@@ -1,7 +1,10 @@
 package com.srlab.basic.serverside.boards.services;
 
+import com.srlab.basic.serverside.boards.models.Board;
 import com.srlab.basic.serverside.boards.models.Reply;
 import com.srlab.basic.serverside.boards.repositories.CommentRepository;
+import com.srlab.basic.serverside.hierarchies.models.HierarchyData;
+import com.srlab.basic.serverside.hierarchies.repositories.HierarchyDataRepository;
 import com.srlab.basic.serverside.utils.MapStructMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,23 +21,56 @@ public class CommentService {
     @Autowired
     private CommentRepository cRepository;
 
-    public ResponseEntity<?> findOne(Long seq) {
+
+    public Reply save(Reply data) {
+        try{
+            return cRepository.save(data);
+        }catch(Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public Reply findOne(Long seq) {
+        try{
+            return cRepository.findOneBySeq(seq).orElseGet(null);
+        }catch(Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public ResponseEntity<?> feeling(Long seq, String feeling) {
         try {
-            return new ResponseEntity<>(cRepository.findById(seq).orElseGet(null), HttpStatus.OK);
-        } catch(Exception e) {
+            Reply origin = cRepository.findOneBySeq(seq).orElseGet(null);
+            Reply target = new Reply();
+
+            if (feeling.equals("like")) {
+                target.setLikeCount(origin.getLikeCount() + 1L);
+            } else if (feeling.equals("dislike")) {
+                target.setDislikeCount(origin.getDislikeCount() + 1L);
+            }
+
+            MapStructMapper.INSTANCE.update(target, origin);
+            return new ResponseEntity<>(cRepository.save(origin), HttpStatus.OK);
+        } catch (Exception e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
-    public ResponseEntity<?> update(Long seq, Reply data) {
+    public Reply update(Reply ori, Reply tar) {
+        MapStructMapper.INSTANCE.update(tar, ori);
+        return cRepository.save(ori);
+    }
 
+    public ResponseEntity<?> update(Long seq, Reply data) {
         try{
-            Reply origin = (Reply) findOne(seq).getBody();
+            Reply origin = findOne(seq);
             MapStructMapper.INSTANCE.update(data, origin);
 
-            //update
             return new ResponseEntity<>(cRepository.save(origin), HttpStatus.OK);
-        } catch(Exception e) {
+        }catch(Exception e) {
+            e.printStackTrace();
             return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }

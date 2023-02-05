@@ -1,20 +1,19 @@
 package com.srlab.basic.serverside.configs;
 
+import com.srlab.basic.authserverside.users.repositories.UserRepository;
 import com.srlab.basic.authserverside.users.services.CustomOAuth2UserService;
 import com.srlab.basic.authserverside.users.utils.JwtTokenProvider;
 import com.srlab.basic.authserverside.users.utils.OAuth2SuccessHandler;
 import com.srlab.basic.serverside.filters.JwtAuthenticationFilter;
+import com.srlab.basic.serverside.logs.repositories.ApiHistoryRepository;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.boot.autoconfigure.security.SecurityProperties;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.annotation.Order;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
@@ -33,6 +32,10 @@ public class WebSecurityConfig {
 
     private final Logger LOG = LoggerFactory.getLogger(WebSecurityConfig.class);
 
+    @Autowired
+    private ApiHistoryRepository apiRepository;
+    @Autowired
+    private UserRepository userRepository;
 
     private final JwtTokenProvider jwtTokenProvider;
     private final RedisTemplate redisTemplate;
@@ -41,7 +44,7 @@ public class WebSecurityConfig {
     private final OAuth2SuccessHandler successHandler;
 
     @Bean
-    @Order(SecurityProperties.BASIC_AUTH_ORDER)
+//    @Order(SecurityProperties.BASIC_AUTH_ORDER)
     public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
         LOG.info("security config start");
         httpSecurity
@@ -52,20 +55,23 @@ public class WebSecurityConfig {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeRequests()
-                .antMatchers("/api/**").permitAll()
+                .antMatchers(/*"/api/tokens/**"*/"/api/**", "/css/**",
+                        "/js/**", "/*.ico", "/*.html**", "/error").permitAll()
+                .antMatchers("/v2/api-docs", "/swagger-resources/**",
+                        "/swagger-ui/**", "/webjars/**","/swagger/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .oauth2Login()
                 .successHandler(successHandler)
                 .userInfoEndpoint().userService(oAuth2UserService);
 
-        httpSecurity.addFilterBefore(new JwtAuthenticationFilter(jwtTokenProvider, redisTemplate), UsernamePasswordAuthenticationFilter.class);
+        httpSecurity.addFilterBefore(new JwtAuthenticationFilter(userRepository, apiRepository, jwtTokenProvider, redisTemplate), UsernamePasswordAuthenticationFilter.class);
         return httpSecurity.build();
     }
 
     //                .antMatchers("/api/hierarchies/**").permitAll()
 //                .anyRequest().authenticated()
-    //로그인폼 주소 + 성공시 실패시 포워딩
+    //login form address + success fail forwarding
 //                .and()
 //                .formLogin()
 //                .defaultSuccessUrl("/loginsuccess")

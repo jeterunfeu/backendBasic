@@ -1,31 +1,33 @@
 package com.srlab.basic.authserverside.users.models;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.srlab.basic.serverside.auditables.CustomAuditable;
+import com.srlab.basic.serverside.hierarchies.models.HierarchyData;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
+@Schema(name = "user")
 @Entity
 @Table(name = "user_info")
 @Getter
 @Setter
-@Builder
+@SuperBuilder
+@ToString
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserInfo extends CustomAuditable {
+public class User extends CustomAuditable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long seq;
 
-    @Column(name = "id", unique = true)
+    @Column(name = "id", unique = true, nullable = false)
     private String id;
 
-    @Column(name = "password", nullable = true)
+    @Column(name = "password", nullable = false)
     private String password;
 
     @Column(name = "password_status")
@@ -66,14 +68,13 @@ public class UserInfo extends CustomAuditable {
 
     @OneToOne
     @JoinColumn(name = "certificate_id")
-    private UserInfo certificationStaff;
+    private User certificationStaff;
 
-    @OneToMany(fetch = FetchType.LAZY , mappedBy = "userInfo")
-    private List<UserRole> userRoles = new ArrayList<>();
-
-//    @OneToOne(mappedBy = "userInfo")
-//    @JsonIgnore
-//    private UserInfo user;
+    @ManyToOne
+    @JoinColumns({
+            @JoinColumn(name = "hierarchy_seq")
+    })
+    private HierarchyData hierarchyData;
 
     @ManyToOne
     @JoinColumns({
@@ -81,7 +82,7 @@ public class UserInfo extends CustomAuditable {
     })
     private ProjectList projectList;
 
-    public UserInfo update(String name, String email) {
+    public User update(String name, String email) {
         this.name = name;
         this.email = email;
         return this;

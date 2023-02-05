@@ -3,21 +3,22 @@ package com.srlab.basic.serverside.boards.models;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.srlab.basic.serverside.auditables.CustomAuditable;
 import com.srlab.basic.serverside.files.models.AvailableFile;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@Schema(name = "comment")
 @Entity
 @Table(name = "reply")
 @Getter
 @Setter
-@NoArgsConstructor
+@SuperBuilder
 @AllArgsConstructor
+@NoArgsConstructor
 public class Reply extends CustomAuditable {
 
     @Id

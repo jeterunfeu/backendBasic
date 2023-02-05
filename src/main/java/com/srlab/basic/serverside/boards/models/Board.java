@@ -3,19 +3,20 @@ package com.srlab.basic.serverside.boards.models;
 import com.srlab.basic.serverside.auditables.CustomAuditable;
 import com.srlab.basic.serverside.files.models.AvailableFile;
 import com.srlab.basic.serverside.hierarchies.models.HierarchyData;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@Schema(name = "board")
 @Entity
 @Table(name = "board")
 @Getter
 @Setter
+@SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
 public class Board extends CustomAuditable {

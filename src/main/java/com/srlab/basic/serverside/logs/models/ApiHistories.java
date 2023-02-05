@@ -1,18 +1,18 @@
 package com.srlab.basic.serverside.logs.models;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.*;
 
 import javax.persistence.*;
+import java.util.Date;
 
+@Schema(name = "apiHistories")
 @Entity
 @Table(name = "api_histories")
 @Getter
 @Setter
+@Builder
 @AllArgsConstructor
-@NoArgsConstructor
 public class ApiHistories {
 
     @Id
@@ -35,18 +35,12 @@ public class ApiHistories {
     private Integer status;
 
     @Column(name = "user_id")
-    private Long userId;
+    private String userId;
 
     @Column(name = "user_ip")
     private String userIp;
 
-    public ApiHistories(String method, String path, String search, String body, Integer status, Long userId, String userIp) {
-        this.method = method;
-        this.path = path;
-        this.search = search;
-        this.body = body;
-        this.status = status;
-        this.userId = userId;
-        this.userIp = userIp;
-    }
+    @Column(name = "exe_date")
+    private Date exeDate;
+
 }

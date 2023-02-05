@@ -1,70 +1,71 @@
 package com.srlab.basic.authserverside.users.controllers;
 
+import com.srlab.basic.authserverside.users.Dto.*;
 import com.srlab.basic.authserverside.users.services.UserService;
-import com.srlab.basic.serverside.boards.models.RequestDto;
-import com.srlab.basic.serverside.utils.Helper;
-import com.srlab.basic.serverside.utils.Response;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.Errors;
-import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+
+//@Tag(name = "token")
 @RestController
 @RequestMapping("/api/tokens")
 public class TokenController {
 
-    @Autowired
-    private Response response;
+    private final Logger LOG = LoggerFactory.getLogger(TokenController.class);
+
     @Autowired
     private UserService userService;
 
-    @PostMapping("/sign-up")
-    public ResponseEntity<?> signUp(@Validated RequestDto.SignUp signUp, Errors errors) {
-        // validation check
-        if (errors.hasErrors()) {
-            return response.invalidFields(Helper.refineErrors(errors));
-        }
+    @Operation(description = "sign-up", responses = { @ApiResponse(responseCode = "200", description = "insert member"),
+            @ApiResponse(responseCode = "400", description = "bad request"),
+            @ApiResponse(responseCode = "500", description = "internal server error")})
+    @PostMapping("/signup")
+    public ResponseEntity<?> signUp(HttpServletRequest req, @RequestBody SignUpDto signUp) {
+
         return userService.signUp(signUp);
     }
 
+    @Operation(description = "login", responses = { @ApiResponse(responseCode = "200", description = "login success"),
+            @ApiResponse(responseCode = "400", description = "bad request"),
+            @ApiResponse(responseCode = "500", description = "internal server error")})
     @PostMapping("/login")
-    public ResponseEntity<?> login(@Validated RequestDto.Login login, Errors errors) {
-        // validation check
-        if (errors.hasErrors()) {
-            return response.invalidFields(Helper.refineErrors(errors));
-        }
-        return userService.login(login);
+    public ResponseEntity<?> login(HttpServletRequest req, @RequestBody LoginDto login) {
+
+        return userService.login(req, login);
     }
 
+    @Operation(description = "token refresh", responses = { @ApiResponse(responseCode = "200", description = "token refreshed"),
+            @ApiResponse(responseCode = "400", description = "bad request"),
+            @ApiResponse(responseCode = "500", description = "internal server error")})
     @PostMapping("/refresh")
-    public ResponseEntity<?> refresh(@Validated RequestDto.Refresh refresh, Errors errors) {
-        // validation check
-        if (errors.hasErrors()) {
-            return response.invalidFields(Helper.refineErrors(errors));
-        }
-        return userService.refresh(refresh);
+    public ResponseEntity<?> refresh(HttpServletRequest req, @RequestBody RefreshDto refresh) {
+
+        return userService.refresh(req, refresh);
     }
 
+    @Operation(description = "logout", responses = { @ApiResponse(responseCode = "200", description = "logout success"),
+            @ApiResponse(responseCode = "400", description = "bad request"),
+            @ApiResponse(responseCode = "500", description = "internal server error")})
     @PostMapping("/logout")
-    public ResponseEntity<?> logout(@Validated RequestDto.Logout logout, Errors errors) {
-        // validation check
-        if (errors.hasErrors()) {
-            return response.invalidFields(Helper.refineErrors(errors));
-        }
-        return userService.logout(logout);
+    public ResponseEntity<?> logout(HttpServletRequest req, @RequestBody LogoutDto logout) {
+
+        return userService.logout(req, logout);
     }
 
+    @Operation(description = "get user info", responses = { @ApiResponse(responseCode = "200", description = "get user info"),
+            @ApiResponse(responseCode = "400", description = "bad request"),
+            @ApiResponse(responseCode = "500", description = "internal server error")})
     @GetMapping("/checkInfo")
-    public ResponseEntity<?> checkInfo(@Validated RequestDto.Check check, Errors errors) {
-        // validation check
-        if (errors.hasErrors()) {
-            return response.invalidFields(Helper.refineErrors(errors));
-        }
+    public ResponseEntity<?> checkInfo(HttpServletRequest req, @RequestBody CheckDto check) {
+
         return userService.checkInfo(check);
     }
 

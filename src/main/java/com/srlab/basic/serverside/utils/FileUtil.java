@@ -67,7 +67,7 @@ public class FileUtil {
         }
     }
 
-    // 파일을 존재여부를 확인하는 메소드
+    // file exist method
     public static Boolean fileIsLive(String isLivefile) {
         File f1 = new File(isLivefile);
 
@@ -78,24 +78,23 @@ public class FileUtil {
         }
     }
 
-    // 파일을 생성하는 메소드
+    // make file method
     public static void fileMake(String makeFileName) {
         File f1 = new File(makeFileName);
         try {
             f1.createNewFile();
         } catch (IOException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
     }
 
-    // 파일을 삭제하는 메소드
+    // delete file method
     public static void fileDelete(String deleteFileName) {
         File I = new File(deleteFileName);
         I.delete();
     }
 
-    // 파일을 복사하는 메소드
+    // copy file method
     public static void fileCopy(String inFileName, String outFileName) {
         try {
             FileInputStream fis = new FileInputStream(inFileName);
@@ -109,12 +108,11 @@ public class FileUtil {
             fos.close();
 
         } catch (IOException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
     }
 
-    // 파일을 이동하는 메소드
+    // file move method
     public static void fileMove(String inFileName, String outFileName) {
         try {
             FileInputStream fis = new FileInputStream(inFileName);
@@ -127,29 +125,28 @@ public class FileUtil {
             fis.close();
             fos.close();
 
-            // 복사한뒤 원본파일을 삭제함
+            // copy then delete original
             fileDelete(inFileName);
 
         } catch (IOException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
     }
 
-    // 디렉토리의 파일 리스트를 읽는 메소드
+    // read file list method
     public static List<File> getDirFileList(String dirPath) {
-        // 디렉토리 파일 리스트
+        // directory file list
         List<File> dirFileList = null;
 
-        // 파일 목록을 요청한 디렉토리를 가지고 파일 객체를 생성함
+        // make file's instance
         File dir = new File(dirPath);
 
-        // 디렉토리가 존재한다면
+        // if directory exists
         if (dir.exists()) {
-            // 파일 목록을 구함
+            // make file list
             File[] files = dir.listFiles();
 
-            // 파일 배열을 파일 리스트로 변화함
+            // file array to file list
             dirFileList = Arrays.asList(files);
         }
 
@@ -157,37 +154,37 @@ public class FileUtil {
     }
 
 
-    // 폴더 존재 여부 체크 후 생성
+    // file exist check and make
     public void directoryConfirmAndMake(String targetDir){
         File d = new File(targetDir);
         if(!d.isDirectory()){
             if(!d.mkdirs()){
                 d.mkdirs();
-                System.out.println("폴더 생성");
+                System.out.println("made folder");
             }
         }
     }
 
-    public static String renameOfString(File f) { // File f는 원본 파일
+    public static String renameOfString(File f) { // f is original file
         if (createNewFile(f))
-            return f.getName(); // 생성된 f가 중복되지 않으면 리턴
+            return f.getName(); // if f is not duplicated then return
 
         String name = f.getName();
         String body = null;
         String ext = null;
 
         int dot = name.lastIndexOf(".");
-        if (dot != -1) { // 확장자가 없을때
+        if (dot != -1) { // file type none
             body = name.substring(0, dot);
             ext = name.substring(dot);
-        } else { // 확장자가 있을때
+        } else { // file type exists
             body = name;
             ext = "";
         }
 
         int count = 0;
-        // 중복된 파일이 있을때
-        // 파일이름뒤에 a_(숫자).확장자 이렇게 들어가게 되는데 숫자는 99999까지 된다.
+        //if duplicated exists
+        //add a_(num).file type, it's number limit 99999
         while (!createNewFile(f) && count < 99999) {
             count++;
             //String newName = body + count + ext;
@@ -197,26 +194,26 @@ public class FileUtil {
         return f.getName();
     }
 
-    public static File renameOfFile(File f) { // File f는 원본 파일
+    public static File renameOfFile(File f) { // f is original file
         if (createNewFile(f))
-            return f; // 생성된 f가 중복되지 않으면 리턴
+            return f; // if f doesn't duplicate then return
 
         String name = f.getName();
         String body = null;
         String ext = null;
 
         int dot = name.lastIndexOf(".");
-        if (dot != -1) { // 확장자가 없을때
+        if (dot != -1) { // file type doesn't exist
             body = name.substring(0, dot);
             ext = name.substring(dot);
-        } else { // 확장자가 있을때
+        } else { // file type exists
             body = name;
             ext = "";
         }
 
         int count = 0;
-        // 중복된 파일이 있을때
-        // 파일이름뒤에 a_(숫자).확장자 이렇게 들어가게 되는데 숫자는 99999까지 된다.
+        //if duplicated exists
+        //add a_(num).file type, it's number limit 99999
         while (!createNewFile(f) && count < 99999) {
             count++;
             //String newName = body + count + ext;
@@ -228,7 +225,7 @@ public class FileUtil {
 
     private static boolean createNewFile(File f) {
         try {
-            return f.createNewFile(); // 존재하는 파일이 아니면
+            return f.createNewFile(); // if it is not exist file
         } catch (IOException ignored) {
             return false;
         }

@@ -1,0 +1,581 @@
+2023:02:02 06:50:10.432 WARN  --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=9h17m17s578ms371µs300ns). 
+2023:02:02 07:52:27.417 WARN  --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=46m46s739ms901µs901ns). 
+2023:02:02 08:00:04.634 INFO  --- [http-nio-30403-exec-4] c.s.b.s.f.JwtAuthenticationFilter : jwt start 
+2023:02:02 08:00:04.637 INFO  --- [http-nio-30403-exec-4] c.s.b.s.f.JwtAuthenticationFilter : jwt start6 
+2023:02:02 08:00:04.637 INFO  --- [http-nio-30403-exec-4] c.s.b.s.f.JwtAuthenticationFilter : jwt start1 
+2023:02:02 08:00:04.638 INFO  --- [http-nio-30403-exec-4] c.s.b.s.f.JwtAuthenticationFilter : jwt start5 
+2023:02:02 08:00:04.640 INFO  --- [http-nio-30403-exec-4] c.s.b.s.filters.SecurityFilter : cors filter start 
+2023:02:02 08:00:04.640 INFO  --- [http-nio-30403-exec-4] c.s.b.s.f.RequestServletFilter : requestServletFilter start 
+2023:02:02 08:00:04.642 INFO  --- [http-nio-30403-exec-4] c.s.b.s.f.RequestServletFilter : requestServletFilter start2 
+2023:02:02 08:00:04.643 INFO  --- [http-nio-30403-exec-4] c.s.b.s.f.RequestServletFilter : responseorg.springframework.security.web.header.HeaderWriterFilter$HeaderWriterResponse@9f98e87 
+2023:02:02 08:00:04.649 INFO  --- [http-nio-30403-exec-4] c.s.b.s.h.c.HierarchyDataController : insert1 
+2023:02:02 08:00:04.650 INFO  --- [http-nio-30403-exec-4] c.s.b.s.queries.CommonDataService : insert2 
+2023:02:02 08:00:04.651 INFO  --- [http-nio-30403-exec-4] c.s.b.s.queries.CommonDataService : method1 
+2023:02:02 08:00:04.651 INFO  --- [http-nio-30403-exec-4] c.s.b.s.queries.CommonDataService : method2 
+2023:02:02 08:00:04.652 INFO  --- [http-nio-30403-exec-4] c.s.b.s.queries.CommonDataService : method3 
+2023:02:02 08:00:04.652 INFO  --- [http-nio-30403-exec-4] c.s.b.s.queries.CommonDataService : method4 
+2023:02:02 08:00:04.652 INFO  --- [http-nio-30403-exec-4] c.s.b.s.queries.CommonDataService : method5 
+2023:02:02 08:00:04.654 INFO  --- [http-nio-30403-exec-4] c.s.b.s.queries.CommonDataService : insert3HierarchyData(seq=null, name=root, description=root node, root=null, parent=null, leftNode=null, rightNode=2, depth=null, nodeOrder=null, files=[], boards=[]) 
+2023:02:02 08:00:04.654 INFO  --- [http-nio-30403-exec-4] c.s.b.s.queries.CommonDataService : method1 
+2023:02:02 08:00:04.654 INFO  --- [http-nio-30403-exec-4] c.s.b.s.queries.CommonDataService : method2 
+2023:02:02 08:00:04.655 INFO  --- [http-nio-30403-exec-4] c.s.b.s.queries.CommonDataService : method3 
+2023:02:02 08:00:04.655 INFO  --- [http-nio-30403-exec-4] c.s.b.s.queries.CommonDataService : insert4 
+2023:02:02 08:00:04.655 INFO  --- [http-nio-30403-exec-4] c.s.b.s.queries.CommonDataService : method1 
+2023:02:02 08:00:04.655 INFO  --- [http-nio-30403-exec-4] c.s.b.s.queries.CommonDataService : method2 
+2023:02:02 08:00:04.656 INFO  --- [http-nio-30403-exec-4] c.s.b.s.queries.CommonDataService : method3 
+2023:02:02 08:00:04.657 INFO  --- [http-nio-30403-exec-4] c.s.b.s.queries.CommonDataService : insert5HierarchyData(seq=null, name=root, description=root node, root=null, parent=null, leftNode=1, rightNode=2, depth=0, nodeOrder=null, files=[], boards=[]) 
+2023:02:02 08:00:04.658 INFO  --- [http-nio-30403-exec-4] c.s.b.s.queries.QueryBuilder : builder1 
+2023:02:02 08:00:04.658 INFO  --- [http-nio-30403-exec-4] c.s.b.s.queries.QueryBuilder : builder2 
+2023:02:02 08:00:04.690 INFO  --- [http-nio-30403-exec-4] c.s.b.s.queries.QueryBuilder : builder3 
+2023:02:02 08:00:04.690 INFO  --- [http-nio-30403-exec-4] c.s.b.s.queries.CommonDataService : insert6 
+2023:02:02 08:00:04.690 INFO  --- [http-nio-30403-exec-4] c.s.b.s.queries.CommonDataService : method1 
+2023:02:02 08:00:04.691 INFO  --- [http-nio-30403-exec-4] c.s.b.s.queries.CommonDataService : method2 
+2023:02:02 08:00:04.691 INFO  --- [http-nio-30403-exec-4] c.s.b.s.queries.CommonDataService : method3 
+2023:02:02 08:00:04.691 INFO  --- [http-nio-30403-exec-4] c.s.b.s.queries.CommonDataService : insert7HierarchyData(seq=null, name=root, description=root node, root=null, parent=null, leftNode=1, rightNode=2, depth=0, nodeOrder=29, files=[], boards=[]) 
+2023:02:02 08:00:04.692 INFO  --- [http-nio-30403-exec-4] c.s.b.s.h.s.HierarchyDataService : save 
+2023:02:02 08:00:04.692 INFO  --- [http-nio-30403-exec-4] c.s.b.s.h.s.HierarchyDataService : data HierarchyData(seq=null, name=root, description=root node, root=null, parent=null, leftNode=1, rightNode=2, depth=0, nodeOrder=29, files=[], boards=[]) 
+2023:02:02 08:00:04.706 INFO  --- [http-nio-30403-exec-4] c.s.b.s.queries.CommonDataService : insert8 
+2023:02:02 08:00:35.235 INFO  --- [http-nio-30403-exec-5] c.s.b.s.f.JwtAuthenticationFilter : jwt start 
+2023:02:02 08:00:35.236 INFO  --- [http-nio-30403-exec-5] c.s.b.s.f.JwtAuthenticationFilter : jwt start6 
+2023:02:02 08:00:35.236 INFO  --- [http-nio-30403-exec-5] c.s.b.s.f.JwtAuthenticationFilter : jwt start1 
+2023:02:02 08:00:35.236 INFO  --- [http-nio-30403-exec-5] c.s.b.s.f.JwtAuthenticationFilter : jwt start5 
+2023:02:02 08:00:35.237 INFO  --- [http-nio-30403-exec-5] c.s.b.s.filters.SecurityFilter : cors filter start 
+2023:02:02 08:00:35.237 INFO  --- [http-nio-30403-exec-5] c.s.b.s.f.RequestServletFilter : requestServletFilter start 
+2023:02:02 08:00:35.238 INFO  --- [http-nio-30403-exec-5] c.s.b.s.f.RequestServletFilter : requestServletFilter start2 
+2023:02:02 08:00:35.238 INFO  --- [http-nio-30403-exec-5] c.s.b.s.f.RequestServletFilter : responseorg.springframework.security.web.header.HeaderWriterFilter$HeaderWriterResponse@c5c2da5 
+2023:02:02 08:00:35.241 INFO  --- [http-nio-30403-exec-5] c.s.b.s.h.c.HierarchyDataController : insert1 
+2023:02:02 08:00:35.241 INFO  --- [http-nio-30403-exec-5] c.s.b.s.queries.CommonDataService : insert2 
+2023:02:02 08:00:35.241 INFO  --- [http-nio-30403-exec-5] c.s.b.s.queries.CommonDataService : method1 
+2023:02:02 08:00:35.241 INFO  --- [http-nio-30403-exec-5] c.s.b.s.queries.CommonDataService : method2 
+2023:02:02 08:00:35.241 INFO  --- [http-nio-30403-exec-5] c.s.b.s.queries.CommonDataService : method3 
+2023:02:02 08:00:35.242 INFO  --- [http-nio-30403-exec-5] c.s.b.s.queries.CommonDataService : method4 
+2023:02:02 08:00:35.242 INFO  --- [http-nio-30403-exec-5] c.s.b.s.queries.CommonDataService : method5 
+2023:02:02 08:00:35.242 INFO  --- [http-nio-30403-exec-5] c.s.b.s.queries.CommonDataService : insert3HierarchyData(seq=null, name=root2, description=root2 node, root=null, parent=null, leftNode=null, rightNode=2, depth=null, nodeOrder=null, files=[], boards=[]) 
+2023:02:02 08:00:35.242 INFO  --- [http-nio-30403-exec-5] c.s.b.s.queries.CommonDataService : method1 
+2023:02:02 08:00:35.242 INFO  --- [http-nio-30403-exec-5] c.s.b.s.queries.CommonDataService : method2 
+2023:02:02 08:00:35.243 INFO  --- [http-nio-30403-exec-5] c.s.b.s.queries.CommonDataService : method3 
+2023:02:02 08:00:35.243 INFO  --- [http-nio-30403-exec-5] c.s.b.s.queries.CommonDataService : insert4 
+2023:02:02 08:00:35.243 INFO  --- [http-nio-30403-exec-5] c.s.b.s.queries.CommonDataService : method1 
+2023:02:02 08:00:35.243 INFO  --- [http-nio-30403-exec-5] c.s.b.s.queries.CommonDataService : method2 
+2023:02:02 08:00:35.243 INFO  --- [http-nio-30403-exec-5] c.s.b.s.queries.CommonDataService : method3 
+2023:02:02 08:00:35.244 INFO  --- [http-nio-30403-exec-5] c.s.b.s.queries.CommonDataService : insert5HierarchyData(seq=null, name=root2, description=root2 node, root=null, parent=null, leftNode=1, rightNode=2, depth=0, nodeOrder=null, files=[], boards=[]) 
+2023:02:02 08:00:35.244 INFO  --- [http-nio-30403-exec-5] c.s.b.s.queries.QueryBuilder : builder1 
+2023:02:02 08:00:35.244 INFO  --- [http-nio-30403-exec-5] c.s.b.s.queries.QueryBuilder : builder2 
+2023:02:02 08:00:35.249 INFO  --- [http-nio-30403-exec-5] c.s.b.s.queries.QueryBuilder : builder3 
+2023:02:02 08:00:35.249 INFO  --- [http-nio-30403-exec-5] c.s.b.s.queries.CommonDataService : insert6 
+2023:02:02 08:00:35.249 INFO  --- [http-nio-30403-exec-5] c.s.b.s.queries.CommonDataService : method1 
+2023:02:02 08:00:35.249 INFO  --- [http-nio-30403-exec-5] c.s.b.s.queries.CommonDataService : method2 
+2023:02:02 08:00:35.250 INFO  --- [http-nio-30403-exec-5] c.s.b.s.queries.CommonDataService : method3 
+2023:02:02 08:00:35.250 INFO  --- [http-nio-30403-exec-5] c.s.b.s.queries.CommonDataService : insert7HierarchyData(seq=null, name=root2, description=root2 node, root=null, parent=null, leftNode=1, rightNode=2, depth=0, nodeOrder=30, files=[], boards=[]) 
+2023:02:02 08:00:35.250 INFO  --- [http-nio-30403-exec-5] c.s.b.s.h.s.HierarchyDataService : save 
+2023:02:02 08:00:35.250 INFO  --- [http-nio-30403-exec-5] c.s.b.s.h.s.HierarchyDataService : data HierarchyData(seq=null, name=root2, description=root2 node, root=null, parent=null, leftNode=1, rightNode=2, depth=0, nodeOrder=30, files=[], boards=[]) 
+2023:02:02 08:00:35.271 INFO  --- [http-nio-30403-exec-5] c.s.b.s.queries.CommonDataService : insert8 
+2023:02:02 08:03:09.305 INFO  --- [http-nio-30403-exec-7] c.s.b.s.f.JwtAuthenticationFilter : jwt start 
+2023:02:02 08:03:09.305 INFO  --- [http-nio-30403-exec-7] c.s.b.s.f.JwtAuthenticationFilter : jwt start6 
+2023:02:02 08:03:09.305 INFO  --- [http-nio-30403-exec-7] c.s.b.s.f.JwtAuthenticationFilter : jwt start1 
+2023:02:02 08:03:09.305 INFO  --- [http-nio-30403-exec-7] c.s.b.s.f.JwtAuthenticationFilter : jwt start5 
+2023:02:02 08:03:09.305 INFO  --- [http-nio-30403-exec-7] c.s.b.s.filters.SecurityFilter : cors filter start 
+2023:02:02 08:03:09.306 INFO  --- [http-nio-30403-exec-7] c.s.b.s.f.RequestServletFilter : requestServletFilter start 
+2023:02:02 08:03:09.306 INFO  --- [http-nio-30403-exec-7] c.s.b.s.f.RequestServletFilter : requestServletFilter start2 
+2023:02:02 08:03:09.306 INFO  --- [http-nio-30403-exec-7] c.s.b.s.f.RequestServletFilter : responseorg.springframework.security.web.header.HeaderWriterFilter$HeaderWriterResponse@1a93cc23 
+2023:02:02 08:03:09.310 INFO  --- [http-nio-30403-exec-7] c.s.b.s.queries.CommonDataService : method1 
+2023:02:02 08:03:09.310 INFO  --- [http-nio-30403-exec-7] c.s.b.s.queries.CommonDataService : method2 
+2023:02:02 08:03:09.310 INFO  --- [http-nio-30403-exec-7] c.s.b.s.queries.CommonDataService : method3 
+2023:02:02 08:03:09.329 INFO  --- [http-nio-30403-exec-7] c.s.b.s.queries.CommonDataService : origin : HierarchyData(seq=62, name=root, description=root node, root=null, parent=null, leftNode=1, rightNode=2, depth=0, nodeOrder=29, files=[], boards=[]) 
+2023:02:02 08:03:09.330 INFO  --- [http-nio-30403-exec-7] c.s.b.s.queries.CommonDataService : method1 
+2023:02:02 08:03:09.330 INFO  --- [http-nio-30403-exec-7] c.s.b.s.queries.CommonDataService : method2 
+2023:02:02 08:03:09.330 INFO  --- [http-nio-30403-exec-7] c.s.b.s.queries.CommonDataService : method3 
+2023:02:02 08:03:09.330 INFO  --- [http-nio-30403-exec-7] c.s.b.s.queries.CommonDataService : method1 
+2023:02:02 08:03:09.331 INFO  --- [http-nio-30403-exec-7] c.s.b.s.queries.CommonDataService : method2 
+2023:02:02 08:03:09.331 INFO  --- [http-nio-30403-exec-7] c.s.b.s.queries.CommonDataService : method3 
+2023:02:02 08:03:09.332 INFO  --- [http-nio-30403-exec-7] c.s.b.s.queries.CommonDataService : method1 
+2023:02:02 08:03:09.333 INFO  --- [http-nio-30403-exec-7] c.s.b.s.queries.CommonDataService : method2 
+2023:02:02 08:03:09.333 INFO  --- [http-nio-30403-exec-7] c.s.b.s.queries.CommonDataService : method3 
+2023:02:02 08:03:09.333 INFO  --- [http-nio-30403-exec-7] c.s.b.s.queries.CommonDataService : 1 
+2023:02:02 08:03:09.333 INFO  --- [http-nio-30403-exec-7] c.s.b.s.queries.CommonDataService : method1 
+2023:02:02 08:03:09.333 INFO  --- [http-nio-30403-exec-7] c.s.b.s.queries.CommonDataService : method2 
+2023:02:02 08:03:09.333 INFO  --- [http-nio-30403-exec-7] c.s.b.s.queries.CommonDataService : method3 
+2023:02:02 08:03:09.334 INFO  --- [http-nio-30403-exec-7] c.s.b.s.queries.CommonDataService : 2 
+2023:02:02 08:03:09.334 INFO  --- [http-nio-30403-exec-7] c.s.b.s.queries.CommonDataService : method1 
+2023:02:02 08:03:09.334 INFO  --- [http-nio-30403-exec-7] c.s.b.s.queries.CommonDataService : method2 
+2023:02:02 08:03:09.334 INFO  --- [http-nio-30403-exec-7] c.s.b.s.queries.CommonDataService : method3 
+2023:02:02 08:03:09.334 INFO  --- [http-nio-30403-exec-7] c.s.b.s.queries.CommonDataService : method4 
+2023:02:02 08:03:09.334 INFO  --- [http-nio-30403-exec-7] c.s.b.s.queries.CommonDataService : method5 
+2023:02:02 08:03:09.334 INFO  --- [http-nio-30403-exec-7] c.s.b.s.queries.CommonDataService : 3 
+2023:02:02 08:03:09.334 INFO  --- [http-nio-30403-exec-7] c.s.b.s.queries.CommonDataService : method1 
+2023:02:02 08:03:09.334 INFO  --- [http-nio-30403-exec-7] c.s.b.s.queries.CommonDataService : method2 
+2023:02:02 08:03:09.334 INFO  --- [http-nio-30403-exec-7] c.s.b.s.queries.CommonDataService : method3 
+2023:02:02 08:03:09.334 INFO  --- [http-nio-30403-exec-7] c.s.b.s.queries.CommonDataService : 4 
+2023:02:02 08:03:09.334 INFO  --- [http-nio-30403-exec-7] c.s.b.s.queries.CommonDataService : method1 
+2023:02:02 08:03:09.334 INFO  --- [http-nio-30403-exec-7] c.s.b.s.queries.CommonDataService : method2 
+2023:02:02 08:03:09.335 INFO  --- [http-nio-30403-exec-7] c.s.b.s.queries.CommonDataService : method3 
+2023:02:02 08:03:09.335 INFO  --- [http-nio-30403-exec-7] c.s.b.s.queries.CommonDataService : 5 
+2023:02:02 08:03:09.335 INFO  --- [http-nio-30403-exec-7] c.s.b.s.queries.CommonDataService : method1 
+2023:02:02 08:03:09.336 INFO  --- [http-nio-30403-exec-7] c.s.b.s.queries.CommonDataService : method2 
+2023:02:02 08:03:09.336 INFO  --- [http-nio-30403-exec-7] c.s.b.s.queries.CommonDataService : method3 
+2023:02:02 08:03:09.336 INFO  --- [http-nio-30403-exec-7] c.s.b.s.queries.CommonDataService : 6 
+2023:02:02 08:03:09.336 INFO  --- [http-nio-30403-exec-7] c.s.b.s.queries.CommonDataService : method1 
+2023:02:02 08:03:09.336 INFO  --- [http-nio-30403-exec-7] c.s.b.s.queries.CommonDataService : method2 
+2023:02:02 08:03:09.336 INFO  --- [http-nio-30403-exec-7] c.s.b.s.queries.CommonDataService : method3 
+2023:02:02 08:03:09.336 INFO  --- [http-nio-30403-exec-7] c.s.b.s.h.s.HierarchyDataService : save 
+2023:02:02 08:03:09.336 INFO  --- [http-nio-30403-exec-7] c.s.b.s.h.s.HierarchyDataService : data HierarchyData(seq=null, name=subnode1, description=root1 sub node1, root=HierarchyData(seq=62, name=root, description=root node, root=null, parent=null, leftNode=1, rightNode=2, depth=0, nodeOrder=29, files=[], boards=[]), parent=HierarchyData(seq=62, name=root, description=root node, root=null, parent=null, leftNode=1, rightNode=2, depth=0, nodeOrder=29, files=[], boards=[]), leftNode=3, rightNode=4, depth=1, nodeOrder=0, files=[], boards=[]) 
+2023:02:02 08:03:09.345 INFO  --- [http-nio-30403-exec-7] c.s.b.s.queries.CommonDataService : 7 
+2023:02:02 08:03:51.865 INFO  --- [http-nio-30403-exec-9] c.s.b.s.f.JwtAuthenticationFilter : jwt start 
+2023:02:02 08:03:51.866 INFO  --- [http-nio-30403-exec-9] c.s.b.s.f.JwtAuthenticationFilter : jwt start6 
+2023:02:02 08:03:51.866 INFO  --- [http-nio-30403-exec-9] c.s.b.s.f.JwtAuthenticationFilter : jwt start1 
+2023:02:02 08:03:51.866 INFO  --- [http-nio-30403-exec-9] c.s.b.s.f.JwtAuthenticationFilter : jwt start5 
+2023:02:02 08:03:51.867 INFO  --- [http-nio-30403-exec-9] c.s.b.s.filters.SecurityFilter : cors filter start 
+2023:02:02 08:03:51.867 INFO  --- [http-nio-30403-exec-9] c.s.b.s.f.RequestServletFilter : requestServletFilter start 
+2023:02:02 08:03:51.867 INFO  --- [http-nio-30403-exec-9] c.s.b.s.f.RequestServletFilter : requestServletFilter start2 
+2023:02:02 08:03:51.868 INFO  --- [http-nio-30403-exec-9] c.s.b.s.f.RequestServletFilter : responseorg.springframework.security.web.header.HeaderWriterFilter$HeaderWriterResponse@120234cf 
+2023:02:02 08:03:51.871 INFO  --- [http-nio-30403-exec-9] c.s.b.s.queries.CommonDataService : method1 
+2023:02:02 08:03:51.873 INFO  --- [http-nio-30403-exec-9] c.s.b.s.queries.CommonDataService : method2 
+2023:02:02 08:03:51.873 INFO  --- [http-nio-30403-exec-9] c.s.b.s.queries.CommonDataService : method3 
+2023:02:02 08:03:51.888 INFO  --- [http-nio-30403-exec-9] c.s.b.s.queries.CommonDataService : origin : HierarchyData(seq=62, name=root, description=root node, root=null, parent=null, leftNode=1, rightNode=2, depth=0, nodeOrder=29, files=[], boards=[]) 
+2023:02:02 08:03:51.888 INFO  --- [http-nio-30403-exec-9] c.s.b.s.queries.CommonDataService : method1 
+2023:02:02 08:03:51.888 INFO  --- [http-nio-30403-exec-9] c.s.b.s.queries.CommonDataService : method2 
+2023:02:02 08:03:51.888 INFO  --- [http-nio-30403-exec-9] c.s.b.s.queries.CommonDataService : method3 
+2023:02:02 08:03:51.889 INFO  --- [http-nio-30403-exec-9] c.s.b.s.queries.CommonDataService : method1 
+2023:02:02 08:03:51.889 INFO  --- [http-nio-30403-exec-9] c.s.b.s.queries.CommonDataService : method2 
+2023:02:02 08:03:51.889 INFO  --- [http-nio-30403-exec-9] c.s.b.s.queries.CommonDataService : method3 
+2023:02:02 08:03:51.889 INFO  --- [http-nio-30403-exec-9] c.s.b.s.queries.CommonDataService : method1 
+2023:02:02 08:03:51.889 INFO  --- [http-nio-30403-exec-9] c.s.b.s.queries.CommonDataService : method2 
+2023:02:02 08:03:51.889 INFO  --- [http-nio-30403-exec-9] c.s.b.s.queries.CommonDataService : method3 
+2023:02:02 08:03:51.890 INFO  --- [http-nio-30403-exec-9] c.s.b.s.queries.CommonDataService : 1 
+2023:02:02 08:03:51.890 INFO  --- [http-nio-30403-exec-9] c.s.b.s.queries.CommonDataService : method1 
+2023:02:02 08:03:51.890 INFO  --- [http-nio-30403-exec-9] c.s.b.s.queries.CommonDataService : method2 
+2023:02:02 08:03:51.890 INFO  --- [http-nio-30403-exec-9] c.s.b.s.queries.CommonDataService : method3 
+2023:02:02 08:03:51.890 INFO  --- [http-nio-30403-exec-9] c.s.b.s.queries.CommonDataService : 2 
+2023:02:02 08:03:51.890 INFO  --- [http-nio-30403-exec-9] c.s.b.s.queries.CommonDataService : method1 
+2023:02:02 08:03:51.890 INFO  --- [http-nio-30403-exec-9] c.s.b.s.queries.CommonDataService : method2 
+2023:02:02 08:03:51.890 INFO  --- [http-nio-30403-exec-9] c.s.b.s.queries.CommonDataService : method3 
+2023:02:02 08:03:51.890 INFO  --- [http-nio-30403-exec-9] c.s.b.s.queries.CommonDataService : method4 
+2023:02:02 08:03:51.891 INFO  --- [http-nio-30403-exec-9] c.s.b.s.queries.CommonDataService : method5 
+2023:02:02 08:03:51.891 INFO  --- [http-nio-30403-exec-9] c.s.b.s.queries.CommonDataService : 3 
+2023:02:02 08:03:51.891 INFO  --- [http-nio-30403-exec-9] c.s.b.s.queries.CommonDataService : method1 
+2023:02:02 08:03:51.891 INFO  --- [http-nio-30403-exec-9] c.s.b.s.queries.CommonDataService : method2 
+2023:02:02 08:03:51.891 INFO  --- [http-nio-30403-exec-9] c.s.b.s.queries.CommonDataService : method3 
+2023:02:02 08:03:51.892 INFO  --- [http-nio-30403-exec-9] c.s.b.s.queries.CommonDataService : 4 
+2023:02:02 08:03:51.892 INFO  --- [http-nio-30403-exec-9] c.s.b.s.queries.CommonDataService : method1 
+2023:02:02 08:03:51.892 INFO  --- [http-nio-30403-exec-9] c.s.b.s.queries.CommonDataService : method2 
+2023:02:02 08:03:51.892 INFO  --- [http-nio-30403-exec-9] c.s.b.s.queries.CommonDataService : method3 
+2023:02:02 08:03:51.892 INFO  --- [http-nio-30403-exec-9] c.s.b.s.queries.CommonDataService : 5 
+2023:02:02 08:03:51.892 INFO  --- [http-nio-30403-exec-9] c.s.b.s.queries.CommonDataService : method1 
+2023:02:02 08:03:51.892 INFO  --- [http-nio-30403-exec-9] c.s.b.s.queries.CommonDataService : method2 
+2023:02:02 08:03:51.892 INFO  --- [http-nio-30403-exec-9] c.s.b.s.queries.CommonDataService : method3 
+2023:02:02 08:03:51.893 INFO  --- [http-nio-30403-exec-9] c.s.b.s.queries.CommonDataService : 6 
+2023:02:02 08:03:51.893 INFO  --- [http-nio-30403-exec-9] c.s.b.s.queries.CommonDataService : method1 
+2023:02:02 08:03:51.893 INFO  --- [http-nio-30403-exec-9] c.s.b.s.queries.CommonDataService : method2 
+2023:02:02 08:03:51.893 INFO  --- [http-nio-30403-exec-9] c.s.b.s.queries.CommonDataService : method3 
+2023:02:02 08:03:51.893 INFO  --- [http-nio-30403-exec-9] c.s.b.s.h.s.HierarchyDataService : save 
+2023:02:02 08:03:51.893 INFO  --- [http-nio-30403-exec-9] c.s.b.s.h.s.HierarchyDataService : data HierarchyData(seq=null, name=subnode2, description=root1 sub node2, root=HierarchyData(seq=62, name=root, description=root node, root=null, parent=null, leftNode=1, rightNode=2, depth=0, nodeOrder=29, files=[], boards=[]), parent=HierarchyData(seq=62, name=root, description=root node, root=null, parent=null, leftNode=1, rightNode=2, depth=0, nodeOrder=29, files=[], boards=[]), leftNode=3, rightNode=4, depth=1, nodeOrder=0, files=[], boards=[]) 
+2023:02:02 08:03:51.920 INFO  --- [http-nio-30403-exec-9] c.s.b.s.queries.CommonDataService : 7 
+2023:02:02 08:26:46.381 INFO  --- [SpringApplicationShutdownHook] o.s.o.j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default' 
+2023:02:02 08:26:46.392 INFO  --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource : HikariPool-1 - Shutdown initiated... 
+2023:02:02 08:26:46.416 INFO  --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource : HikariPool-1 - Shutdown completed. 
+2023:02:02 08:26:57.043 INFO  --- [main] com.srlab.basic.BasicApplication : Starting BasicApplication using Java 11 on SES-2303 with PID 6120 (C:\Users\user\Desktop\backendBasic\target\classes started by user in C:\Users\user\Desktop\backendBasic) 
+2023:02:02 08:26:57.047 INFO  --- [main] com.srlab.basic.BasicApplication : The following 1 profile is active: "oauth" 
+2023:02:02 08:26:58.335 INFO  --- [main] o.s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode 
+2023:02:02 08:26:58.338 INFO  --- [main] o.s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode. 
+2023:02:02 08:26:58.603 INFO  --- [main] o.s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 254 ms. Found 9 JPA repository interfaces. 
+2023:02:02 08:26:58.619 INFO  --- [main] o.s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode 
+2023:02:02 08:26:58.621 INFO  --- [main] o.s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode. 
+2023:02:02 08:26:58.646 INFO  --- [main] o.s.d.r.c.RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.srlab.basic.authserverside.users.repositories.UserRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository 
+2023:02:02 08:26:58.647 INFO  --- [main] o.s.d.r.c.RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.srlab.basic.serverside.boards.repositories.BoardRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository 
+2023:02:02 08:26:58.648 INFO  --- [main] o.s.d.r.c.RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.srlab.basic.serverside.boards.repositories.CommentRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository 
+2023:02:02 08:26:58.649 INFO  --- [main] o.s.d.r.c.RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.srlab.basic.serverside.devices.repositories.DeviceRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository 
+2023:02:02 08:26:58.650 INFO  --- [main] o.s.d.r.c.RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.srlab.basic.serverside.files.repositories.FileRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository 
+2023:02:02 08:26:58.650 INFO  --- [main] o.s.d.r.c.RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.srlab.basic.serverside.files.repositories.FileTempRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository 
+2023:02:02 08:26:58.652 INFO  --- [main] o.s.d.r.c.RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.srlab.basic.serverside.hierarchies.repositories.HierarchyDataRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository 
+2023:02:02 08:26:58.652 INFO  --- [main] o.s.d.r.c.RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.srlab.basic.serverside.logs.repositories.ApiHistoryRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository 
+2023:02:02 08:26:58.653 INFO  --- [main] o.s.d.r.c.RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.srlab.basic.serverside.logs.repositories.ConnectHistoryRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository 
+2023:02:02 08:26:58.653 INFO  --- [main] o.s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 23 ms. Found 0 Redis repository interfaces. 
+2023:02:02 08:26:59.616 INFO  --- [main] o.s.b.w.e.tomcat.TomcatWebServer : Tomcat initialized with port(s): 30403 (http) 
+2023:02:02 08:26:59.630 INFO  --- [main] o.a.catalina.core.StandardService : Starting service [Tomcat] 
+2023:02:02 08:26:59.631 INFO  --- [main] o.a.catalina.core.StandardEngine : Starting Servlet engine: [Apache Tomcat/9.0.70] 
+2023:02:02 08:26:59.819 INFO  --- [main] o.a.c.c.C.[Tomcat].[localhost].[/] : Initializing Spring embedded WebApplicationContext 
+2023:02:02 08:26:59.820 INFO  --- [main] o.s.b.w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2714 ms 
+2023:02:02 08:27:00.142 INFO  --- [main] o.h.jpa.internal.util.LogHelper : HHH000204: Processing PersistenceUnitInfo [name: default] 
+2023:02:02 08:27:00.216 INFO  --- [main] org.hibernate.Version : HHH000412: Hibernate ORM core version 5.6.14.Final 
+2023:02:02 08:27:00.426 INFO  --- [main] o.h.annotations.common.Version : HCANN000001: Hibernate Commons Annotations {5.1.2.Final} 
+2023:02:02 08:27:00.573 INFO  --- [main] com.zaxxer.hikari.HikariDataSource : HikariPool-1 - Starting... 
+2023:02:02 08:27:00.580 WARN  --- [main] c.z.hikari.util.DriverDataSource : Registered driver with driverClassName=oracle.jdbc.driver.OracleDriver was not found, trying direct instantiation. 
+2023:02:02 08:27:00.921 INFO  --- [main] com.zaxxer.hikari.HikariDataSource : HikariPool-1 - Start completed. 
+2023:02:02 08:27:00.955 INFO  --- [main] org.hibernate.dialect.Dialect : HHH000400: Using dialect: org.hibernate.dialect.Oracle12cDialect 
+2023:02:02 08:27:49.994 INFO  --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform] 
+2023:02:02 08:27:50.013 INFO  --- [main] o.s.o.j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default' 
+2023:02:02 08:27:50.639 INFO  --- [main] o.a.c.c.C.[Tomcat].[localhost].[/] : org.tuckey.web.filters.urlrewrite.UrlRewriteFilter ERROR: unable to find urlrewrite conf file at /WEB-INF/urlrewrite.xml 
+2023:02:02 08:27:51.665 INFO  --- [main] c.s.b.s.configs.WebSecurityConfig : security config start 
+2023:02:02 08:27:51.833 INFO  --- [main] o.s.s.w.DefaultSecurityFilterChain : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@5967492a, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@f4a21cb, org.springframework.security.web.context.SecurityContextPersistenceFilter@37c1e2a4, org.springframework.security.web.header.HeaderWriterFilter@3c739a9b, org.springframework.web.filter.CorsFilter@635f4be1, org.springframework.security.web.authentication.logout.LogoutFilter@61d4e070, org.springframework.security.oauth2.client.web.OAuth2AuthorizationRequestRedirectFilter@27acd9a7, org.springframework.security.oauth2.client.web.OAuth2LoginAuthenticationFilter@3f7d20c5, com.srlab.basic.serverside.filters.JwtAuthenticationFilter@456d3914, org.springframework.security.web.authentication.ui.DefaultLoginPageGeneratingFilter@7f6c85c4, org.springframework.security.web.authentication.ui.DefaultLogoutPageGeneratingFilter@26a0068a, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@749054a3, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@bf70ce5, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@783a2fec, org.springframework.security.web.session.SessionManagementFilter@7dfbdcfe, org.springframework.security.web.access.ExceptionTranslationFilter@6da5cb1, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@e8c381e] 
+2023:02:02 08:27:51.899 WARN  --- [main] o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning 
+2023:02:02 08:27:52.484 INFO  --- [main] o.s.b.a.e.web.EndpointLinksResolver : Exposing 1 endpoint(s) beneath base path '/actuator' 
+2023:02:02 08:27:52.528 INFO  --- [main] o.s.b.w.e.tomcat.TomcatWebServer : Tomcat started on port(s): 30403 (http) with context path '' 
+2023:02:02 08:27:52.543 INFO  --- [main] com.srlab.basic.BasicApplication : Started BasicApplication in 56.127 seconds (JVM running for 56.956) 
+2023:02:02 08:28:12.803 INFO  --- [http-nio-30403-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/] : Initializing Spring DispatcherServlet 'dispatcherServlet' 
+2023:02:02 08:28:12.805 INFO  --- [http-nio-30403-exec-1] o.s.web.servlet.DispatcherServlet : Initializing Servlet 'dispatcherServlet' 
+2023:02:02 08:28:12.809 INFO  --- [http-nio-30403-exec-1] o.s.web.servlet.DispatcherServlet : Completed initialization in 3 ms 
+2023:02:02 08:28:12.859 INFO  --- [http-nio-30403-exec-1] c.s.b.s.f.JwtAuthenticationFilter : jwt start 
+2023:02:02 08:28:12.859 INFO  --- [http-nio-30403-exec-1] c.s.b.s.f.JwtAuthenticationFilter : jwt start6 
+2023:02:02 08:28:12.861 INFO  --- [http-nio-30403-exec-1] c.s.b.s.f.JwtAuthenticationFilter : jwt start1 
+2023:02:02 08:28:12.861 INFO  --- [http-nio-30403-exec-1] c.s.b.s.f.JwtAuthenticationFilter : jwt start5 
+2023:02:02 08:28:12.881 INFO  --- [http-nio-30403-exec-1] c.s.b.s.filters.SecurityFilter : cors filter start 
+2023:02:02 08:28:12.882 INFO  --- [http-nio-30403-exec-1] c.s.b.s.f.RequestServletFilter : requestServletFilter start 
+2023:02:02 08:28:12.891 INFO  --- [http-nio-30403-exec-1] c.s.b.s.f.RequestServletFilter : requestServletFilter start2 
+2023:02:02 08:28:12.892 INFO  --- [http-nio-30403-exec-1] c.s.b.s.f.RequestServletFilter : responseorg.springframework.security.web.header.HeaderWriterFilter$HeaderWriterResponse@7639c194 
+2023:02:02 08:28:13.201 INFO  --- [http-nio-30403-exec-1] c.s.b.s.h.c.HierarchyDataController : insert1 
+2023:02:02 08:28:13.232 INFO  --- [http-nio-30403-exec-1] c.s.b.s.queries.CommonDataService : insert2 
+2023:02:02 08:28:13.233 INFO  --- [http-nio-30403-exec-1] c.s.b.s.queries.CommonDataService : method1 
+2023:02:02 08:28:13.233 INFO  --- [http-nio-30403-exec-1] c.s.b.s.queries.CommonDataService : method2 
+2023:02:02 08:28:13.233 INFO  --- [http-nio-30403-exec-1] c.s.b.s.queries.CommonDataService : method3 
+2023:02:02 08:28:13.233 INFO  --- [http-nio-30403-exec-1] c.s.b.s.queries.CommonDataService : method4 
+2023:02:02 08:28:13.234 INFO  --- [http-nio-30403-exec-1] c.s.b.s.queries.CommonDataService : method5 
+2023:02:02 08:28:13.282 INFO  --- [http-nio-30403-exec-1] c.s.b.s.queries.CommonDataService : insert3HierarchyData(seq=null, name=root, description=root1, root=null, parent=null, leftNode=null, rightNode=2, depth=null, nodeOrder=null, files=[], boards=[]) 
+2023:02:02 08:28:13.283 INFO  --- [http-nio-30403-exec-1] c.s.b.s.queries.CommonDataService : method1 
+2023:02:02 08:28:13.283 INFO  --- [http-nio-30403-exec-1] c.s.b.s.queries.CommonDataService : method2 
+2023:02:02 08:28:13.284 INFO  --- [http-nio-30403-exec-1] c.s.b.s.queries.CommonDataService : method3 
+2023:02:02 08:28:13.305 INFO  --- [http-nio-30403-exec-1] c.s.b.s.queries.CommonDataService : insert4 
+2023:02:02 08:28:13.305 INFO  --- [http-nio-30403-exec-1] c.s.b.s.queries.CommonDataService : method1 
+2023:02:02 08:28:13.305 INFO  --- [http-nio-30403-exec-1] c.s.b.s.queries.CommonDataService : method2 
+2023:02:02 08:28:13.306 INFO  --- [http-nio-30403-exec-1] c.s.b.s.queries.CommonDataService : method3 
+2023:02:02 08:28:13.306 INFO  --- [http-nio-30403-exec-1] c.s.b.s.queries.CommonDataService : insert5HierarchyData(seq=null, name=root, description=root1, root=null, parent=null, leftNode=1, rightNode=2, depth=0, nodeOrder=null, files=[], boards=[]) 
+2023:02:02 08:28:13.307 INFO  --- [http-nio-30403-exec-1] c.s.b.s.queries.QueryBuilder : builder1 
+2023:02:02 08:28:13.372 INFO  --- [http-nio-30403-exec-1] c.s.b.s.queries.QueryBuilder : builder2 
+2023:02:02 08:28:13.536 INFO  --- [http-nio-30403-exec-1] c.s.b.s.queries.QueryBuilder : builder3 
+2023:02:02 08:28:13.537 INFO  --- [http-nio-30403-exec-1] c.s.b.s.queries.CommonDataService : insert6 
+2023:02:02 08:28:13.538 INFO  --- [http-nio-30403-exec-1] c.s.b.s.queries.CommonDataService : method1 
+2023:02:02 08:28:13.538 INFO  --- [http-nio-30403-exec-1] c.s.b.s.queries.CommonDataService : method2 
+2023:02:02 08:28:13.538 INFO  --- [http-nio-30403-exec-1] c.s.b.s.queries.CommonDataService : method3 
+2023:02:02 08:28:13.539 INFO  --- [http-nio-30403-exec-1] c.s.b.s.queries.CommonDataService : insert7HierarchyData(seq=null, name=root, description=root1, root=null, parent=null, leftNode=1, rightNode=2, depth=0, nodeOrder=33, files=[], boards=[]) 
+2023:02:02 08:28:13.539 INFO  --- [http-nio-30403-exec-1] c.s.b.s.h.s.HierarchyDataService : save 
+2023:02:02 08:28:13.540 INFO  --- [http-nio-30403-exec-1] c.s.b.s.h.s.HierarchyDataService : data HierarchyData(seq=null, name=root, description=root1, root=null, parent=null, leftNode=1, rightNode=2, depth=0, nodeOrder=33, files=[], boards=[]) 
+2023:02:02 08:28:13.743 INFO  --- [http-nio-30403-exec-1] c.s.b.s.queries.CommonDataService : insert8 
+2023:02:02 08:28:39.857 INFO  --- [http-nio-30403-exec-3] c.s.b.s.f.JwtAuthenticationFilter : jwt start 
+2023:02:02 08:28:39.858 INFO  --- [http-nio-30403-exec-3] c.s.b.s.f.JwtAuthenticationFilter : jwt start6 
+2023:02:02 08:28:39.858 INFO  --- [http-nio-30403-exec-3] c.s.b.s.f.JwtAuthenticationFilter : jwt start1 
+2023:02:02 08:28:39.859 INFO  --- [http-nio-30403-exec-3] c.s.b.s.f.JwtAuthenticationFilter : jwt start5 
+2023:02:02 08:28:39.860 INFO  --- [http-nio-30403-exec-3] c.s.b.s.filters.SecurityFilter : cors filter start 
+2023:02:02 08:28:39.860 INFO  --- [http-nio-30403-exec-3] c.s.b.s.f.RequestServletFilter : requestServletFilter start 
+2023:02:02 08:28:39.861 INFO  --- [http-nio-30403-exec-3] c.s.b.s.f.RequestServletFilter : requestServletFilter start2 
+2023:02:02 08:28:39.861 INFO  --- [http-nio-30403-exec-3] c.s.b.s.f.RequestServletFilter : responseorg.springframework.security.web.header.HeaderWriterFilter$HeaderWriterResponse@21dba5bb 
+2023:02:02 08:28:39.871 INFO  --- [http-nio-30403-exec-3] c.s.b.s.queries.CommonDataService : method1 
+2023:02:02 08:28:39.871 INFO  --- [http-nio-30403-exec-3] c.s.b.s.queries.CommonDataService : method2 
+2023:02:02 08:28:39.872 INFO  --- [http-nio-30403-exec-3] c.s.b.s.queries.CommonDataService : method3 
+2023:02:02 08:28:39.968 INFO  --- [http-nio-30403-exec-3] c.s.b.s.queries.CommonDataService : origin : HierarchyData(seq=66, name=root, description=root1, root=null, parent=null, leftNode=1, rightNode=2, depth=0, nodeOrder=33, files=[], boards=[]) 
+2023:02:02 08:28:39.968 INFO  --- [http-nio-30403-exec-3] c.s.b.s.queries.CommonDataService : method1 
+2023:02:02 08:28:39.968 INFO  --- [http-nio-30403-exec-3] c.s.b.s.queries.CommonDataService : method2 
+2023:02:02 08:28:39.968 INFO  --- [http-nio-30403-exec-3] c.s.b.s.queries.CommonDataService : method3 
+2023:02:02 08:28:39.970 INFO  --- [http-nio-30403-exec-3] c.s.b.s.queries.CommonDataService : method1 
+2023:02:02 08:28:39.971 INFO  --- [http-nio-30403-exec-3] c.s.b.s.queries.CommonDataService : method2 
+2023:02:02 08:28:39.971 INFO  --- [http-nio-30403-exec-3] c.s.b.s.queries.CommonDataService : method3 
+2023:02:02 08:28:39.971 INFO  --- [http-nio-30403-exec-3] c.s.b.s.queries.CommonDataService : method1 
+2023:02:02 08:28:39.971 INFO  --- [http-nio-30403-exec-3] c.s.b.s.queries.CommonDataService : method2 
+2023:02:02 08:28:39.972 INFO  --- [http-nio-30403-exec-3] c.s.b.s.queries.CommonDataService : method3 
+2023:02:02 08:28:39.972 INFO  --- [http-nio-30403-exec-3] c.s.b.s.queries.CommonDataService : method1 
+2023:02:02 08:28:39.972 INFO  --- [http-nio-30403-exec-3] c.s.b.s.queries.CommonDataService : method2 
+2023:02:02 08:28:39.972 INFO  --- [http-nio-30403-exec-3] c.s.b.s.queries.CommonDataService : method3 
+2023:02:02 08:28:39.972 INFO  --- [http-nio-30403-exec-3] c.s.b.s.queries.CommonDataService : 1 
+2023:02:02 08:28:39.972 INFO  --- [http-nio-30403-exec-3] c.s.b.s.queries.CommonDataService : method1 
+2023:02:02 08:28:39.972 INFO  --- [http-nio-30403-exec-3] c.s.b.s.queries.CommonDataService : method2 
+2023:02:02 08:28:39.972 INFO  --- [http-nio-30403-exec-3] c.s.b.s.queries.CommonDataService : method3 
+2023:02:02 08:28:39.972 INFO  --- [http-nio-30403-exec-3] c.s.b.s.queries.CommonDataService : 2 
+2023:02:02 08:28:39.972 INFO  --- [http-nio-30403-exec-3] c.s.b.s.queries.CommonDataService : method1 
+2023:02:02 08:28:39.972 INFO  --- [http-nio-30403-exec-3] c.s.b.s.queries.CommonDataService : method2 
+2023:02:02 08:28:39.972 INFO  --- [http-nio-30403-exec-3] c.s.b.s.queries.CommonDataService : method3 
+2023:02:02 08:28:39.972 INFO  --- [http-nio-30403-exec-3] c.s.b.s.queries.CommonDataService : method4 
+2023:02:02 08:28:39.972 INFO  --- [http-nio-30403-exec-3] c.s.b.s.queries.CommonDataService : method5 
+2023:02:02 08:28:39.972 INFO  --- [http-nio-30403-exec-3] c.s.b.s.queries.CommonDataService : 3 
+2023:02:02 08:28:39.973 INFO  --- [http-nio-30403-exec-3] c.s.b.s.queries.CommonDataService : method1 
+2023:02:02 08:28:39.973 INFO  --- [http-nio-30403-exec-3] c.s.b.s.queries.CommonDataService : method2 
+2023:02:02 08:28:39.973 INFO  --- [http-nio-30403-exec-3] c.s.b.s.queries.CommonDataService : method3 
+2023:02:02 08:28:39.973 INFO  --- [http-nio-30403-exec-3] c.s.b.s.queries.CommonDataService : 4 
+2023:02:02 08:28:39.973 INFO  --- [http-nio-30403-exec-3] c.s.b.s.queries.CommonDataService : method1 
+2023:02:02 08:28:39.973 INFO  --- [http-nio-30403-exec-3] c.s.b.s.queries.CommonDataService : method2 
+2023:02:02 08:28:39.973 INFO  --- [http-nio-30403-exec-3] c.s.b.s.queries.CommonDataService : method3 
+2023:02:02 08:28:39.973 INFO  --- [http-nio-30403-exec-3] c.s.b.s.queries.CommonDataService : 5 
+2023:02:02 08:28:39.973 INFO  --- [http-nio-30403-exec-3] c.s.b.s.queries.CommonDataService : method1 
+2023:02:02 08:28:39.973 INFO  --- [http-nio-30403-exec-3] c.s.b.s.queries.CommonDataService : method2 
+2023:02:02 08:28:39.974 INFO  --- [http-nio-30403-exec-3] c.s.b.s.queries.CommonDataService : method3 
+2023:02:02 08:28:39.974 INFO  --- [http-nio-30403-exec-3] c.s.b.s.queries.CommonDataService : 6 
+2023:02:02 08:28:39.975 INFO  --- [http-nio-30403-exec-3] c.s.b.s.queries.CommonDataService : method1 
+2023:02:02 08:28:39.975 INFO  --- [http-nio-30403-exec-3] c.s.b.s.queries.CommonDataService : method2 
+2023:02:02 08:28:39.975 INFO  --- [http-nio-30403-exec-3] c.s.b.s.queries.CommonDataService : method3 
+2023:02:02 08:28:39.975 INFO  --- [http-nio-30403-exec-3] c.s.b.s.h.s.HierarchyDataService : save 
+2023:02:02 08:28:39.975 INFO  --- [http-nio-30403-exec-3] c.s.b.s.h.s.HierarchyDataService : data HierarchyData(seq=null, name=sub node, description=root1 sub node1, root=HierarchyData(seq=66, name=root, description=root1, root=null, parent=null, leftNode=1, rightNode=2, depth=0, nodeOrder=33, files=[], boards=[]), parent=HierarchyData(seq=66, name=root, description=root1, root=null, parent=null, leftNode=1, rightNode=2, depth=0, nodeOrder=33, files=[], boards=[]), leftNode=3, rightNode=4, depth=1, nodeOrder=0, files=[], boards=[]) 
+2023:02:02 08:28:40.012 INFO  --- [http-nio-30403-exec-3] c.s.b.s.queries.CommonDataService : 7 
+2023:02:02 08:28:40.012 INFO  --- [http-nio-30403-exec-3] c.s.b.s.queries.CommonDataService : method1 
+2023:02:02 08:28:40.012 INFO  --- [http-nio-30403-exec-3] c.s.b.s.queries.CommonDataService : method2 
+2023:02:02 08:28:40.012 INFO  --- [http-nio-30403-exec-3] c.s.b.s.queries.CommonDataService : method3 
+2023:02:02 08:28:40.013 INFO  --- [http-nio-30403-exec-3] c.s.b.s.queries.CommonDataService : method4 
+2023:02:02 08:28:40.013 INFO  --- [http-nio-30403-exec-3] c.s.b.s.queries.CommonDataService : method5 
+2023:02:02 08:28:40.013 INFO  --- [http-nio-30403-exec-3] c.s.b.s.queries.CommonDataService : object is not an instance of declaring class 
+2023:02:02 08:29:17.627 INFO  --- [SpringApplicationShutdownHook] o.s.o.j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default' 
+2023:02:02 08:29:17.629 INFO  --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource : HikariPool-1 - Shutdown initiated... 
+2023:02:02 08:29:17.649 INFO  --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource : HikariPool-1 - Shutdown completed. 
+2023:02:02 08:29:26.439 INFO  --- [main] com.srlab.basic.BasicApplication : Starting BasicApplication using Java 11 on SES-2303 with PID 5712 (C:\Users\user\Desktop\backendBasic\target\classes started by user in C:\Users\user\Desktop\backendBasic) 
+2023:02:02 08:29:26.444 INFO  --- [main] com.srlab.basic.BasicApplication : The following 1 profile is active: "oauth" 
+2023:02:02 08:29:27.714 INFO  --- [main] o.s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode 
+2023:02:02 08:29:27.717 INFO  --- [main] o.s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode. 
+2023:02:02 08:29:27.958 INFO  --- [main] o.s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 231 ms. Found 9 JPA repository interfaces. 
+2023:02:02 08:29:27.974 INFO  --- [main] o.s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode 
+2023:02:02 08:29:27.975 INFO  --- [main] o.s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode. 
+2023:02:02 08:29:28.006 INFO  --- [main] o.s.d.r.c.RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.srlab.basic.authserverside.users.repositories.UserRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository 
+2023:02:02 08:29:28.007 INFO  --- [main] o.s.d.r.c.RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.srlab.basic.serverside.boards.repositories.BoardRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository 
+2023:02:02 08:29:28.007 INFO  --- [main] o.s.d.r.c.RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.srlab.basic.serverside.boards.repositories.CommentRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository 
+2023:02:02 08:29:28.008 INFO  --- [main] o.s.d.r.c.RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.srlab.basic.serverside.devices.repositories.DeviceRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository 
+2023:02:02 08:29:28.009 INFO  --- [main] o.s.d.r.c.RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.srlab.basic.serverside.files.repositories.FileRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository 
+2023:02:02 08:29:28.010 INFO  --- [main] o.s.d.r.c.RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.srlab.basic.serverside.files.repositories.FileTempRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository 
+2023:02:02 08:29:28.010 INFO  --- [main] o.s.d.r.c.RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.srlab.basic.serverside.hierarchies.repositories.HierarchyDataRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository 
+2023:02:02 08:29:28.011 INFO  --- [main] o.s.d.r.c.RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.srlab.basic.serverside.logs.repositories.ApiHistoryRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository 
+2023:02:02 08:29:28.012 INFO  --- [main] o.s.d.r.c.RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.srlab.basic.serverside.logs.repositories.ConnectHistoryRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository 
+2023:02:02 08:29:28.013 INFO  --- [main] o.s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 27 ms. Found 0 Redis repository interfaces. 
+2023:02:02 08:29:28.955 INFO  --- [main] o.s.b.w.e.tomcat.TomcatWebServer : Tomcat initialized with port(s): 30403 (http) 
+2023:02:02 08:29:28.971 INFO  --- [main] o.a.catalina.core.StandardService : Starting service [Tomcat] 
+2023:02:02 08:29:28.972 INFO  --- [main] o.a.catalina.core.StandardEngine : Starting Servlet engine: [Apache Tomcat/9.0.70] 
+2023:02:02 08:29:29.195 INFO  --- [main] o.a.c.c.C.[Tomcat].[localhost].[/] : Initializing Spring embedded WebApplicationContext 
+2023:02:02 08:29:29.195 INFO  --- [main] o.s.b.w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2696 ms 
+2023:02:02 08:29:29.460 INFO  --- [main] o.h.jpa.internal.util.LogHelper : HHH000204: Processing PersistenceUnitInfo [name: default] 
+2023:02:02 08:29:29.525 INFO  --- [main] org.hibernate.Version : HHH000412: Hibernate ORM core version 5.6.14.Final 
+2023:02:02 08:29:29.713 INFO  --- [main] o.h.annotations.common.Version : HCANN000001: Hibernate Commons Annotations {5.1.2.Final} 
+2023:02:02 08:29:29.833 INFO  --- [main] com.zaxxer.hikari.HikariDataSource : HikariPool-1 - Starting... 
+2023:02:02 08:29:29.838 WARN  --- [main] c.z.hikari.util.DriverDataSource : Registered driver with driverClassName=oracle.jdbc.driver.OracleDriver was not found, trying direct instantiation. 
+2023:02:02 08:29:30.201 INFO  --- [main] com.zaxxer.hikari.HikariDataSource : HikariPool-1 - Start completed. 
+2023:02:02 08:29:30.230 INFO  --- [main] org.hibernate.dialect.Dialect : HHH000400: Using dialect: org.hibernate.dialect.Oracle12cDialect 
+2023:02:02 08:30:14.018 INFO  --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform] 
+2023:02:02 08:30:14.026 INFO  --- [main] o.s.o.j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default' 
+2023:02:02 08:30:14.635 INFO  --- [main] o.a.c.c.C.[Tomcat].[localhost].[/] : org.tuckey.web.filters.urlrewrite.UrlRewriteFilter ERROR: unable to find urlrewrite conf file at /WEB-INF/urlrewrite.xml 
+2023:02:02 08:30:15.666 INFO  --- [main] c.s.b.s.configs.WebSecurityConfig : security config start 
+2023:02:02 08:30:15.846 INFO  --- [main] o.s.s.w.DefaultSecurityFilterChain : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@591bff1d, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@6e1bd2b, org.springframework.security.web.context.SecurityContextPersistenceFilter@776ae580, org.springframework.security.web.header.HeaderWriterFilter@1f9009d3, org.springframework.web.filter.CorsFilter@18a66406, org.springframework.security.web.authentication.logout.LogoutFilter@6d5376b7, org.springframework.security.oauth2.client.web.OAuth2AuthorizationRequestRedirectFilter@86e7c7a, org.springframework.security.oauth2.client.web.OAuth2LoginAuthenticationFilter@6e863469, com.srlab.basic.serverside.filters.JwtAuthenticationFilter@54d3b4fe, org.springframework.security.web.authentication.ui.DefaultLoginPageGeneratingFilter@6a7db16e, org.springframework.security.web.authentication.ui.DefaultLogoutPageGeneratingFilter@52364a6e, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@5748638c, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@7e864a8c, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@5935ade6, org.springframework.security.web.session.SessionManagementFilter@56394880, org.springframework.security.web.access.ExceptionTranslationFilter@319c77de, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@26c84006] 
+2023:02:02 08:30:15.919 WARN  --- [main] o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning 
+2023:02:02 08:30:16.553 INFO  --- [main] o.s.b.a.e.web.EndpointLinksResolver : Exposing 1 endpoint(s) beneath base path '/actuator' 
+2023:02:02 08:30:16.608 INFO  --- [main] o.s.b.w.e.tomcat.TomcatWebServer : Tomcat started on port(s): 30403 (http) with context path '' 
+2023:02:02 08:30:16.628 INFO  --- [main] com.srlab.basic.BasicApplication : Started BasicApplication in 50.824 seconds (JVM running for 51.646) 
+2023:02:02 08:30:20.980 INFO  --- [http-nio-30403-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/] : Initializing Spring DispatcherServlet 'dispatcherServlet' 
+2023:02:02 08:30:20.985 INFO  --- [http-nio-30403-exec-1] o.s.web.servlet.DispatcherServlet : Initializing Servlet 'dispatcherServlet' 
+2023:02:02 08:30:20.990 INFO  --- [http-nio-30403-exec-1] o.s.web.servlet.DispatcherServlet : Completed initialization in 4 ms 
+2023:02:02 08:30:21.081 INFO  --- [http-nio-30403-exec-1] c.s.b.s.f.JwtAuthenticationFilter : jwt start 
+2023:02:02 08:30:21.082 INFO  --- [http-nio-30403-exec-1] c.s.b.s.f.JwtAuthenticationFilter : jwt start6 
+2023:02:02 08:30:21.083 INFO  --- [http-nio-30403-exec-1] c.s.b.s.f.JwtAuthenticationFilter : jwt start1 
+2023:02:02 08:30:21.083 INFO  --- [http-nio-30403-exec-1] c.s.b.s.f.JwtAuthenticationFilter : jwt start5 
+2023:02:02 08:30:21.095 INFO  --- [http-nio-30403-exec-1] c.s.b.s.filters.SecurityFilter : cors filter start 
+2023:02:02 08:30:21.096 INFO  --- [http-nio-30403-exec-1] c.s.b.s.f.RequestServletFilter : requestServletFilter start 
+2023:02:02 08:30:21.100 INFO  --- [http-nio-30403-exec-1] c.s.b.s.f.RequestServletFilter : requestServletFilter start2 
+2023:02:02 08:30:21.101 INFO  --- [http-nio-30403-exec-1] c.s.b.s.f.RequestServletFilter : responseorg.springframework.security.web.header.HeaderWriterFilter$HeaderWriterResponse@8b82b06 
+2023:02:02 08:30:21.247 INFO  --- [http-nio-30403-exec-1] c.s.b.s.queries.CommonDataService : method1 
+2023:02:02 08:30:21.247 INFO  --- [http-nio-30403-exec-1] c.s.b.s.queries.CommonDataService : method2 
+2023:02:02 08:30:21.248 INFO  --- [http-nio-30403-exec-1] c.s.b.s.queries.CommonDataService : method3 
+2023:02:02 08:30:21.370 INFO  --- [http-nio-30403-exec-1] c.s.b.s.queries.CommonDataService : origin : HierarchyData(seq=66, name=root, description=root1, root=null, parent=null, leftNode=1, rightNode=2, depth=0, nodeOrder=33, files=[], boards=[]) 
+2023:02:02 08:30:21.370 INFO  --- [http-nio-30403-exec-1] c.s.b.s.queries.CommonDataService : method1 
+2023:02:02 08:30:21.370 INFO  --- [http-nio-30403-exec-1] c.s.b.s.queries.CommonDataService : method2 
+2023:02:02 08:30:21.370 INFO  --- [http-nio-30403-exec-1] c.s.b.s.queries.CommonDataService : method3 
+2023:02:02 08:30:21.418 INFO  --- [http-nio-30403-exec-1] c.s.b.s.queries.CommonDataService : method1 
+2023:02:02 08:30:21.418 INFO  --- [http-nio-30403-exec-1] c.s.b.s.queries.CommonDataService : method2 
+2023:02:02 08:30:21.418 INFO  --- [http-nio-30403-exec-1] c.s.b.s.queries.CommonDataService : method3 
+2023:02:02 08:30:21.419 INFO  --- [http-nio-30403-exec-1] c.s.b.s.queries.CommonDataService : method1 
+2023:02:02 08:30:21.419 INFO  --- [http-nio-30403-exec-1] c.s.b.s.queries.CommonDataService : method2 
+2023:02:02 08:30:21.419 INFO  --- [http-nio-30403-exec-1] c.s.b.s.queries.CommonDataService : method3 
+2023:02:02 08:30:21.419 INFO  --- [http-nio-30403-exec-1] c.s.b.s.queries.CommonDataService : method1 
+2023:02:02 08:30:21.419 INFO  --- [http-nio-30403-exec-1] c.s.b.s.queries.CommonDataService : method2 
+2023:02:02 08:30:21.419 INFO  --- [http-nio-30403-exec-1] c.s.b.s.queries.CommonDataService : method3 
+2023:02:02 08:30:21.419 INFO  --- [http-nio-30403-exec-1] c.s.b.s.queries.CommonDataService : 1 
+2023:02:02 08:30:21.419 INFO  --- [http-nio-30403-exec-1] c.s.b.s.queries.CommonDataService : method1 
+2023:02:02 08:30:21.419 INFO  --- [http-nio-30403-exec-1] c.s.b.s.queries.CommonDataService : method2 
+2023:02:02 08:30:21.419 INFO  --- [http-nio-30403-exec-1] c.s.b.s.queries.CommonDataService : method3 
+2023:02:02 08:30:21.419 INFO  --- [http-nio-30403-exec-1] c.s.b.s.queries.CommonDataService : 2 
+2023:02:02 08:30:21.419 INFO  --- [http-nio-30403-exec-1] c.s.b.s.queries.CommonDataService : method1 
+2023:02:02 08:30:21.420 INFO  --- [http-nio-30403-exec-1] c.s.b.s.queries.CommonDataService : method2 
+2023:02:02 08:30:21.420 INFO  --- [http-nio-30403-exec-1] c.s.b.s.queries.CommonDataService : method3 
+2023:02:02 08:30:21.420 INFO  --- [http-nio-30403-exec-1] c.s.b.s.queries.CommonDataService : method4 
+2023:02:02 08:30:21.420 INFO  --- [http-nio-30403-exec-1] c.s.b.s.queries.CommonDataService : method5 
+2023:02:02 08:30:21.421 INFO  --- [http-nio-30403-exec-1] c.s.b.s.queries.CommonDataService : 3 
+2023:02:02 08:30:21.421 INFO  --- [http-nio-30403-exec-1] c.s.b.s.queries.CommonDataService : method1 
+2023:02:02 08:30:21.421 INFO  --- [http-nio-30403-exec-1] c.s.b.s.queries.CommonDataService : method2 
+2023:02:02 08:30:21.421 INFO  --- [http-nio-30403-exec-1] c.s.b.s.queries.CommonDataService : method3 
+2023:02:02 08:30:21.421 INFO  --- [http-nio-30403-exec-1] c.s.b.s.queries.CommonDataService : 4 
+2023:02:02 08:30:21.421 INFO  --- [http-nio-30403-exec-1] c.s.b.s.queries.CommonDataService : method1 
+2023:02:02 08:30:21.421 INFO  --- [http-nio-30403-exec-1] c.s.b.s.queries.CommonDataService : method2 
+2023:02:02 08:30:21.421 INFO  --- [http-nio-30403-exec-1] c.s.b.s.queries.CommonDataService : method3 
+2023:02:02 08:30:21.421 INFO  --- [http-nio-30403-exec-1] c.s.b.s.queries.CommonDataService : 5 
+2023:02:02 08:30:21.421 INFO  --- [http-nio-30403-exec-1] c.s.b.s.queries.CommonDataService : method1 
+2023:02:02 08:30:21.421 INFO  --- [http-nio-30403-exec-1] c.s.b.s.queries.CommonDataService : method2 
+2023:02:02 08:30:21.421 INFO  --- [http-nio-30403-exec-1] c.s.b.s.queries.CommonDataService : method3 
+2023:02:02 08:30:21.421 INFO  --- [http-nio-30403-exec-1] c.s.b.s.queries.CommonDataService : 6 
+2023:02:02 08:30:21.421 INFO  --- [http-nio-30403-exec-1] c.s.b.s.queries.CommonDataService : method1 
+2023:02:02 08:30:21.422 INFO  --- [http-nio-30403-exec-1] c.s.b.s.queries.CommonDataService : method2 
+2023:02:02 08:30:21.422 INFO  --- [http-nio-30403-exec-1] c.s.b.s.queries.CommonDataService : method3 
+2023:02:02 08:30:21.422 INFO  --- [http-nio-30403-exec-1] c.s.b.s.h.s.HierarchyDataService : save 
+2023:02:02 08:30:21.422 INFO  --- [http-nio-30403-exec-1] c.s.b.s.h.s.HierarchyDataService : data HierarchyData(seq=null, name=sub node, description=root1 sub node1, root=HierarchyData(seq=66, name=root, description=root1, root=null, parent=null, leftNode=1, rightNode=2, depth=0, nodeOrder=33, files=[], boards=[]), parent=HierarchyData(seq=66, name=root, description=root1, root=null, parent=null, leftNode=1, rightNode=2, depth=0, nodeOrder=33, files=[], boards=[]), leftNode=3, rightNode=4, depth=1, nodeOrder=0, files=[], boards=[]) 
+2023:02:02 08:30:21.504 INFO  --- [http-nio-30403-exec-1] c.s.b.s.queries.CommonDataService : 7 
+2023:02:02 08:30:21.505 INFO  --- [http-nio-30403-exec-1] c.s.b.s.queries.CommonDataService : method1 
+2023:02:02 08:30:21.505 INFO  --- [http-nio-30403-exec-1] c.s.b.s.queries.CommonDataService : method2 
+2023:02:02 08:30:21.505 INFO  --- [http-nio-30403-exec-1] c.s.b.s.queries.CommonDataService : method3 
+2023:02:02 08:30:21.505 INFO  --- [http-nio-30403-exec-1] c.s.b.s.queries.CommonDataService : method4 
+2023:02:02 08:30:21.505 INFO  --- [http-nio-30403-exec-1] c.s.b.s.queries.CommonDataService : method5 
+2023:02:02 08:30:21.506 INFO  --- [http-nio-30403-exec-1] c.s.b.s.queries.CommonDataService : wrong number of arguments 
+2023:02:02 08:34:21.122 INFO  --- [http-nio-30403-exec-2] c.s.b.s.f.JwtAuthenticationFilter : jwt start 
+2023:02:02 08:34:21.122 INFO  --- [http-nio-30403-exec-2] c.s.b.s.f.JwtAuthenticationFilter : jwt start6 
+2023:02:02 08:34:21.122 INFO  --- [http-nio-30403-exec-2] c.s.b.s.f.JwtAuthenticationFilter : jwt start1 
+2023:02:02 08:34:21.122 INFO  --- [http-nio-30403-exec-2] c.s.b.s.f.JwtAuthenticationFilter : jwt start5 
+2023:02:02 08:34:21.123 INFO  --- [http-nio-30403-exec-2] c.s.b.s.filters.SecurityFilter : cors filter start 
+2023:02:02 08:34:21.123 INFO  --- [http-nio-30403-exec-2] c.s.b.s.f.RequestServletFilter : requestServletFilter start 
+2023:02:02 08:34:21.124 INFO  --- [http-nio-30403-exec-2] c.s.b.s.f.RequestServletFilter : requestServletFilter start2 
+2023:02:02 08:34:21.124 INFO  --- [http-nio-30403-exec-2] c.s.b.s.f.RequestServletFilter : responseorg.springframework.security.web.header.HeaderWriterFilter$HeaderWriterResponse@578999b0 
+2023:02:02 08:34:21.127 INFO  --- [http-nio-30403-exec-2] c.s.b.s.queries.CommonDataService : method1 
+2023:02:02 08:34:21.127 INFO  --- [http-nio-30403-exec-2] c.s.b.s.queries.CommonDataService : method2 
+2023:02:02 08:34:21.127 INFO  --- [http-nio-30403-exec-2] c.s.b.s.queries.CommonDataService : method3 
+2023:02:02 08:34:21.147 INFO  --- [http-nio-30403-exec-2] c.s.b.s.queries.CommonDataService : origin : HierarchyData(seq=66, name=root, description=root1, root=null, parent=null, leftNode=1, rightNode=2, depth=0, nodeOrder=33, files=[], boards=[]) 
+2023:02:02 08:34:21.148 INFO  --- [http-nio-30403-exec-2] c.s.b.s.queries.CommonDataService : method1 
+2023:02:02 08:34:21.148 INFO  --- [http-nio-30403-exec-2] c.s.b.s.queries.CommonDataService : method2 
+2023:02:02 08:34:21.148 INFO  --- [http-nio-30403-exec-2] c.s.b.s.queries.CommonDataService : method3 
+2023:02:02 08:34:21.148 INFO  --- [http-nio-30403-exec-2] c.s.b.s.queries.CommonDataService : method1 
+2023:02:02 08:34:21.148 INFO  --- [http-nio-30403-exec-2] c.s.b.s.queries.CommonDataService : method2 
+2023:02:02 08:34:21.149 INFO  --- [http-nio-30403-exec-2] c.s.b.s.queries.CommonDataService : method3 
+2023:02:02 08:34:21.149 INFO  --- [http-nio-30403-exec-2] c.s.b.s.queries.CommonDataService : method1 
+2023:02:02 08:34:21.149 INFO  --- [http-nio-30403-exec-2] c.s.b.s.queries.CommonDataService : method2 
+2023:02:02 08:34:21.149 INFO  --- [http-nio-30403-exec-2] c.s.b.s.queries.CommonDataService : method3 
+2023:02:02 08:34:21.150 INFO  --- [http-nio-30403-exec-2] c.s.b.s.queries.CommonDataService : method1 
+2023:02:02 08:34:21.150 INFO  --- [http-nio-30403-exec-2] c.s.b.s.queries.CommonDataService : method2 
+2023:02:02 08:34:21.150 INFO  --- [http-nio-30403-exec-2] c.s.b.s.queries.CommonDataService : method3 
+2023:02:02 08:34:21.150 INFO  --- [http-nio-30403-exec-2] c.s.b.s.queries.CommonDataService : 1 
+2023:02:02 08:34:21.151 INFO  --- [http-nio-30403-exec-2] c.s.b.s.queries.CommonDataService : method1 
+2023:02:02 08:34:21.151 INFO  --- [http-nio-30403-exec-2] c.s.b.s.queries.CommonDataService : method2 
+2023:02:02 08:34:21.151 INFO  --- [http-nio-30403-exec-2] c.s.b.s.queries.CommonDataService : method3 
+2023:02:02 08:34:21.152 INFO  --- [http-nio-30403-exec-2] c.s.b.s.queries.CommonDataService : 2 
+2023:02:02 08:34:21.152 INFO  --- [http-nio-30403-exec-2] c.s.b.s.queries.CommonDataService : method1 
+2023:02:02 08:34:21.152 INFO  --- [http-nio-30403-exec-2] c.s.b.s.queries.CommonDataService : method2 
+2023:02:02 08:34:21.152 INFO  --- [http-nio-30403-exec-2] c.s.b.s.queries.CommonDataService : method3 
+2023:02:02 08:34:21.153 INFO  --- [http-nio-30403-exec-2] c.s.b.s.queries.CommonDataService : method4 
+2023:02:02 08:34:21.153 INFO  --- [http-nio-30403-exec-2] c.s.b.s.queries.CommonDataService : method5 
+2023:02:02 08:34:21.153 INFO  --- [http-nio-30403-exec-2] c.s.b.s.queries.CommonDataService : 3 
+2023:02:02 08:34:21.153 INFO  --- [http-nio-30403-exec-2] c.s.b.s.queries.CommonDataService : method1 
+2023:02:02 08:34:21.153 INFO  --- [http-nio-30403-exec-2] c.s.b.s.queries.CommonDataService : method2 
+2023:02:02 08:34:21.154 INFO  --- [http-nio-30403-exec-2] c.s.b.s.queries.CommonDataService : method3 
+2023:02:02 08:34:21.154 INFO  --- [http-nio-30403-exec-2] c.s.b.s.queries.CommonDataService : 4 
+2023:02:02 08:34:21.154 INFO  --- [http-nio-30403-exec-2] c.s.b.s.queries.CommonDataService : method1 
+2023:02:02 08:34:21.154 INFO  --- [http-nio-30403-exec-2] c.s.b.s.queries.CommonDataService : method2 
+2023:02:02 08:34:21.154 INFO  --- [http-nio-30403-exec-2] c.s.b.s.queries.CommonDataService : method3 
+2023:02:02 08:34:21.154 INFO  --- [http-nio-30403-exec-2] c.s.b.s.queries.CommonDataService : 5 
+2023:02:02 08:34:21.155 INFO  --- [http-nio-30403-exec-2] c.s.b.s.queries.CommonDataService : method1 
+2023:02:02 08:34:21.155 INFO  --- [http-nio-30403-exec-2] c.s.b.s.queries.CommonDataService : method2 
+2023:02:02 08:34:21.155 INFO  --- [http-nio-30403-exec-2] c.s.b.s.queries.CommonDataService : method3 
+2023:02:02 08:34:21.155 INFO  --- [http-nio-30403-exec-2] c.s.b.s.queries.CommonDataService : 6 
+2023:02:02 08:34:21.155 INFO  --- [http-nio-30403-exec-2] c.s.b.s.queries.CommonDataService : method1 
+2023:02:02 08:34:21.156 INFO  --- [http-nio-30403-exec-2] c.s.b.s.queries.CommonDataService : method2 
+2023:02:02 08:34:21.156 INFO  --- [http-nio-30403-exec-2] c.s.b.s.queries.CommonDataService : method3 
+2023:02:02 08:34:21.156 INFO  --- [http-nio-30403-exec-2] c.s.b.s.h.s.HierarchyDataService : save 
+2023:02:02 08:34:21.156 INFO  --- [http-nio-30403-exec-2] c.s.b.s.h.s.HierarchyDataService : data HierarchyData(seq=null, name=sub node, description=root1 sub node1, root=HierarchyData(seq=66, name=root, description=root1, root=null, parent=null, leftNode=1, rightNode=2, depth=0, nodeOrder=33, files=[], boards=[]), parent=HierarchyData(seq=66, name=root, description=root1, root=null, parent=null, leftNode=1, rightNode=2, depth=0, nodeOrder=33, files=[], boards=[]), leftNode=3, rightNode=4, depth=1, nodeOrder=0, files=[], boards=[]) 
+2023:02:02 08:34:21.226 INFO  --- [http-nio-30403-exec-2] c.s.b.s.queries.CommonDataService : 7 
+2023:02:02 08:34:21.226 INFO  --- [http-nio-30403-exec-2] c.s.b.s.queries.CommonDataService : method1 
+2023:02:02 08:34:21.226 INFO  --- [http-nio-30403-exec-2] c.s.b.s.queries.CommonDataService : method2 
+2023:02:02 08:34:21.226 INFO  --- [http-nio-30403-exec-2] c.s.b.s.queries.CommonDataService : method3 
+2023:02:02 08:34:21.227 INFO  --- [http-nio-30403-exec-2] c.s.b.s.queries.CommonDataService : method4 
+2023:02:02 08:34:21.227 INFO  --- [http-nio-30403-exec-2] c.s.b.s.queries.CommonDataService : method5 
+2023:02:02 08:34:21.227 INFO  --- [http-nio-30403-exec-2] c.s.b.s.queries.CommonDataService : wrong number of arguments 
+2023:02:02 09:13:23.555 WARN  --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1m52s562ms202µs200ns). 
+2023:02:02 09:43:07.100 WARN  --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=28m43s524ms781µs700ns). 
+2023:02:02 10:10:10.311 WARN  --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=9m32s895ms327µs600ns). 
+2023:02:02 10:56:41.706 WARN  --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=23m1s52ms809µs700ns). 
+2023:02:02 11:53:14.166 WARN  --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=9m52s821ms790µs600ns). 
+2023:02:02 12:45:03.409 WARN  --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=30m18s866ms867µs600ns). 
+2023:02:02 14:51:57.327 WARN  --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1h11m53s24ms45µs700ns). 
+2023:02:02 17:47:28.993 WARN  --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=58s839ms565µs900ns). 
+2023:02:02 20:15:15.960 WARN  --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=2h12m46s717ms814µs600ns). 
+2023:02:02 21:21:40.755 INFO  --- [main] com.srlab.basic.BasicApplication : Starting BasicApplication using Java 11 on SES-2303 with PID 5736 (C:\Users\user\Desktop\backendBasic\target\classes started by user in C:\Users\user\Desktop\backendBasic) 
+2023:02:02 21:21:40.758 INFO  --- [main] com.srlab.basic.BasicApplication : The following 1 profile is active: "oauth" 
+2023:02:02 21:21:42.031 INFO  --- [main] o.s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode 
+2023:02:02 21:21:42.033 INFO  --- [main] o.s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode. 
+2023:02:02 21:21:42.287 INFO  --- [main] o.s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 245 ms. Found 9 JPA repository interfaces. 
+2023:02:02 21:21:42.304 INFO  --- [main] o.s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode 
+2023:02:02 21:21:42.306 INFO  --- [main] o.s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode. 
+2023:02:02 21:21:42.332 INFO  --- [main] o.s.d.r.c.RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.srlab.basic.authserverside.users.repositories.UserRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository 
+2023:02:02 21:21:42.333 INFO  --- [main] o.s.d.r.c.RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.srlab.basic.serverside.boards.repositories.BoardRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository 
+2023:02:02 21:21:42.334 INFO  --- [main] o.s.d.r.c.RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.srlab.basic.serverside.boards.repositories.CommentRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository 
+2023:02:02 21:21:42.335 INFO  --- [main] o.s.d.r.c.RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.srlab.basic.serverside.devices.repositories.DeviceRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository 
+2023:02:02 21:21:42.336 INFO  --- [main] o.s.d.r.c.RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.srlab.basic.serverside.files.repositories.FileRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository 
+2023:02:02 21:21:42.337 INFO  --- [main] o.s.d.r.c.RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.srlab.basic.serverside.files.repositories.FileTempRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository 
+2023:02:02 21:21:42.338 INFO  --- [main] o.s.d.r.c.RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.srlab.basic.serverside.hierarchies.repositories.HierarchyDataRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository 
+2023:02:02 21:21:42.339 INFO  --- [main] o.s.d.r.c.RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.srlab.basic.serverside.logs.repositories.ApiHistoryRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository 
+2023:02:02 21:21:42.340 INFO  --- [main] o.s.d.r.c.RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.srlab.basic.serverside.logs.repositories.ConnectHistoryRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository 
+2023:02:02 21:21:42.340 INFO  --- [main] o.s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 24 ms. Found 0 Redis repository interfaces. 
+2023:02:02 21:21:43.261 INFO  --- [main] o.s.b.w.e.tomcat.TomcatWebServer : Tomcat initialized with port(s): 30403 (http) 
+2023:02:02 21:21:43.272 INFO  --- [main] o.a.catalina.core.StandardService : Starting service [Tomcat] 
+2023:02:02 21:21:43.273 INFO  --- [main] o.a.catalina.core.StandardEngine : Starting Servlet engine: [Apache Tomcat/9.0.70] 
+2023:02:02 21:21:43.448 INFO  --- [main] o.a.c.c.C.[Tomcat].[localhost].[/] : Initializing Spring embedded WebApplicationContext 
+2023:02:02 21:21:43.448 INFO  --- [main] o.s.b.w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2639 ms 
+2023:02:02 21:21:43.768 INFO  --- [main] o.h.jpa.internal.util.LogHelper : HHH000204: Processing PersistenceUnitInfo [name: default] 
+2023:02:02 21:21:43.860 INFO  --- [main] org.hibernate.Version : HHH000412: Hibernate ORM core version 5.6.14.Final 
+2023:02:02 21:21:44.161 INFO  --- [main] o.h.annotations.common.Version : HCANN000001: Hibernate Commons Annotations {5.1.2.Final} 
+2023:02:02 21:21:44.334 INFO  --- [main] com.zaxxer.hikari.HikariDataSource : HikariPool-1 - Starting... 
+2023:02:02 21:21:44.344 WARN  --- [main] c.z.hikari.util.DriverDataSource : Registered driver with driverClassName=oracle.jdbc.driver.OracleDriver was not found, trying direct instantiation. 
+2023:02:02 21:21:44.774 INFO  --- [main] com.zaxxer.hikari.HikariDataSource : HikariPool-1 - Start completed. 
+2023:02:02 21:21:44.804 INFO  --- [main] org.hibernate.dialect.Dialect : HHH000400: Using dialect: org.hibernate.dialect.Oracle12cDialect 
+2023:02:02 21:22:10.464 INFO  --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform] 
+2023:02:02 21:22:10.472 INFO  --- [main] o.s.o.j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default' 
+2023:02:02 21:22:11.033 INFO  --- [main] o.a.c.c.C.[Tomcat].[localhost].[/] : org.tuckey.web.filters.urlrewrite.UrlRewriteFilter ERROR: unable to find urlrewrite conf file at /WEB-INF/urlrewrite.xml 
+2023:02:02 21:22:11.965 INFO  --- [main] c.s.b.s.configs.WebSecurityConfig : security config start 
+2023:02:02 21:22:12.147 INFO  --- [main] o.s.s.w.DefaultSecurityFilterChain : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@45fdd38d, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@376b6d7d, org.springframework.security.web.context.SecurityContextPersistenceFilter@32107bba, org.springframework.security.web.header.HeaderWriterFilter@6089c1e3, org.springframework.web.filter.CorsFilter@e934485, org.springframework.security.web.authentication.logout.LogoutFilter@1ccf1819, org.springframework.security.oauth2.client.web.OAuth2AuthorizationRequestRedirectFilter@d0971cd, org.springframework.security.oauth2.client.web.OAuth2LoginAuthenticationFilter@53b42a0d, com.srlab.basic.serverside.filters.JwtAuthenticationFilter@6f272dc4, org.springframework.security.web.authentication.ui.DefaultLoginPageGeneratingFilter@298990ab, org.springframework.security.web.authentication.ui.DefaultLogoutPageGeneratingFilter@446dea16, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@3759ea4d, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@7c75f3a8, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@28817763, org.springframework.security.web.session.SessionManagementFilter@7acb0a44, org.springframework.security.web.access.ExceptionTranslationFilter@6c366d3, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@4bb4adf7] 
+2023:02:02 21:22:12.242 WARN  --- [main] o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning 
+2023:02:02 21:22:12.814 INFO  --- [main] o.s.b.a.e.web.EndpointLinksResolver : Exposing 1 endpoint(s) beneath base path '/actuator' 
+2023:02:02 21:22:12.853 INFO  --- [main] o.s.b.w.e.tomcat.TomcatWebServer : Tomcat started on port(s): 30403 (http) with context path '' 
+2023:02:02 21:22:12.866 INFO  --- [main] com.srlab.basic.BasicApplication : Started BasicApplication in 32.693 seconds (JVM running for 33.696) 
+2023:02:02 21:22:30.206 INFO  --- [http-nio-30403-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/] : Initializing Spring DispatcherServlet 'dispatcherServlet' 
+2023:02:02 21:22:30.207 INFO  --- [http-nio-30403-exec-1] o.s.web.servlet.DispatcherServlet : Initializing Servlet 'dispatcherServlet' 
+2023:02:02 21:22:30.209 INFO  --- [http-nio-30403-exec-1] o.s.web.servlet.DispatcherServlet : Completed initialization in 2 ms 
+2023:02:02 21:22:30.232 INFO  --- [http-nio-30403-exec-1] c.s.b.s.f.JwtAuthenticationFilter : jwt start 
+2023:02:02 21:22:30.233 INFO  --- [http-nio-30403-exec-1] c.s.b.s.f.JwtAuthenticationFilter : jwt start6 
+2023:02:02 21:22:30.233 INFO  --- [http-nio-30403-exec-1] c.s.b.s.f.JwtAuthenticationFilter : jwt start1 
+2023:02:02 21:22:30.233 INFO  --- [http-nio-30403-exec-1] c.s.b.s.f.JwtAuthenticationFilter : jwt start5 
+2023:02:02 21:22:30.242 INFO  --- [http-nio-30403-exec-1] c.s.b.s.filters.SecurityFilter : cors filter start 
+2023:02:02 21:22:30.243 INFO  --- [http-nio-30403-exec-1] c.s.b.s.f.RequestServletFilter : requestServletFilter start 
+2023:02:02 21:22:30.247 INFO  --- [http-nio-30403-exec-1] c.s.b.s.f.RequestServletFilter : requestServletFilter start2 
+2023:02:02 21:22:30.248 INFO  --- [http-nio-30403-exec-1] c.s.b.s.f.RequestServletFilter : responseorg.springframework.security.web.header.HeaderWriterFilter$HeaderWriterResponse@4edaef89 
+2023:02:02 21:22:30.399 INFO  --- [http-nio-30403-exec-1] c.s.b.s.queries.CommonDataService : method1 
+2023:02:02 21:22:30.400 INFO  --- [http-nio-30403-exec-1] c.s.b.s.queries.CommonDataService : method2 
+2023:02:02 21:22:30.400 INFO  --- [http-nio-30403-exec-1] c.s.b.s.queries.CommonDataService : method3 
+2023:02:02 21:22:30.617 INFO  --- [http-nio-30403-exec-1] c.s.b.s.queries.CommonDataService : origin : HierarchyData(seq=66, name=root, description=root1, root=null, parent=null, leftNode=1, rightNode=2, depth=0, nodeOrder=33, files=[], boards=[]) 
+2023:02:02 21:22:30.618 INFO  --- [http-nio-30403-exec-1] c.s.b.s.queries.CommonDataService : method1 
+2023:02:02 21:22:30.618 INFO  --- [http-nio-30403-exec-1] c.s.b.s.queries.CommonDataService : method2 
+2023:02:02 21:22:30.618 INFO  --- [http-nio-30403-exec-1] c.s.b.s.queries.CommonDataService : method3 
+2023:02:02 21:22:30.705 INFO  --- [http-nio-30403-exec-1] c.s.b.s.queries.CommonDataService : method1 
+2023:02:02 21:22:30.705 INFO  --- [http-nio-30403-exec-1] c.s.b.s.queries.CommonDataService : method2 
+2023:02:02 21:22:30.705 INFO  --- [http-nio-30403-exec-1] c.s.b.s.queries.CommonDataService : method3 
+2023:02:02 21:22:30.706 INFO  --- [http-nio-30403-exec-1] c.s.b.s.queries.CommonDataService : method1 
+2023:02:02 21:22:30.706 INFO  --- [http-nio-30403-exec-1] c.s.b.s.queries.CommonDataService : method2 
+2023:02:02 21:22:30.706 INFO  --- [http-nio-30403-exec-1] c.s.b.s.queries.CommonDataService : method3 
+2023:02:02 21:22:30.706 INFO  --- [http-nio-30403-exec-1] c.s.b.s.queries.CommonDataService : method1 
+2023:02:02 21:22:30.706 INFO  --- [http-nio-30403-exec-1] c.s.b.s.queries.CommonDataService : method2 
+2023:02:02 21:22:30.706 INFO  --- [http-nio-30403-exec-1] c.s.b.s.queries.CommonDataService : method3 
+2023:02:02 21:22:30.706 INFO  --- [http-nio-30403-exec-1] c.s.b.s.queries.CommonDataService : 1 
+2023:02:02 21:22:30.707 INFO  --- [http-nio-30403-exec-1] c.s.b.s.queries.CommonDataService : method1 
+2023:02:02 21:22:30.707 INFO  --- [http-nio-30403-exec-1] c.s.b.s.queries.CommonDataService : method2 
+2023:02:02 21:22:30.707 INFO  --- [http-nio-30403-exec-1] c.s.b.s.queries.CommonDataService : method3 
+2023:02:02 21:22:30.707 INFO  --- [http-nio-30403-exec-1] c.s.b.s.queries.CommonDataService : 2 
+2023:02:02 21:22:30.707 INFO  --- [http-nio-30403-exec-1] c.s.b.s.queries.CommonDataService : method1 
+2023:02:02 21:22:30.707 INFO  --- [http-nio-30403-exec-1] c.s.b.s.queries.CommonDataService : method2 
+2023:02:02 21:22:30.707 INFO  --- [http-nio-30403-exec-1] c.s.b.s.queries.CommonDataService : method3 
+2023:02:02 21:22:30.707 INFO  --- [http-nio-30403-exec-1] c.s.b.s.queries.CommonDataService : method4 
+2023:02:02 21:22:30.708 INFO  --- [http-nio-30403-exec-1] c.s.b.s.queries.CommonDataService : method5 
+2023:02:02 21:22:30.708 INFO  --- [http-nio-30403-exec-1] c.s.b.s.queries.CommonDataService : 3 
+2023:02:02 21:22:30.708 INFO  --- [http-nio-30403-exec-1] c.s.b.s.queries.CommonDataService : method1 
+2023:02:02 21:22:30.708 INFO  --- [http-nio-30403-exec-1] c.s.b.s.queries.CommonDataService : method2 
+2023:02:02 21:22:30.708 INFO  --- [http-nio-30403-exec-1] c.s.b.s.queries.CommonDataService : method3 
+2023:02:02 21:22:30.709 INFO  --- [http-nio-30403-exec-1] c.s.b.s.queries.CommonDataService : 4 
+2023:02:02 21:22:30.709 INFO  --- [http-nio-30403-exec-1] c.s.b.s.queries.CommonDataService : method1 
+2023:02:02 21:22:30.709 INFO  --- [http-nio-30403-exec-1] c.s.b.s.queries.CommonDataService : method2 
+2023:02:02 21:22:30.709 INFO  --- [http-nio-30403-exec-1] c.s.b.s.queries.CommonDataService : method3 
+2023:02:02 21:22:30.709 INFO  --- [http-nio-30403-exec-1] c.s.b.s.queries.CommonDataService : 5 
+2023:02:02 21:22:30.709 INFO  --- [http-nio-30403-exec-1] c.s.b.s.queries.CommonDataService : method1 
+2023:02:02 21:22:30.709 INFO  --- [http-nio-30403-exec-1] c.s.b.s.queries.CommonDataService : method2 
+2023:02:02 21:22:30.709 INFO  --- [http-nio-30403-exec-1] c.s.b.s.queries.CommonDataService : method3 
+2023:02:02 21:22:30.709 INFO  --- [http-nio-30403-exec-1] c.s.b.s.queries.CommonDataService : 6 
+2023:02:02 21:22:30.710 INFO  --- [http-nio-30403-exec-1] c.s.b.s.queries.CommonDataService : method1 
+2023:02:02 21:22:30.710 INFO  --- [http-nio-30403-exec-1] c.s.b.s.queries.CommonDataService : method2 
+2023:02:02 21:22:30.710 INFO  --- [http-nio-30403-exec-1] c.s.b.s.queries.CommonDataService : method3 
+2023:02:02 21:22:30.710 INFO  --- [http-nio-30403-exec-1] c.s.b.s.h.s.HierarchyDataService : save 
+2023:02:02 21:22:30.711 INFO  --- [http-nio-30403-exec-1] c.s.b.s.h.s.HierarchyDataService : data HierarchyData(seq=null, name=sub node, description=root1 sub node1, root=HierarchyData(seq=66, name=root, description=root1, root=null, parent=null, leftNode=1, rightNode=2, depth=0, nodeOrder=33, files=[], boards=[]), parent=HierarchyData(seq=66, name=root, description=root1, root=null, parent=null, leftNode=1, rightNode=2, depth=0, nodeOrder=33, files=[], boards=[]), leftNode=3, rightNode=4, depth=1, nodeOrder=0, files=[], boards=[]) 
+2023:02:02 21:22:30.852 INFO  --- [http-nio-30403-exec-1] c.s.b.s.queries.CommonDataService : 7 
+2023:02:02 21:22:30.852 INFO  --- [http-nio-30403-exec-1] c.s.b.s.queries.CommonDataService : method1 
+2023:02:02 21:22:30.853 INFO  --- [http-nio-30403-exec-1] c.s.b.s.queries.CommonDataService : method2 
+2023:02:02 21:22:30.853 INFO  --- [http-nio-30403-exec-1] c.s.b.s.queries.CommonDataService : method3 
+2023:02:02 21:22:30.853 INFO  --- [http-nio-30403-exec-1] c.s.b.s.queries.CommonDataService : method4 
+2023:02:02 21:22:30.853 INFO  --- [http-nio-30403-exec-1] c.s.b.s.queries.CommonDataService : method5 
+2023:02:02 21:22:30.853 INFO  --- [http-nio-30403-exec-1] c.s.b.s.queries.CommonDataService : wrong number of arguments 

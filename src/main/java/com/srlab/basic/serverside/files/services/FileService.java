@@ -125,27 +125,25 @@ public class FileService {
                 Long unixTime = System.currentTimeMillis();
                 String uploadFileName = unixTime + "_" + uuid;
 
-                TempFile fileTemp = new TempFile();
-
-                fileTemp.setCategory(category);
-                fileTemp.setKey(uuid.toString());
-                fileTemp.setFileName(originFileName);
-                fileTemp.setFileExt(FilenameUtils.getExtension(originFileName));
-                fileTemp.setFilePath(path + "/" + uploadFileName);
-                fileTemp.setFileMimeType(mimeType);
-                fileTemp.setInsertedDate(new Date());
-                fileTemp.setFileSize(fileAsBytes.length);
+                TempFile fileTemp = TempFile.builder()
+                        .category(category)
+                        .key(uuid.toString())
+                        .fileName(originFileName)
+                        .fileExt(FilenameUtils.getExtension(originFileName))
+                        .filePath(path + "/" + uploadFileName)
+                        .fileMimeType(mimeType)
+                        .insertedDate(new Date())
+                        .fileSize(fileAsBytes.length)
+                        .build();
 
                 list.add(fileTemp);
 
                 fileTempRepository.save(fileTemp);
 
-                fileTemp = (TempFile) getFileTemporaryOne(fileTemp.getKey()).getBody();
-
-                // 파일 복사 처리
+                // file copy
                 InputStream is = multipartFile.getInputStream();
 
-                Path moveLocation = fileStorageTarget.resolve(uploadFileName); // 실제파일
+                Path moveLocation = fileStorageTarget.resolve(uploadFileName); // real file
                 Files.copy(is, moveLocation, StandardCopyOption.REPLACE_EXISTING);
             }
             return new ResponseEntity<>(list, HttpStatus.OK);
@@ -154,7 +152,7 @@ public class FileService {
         }
     }
 
-    public ResponseEntity<?> transfer(String category, Long seq, Map<String, String> map) throws IOException {
+    public ResponseEntity<?> transfer(String category, Long seq, Map<String, String> map) {
         try {
             List<AvailableFile> files = new ArrayList<>();
             List<AvailableFile> result = null;
@@ -169,30 +167,31 @@ public class FileService {
             }
             return new ResponseEntity<>(result, HttpStatus.OK);
         } catch (Exception e) {
+            e.printStackTrace();
             return new ResponseEntity<>(e.getMessage(), HttpStatus.OK);
         }
     }
 
     private ResponseEntity<?> transOneFile(String category, Long seq, String key) {
         try {
-            AvailableFile file = new AvailableFile();
-
             SimpleDateFormat format = new SimpleDateFormat("yyyy");
             String year = format.format(new Date());
 
             TempFile fileTemp = (TempFile) getFileTemporaryOne(key).getBody();
 
-            file.setInsertedDate(fileTemp.getInsertedDate());
-            String fullPath = config.getPath() + "/" + year + "/" + fileTemp.getInsertedDate() + "_" + fileTemp.getFileName();
-            file.setFileExt(fileTemp.getFileExt());
-            file.setFilePath(fullPath);
-            file.setFileName(fileTemp.getFileName());
-            file.setFileSize(fileTemp.getFileSize());
-            file.setKey(fileTemp.getKey());
-            file.setFileMimeType(fileTemp.getFileMimeType());
-            file.setCategory(category);
-            //mapping option
-//            file.setProgramReview(programReviewRepository.findById(seq).get());
+            String fullPath = config.getPath() + "/" + year + "/" +
+                    fileTemp.getInsertedDate() + "_" + fileTemp.getFileName();
+
+            AvailableFile file = AvailableFile.builder()
+                    .insertedDate(fileTemp.getInsertedDate())
+                    .fileExt(fileTemp.getFileExt())
+                    .filePath(fullPath)
+                    .fileName(fileTemp.getFileName())
+                    .fileSize(fileTemp.getFileSize())
+                    .key(fileTemp.getKey())
+                    .fileMimeType(fileTemp.getFileMimeType())
+                    .category(category)
+                    .build();
 
             file = fileRepository.save(file);
 
@@ -217,32 +216,30 @@ public class FileService {
 
             File f = new File(path);
 
-            if (!f.exists()) {
-                f.mkdirs();
-            }
+            if (!f.exists()) f.mkdirs();
 
             Path sourceLocation = fileTarget.resolve(file.getFileName());
             Path targetLocation = fileSource.resolve(saveName);
             Files.copy(sourceLocation, targetLocation, StandardCopyOption.REPLACE_EXISTING);
             return new ResponseEntity<>(true, HttpStatus.OK);
-        } catch(Exception e) {
+        } catch (Exception e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.OK);
         }
 
     }
 
     public ResponseEntity<?> deleteFileByKey(String key) {
-        try{
+        try {
             File chkfile = (File) checkExistsFile(key).getBody();
             Boolean result = false;
             if (chkfile != null && chkfile.exists()) {
-                    chkfile.delete();
-                    result = true;
+                chkfile.delete();
+                result = true;
             } else {
                 System.out.println("Not Found The File");
             }
             return new ResponseEntity<>(result, HttpStatus.OK);
-        } catch(Exception e) {
+        } catch (Exception e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
 

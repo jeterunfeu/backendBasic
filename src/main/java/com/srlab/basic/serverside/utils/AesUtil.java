@@ -14,14 +14,6 @@ public class AesUtil {
 
     private final Logger LOG = LoggerFactory.getLogger(AesUtil.class);
 
-//    @Autowired
-//    private YamlConfig config;
-
-//    private String key= config.getKey();
-//    private String salt= config.getSalt();
-
-//    private AesBytesEncryptor aes = new AesBytesEncryptor(key, salt);
-
     public String encodeAes(String text, String key, String salt) {
         return new String(new AesBytesEncryptor(key, salt).encrypt(text.getBytes(StandardCharsets.UTF_8)));
     }

@@ -2,6 +2,7 @@ package com.srlab.basic.authserverside.users.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.srlab.basic.serverside.auditables.CustomAuditable;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,6 +13,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+@Schema(name = "projectList")
 @Entity
 @Table(name = "board")
 @Getter
@@ -47,10 +49,10 @@ public class ProjectList extends CustomAuditable {
 
     @OneToOne
     @JoinColumn(name = "certificate_id")
-    private UserInfo certificationStaff;
+    private User certificationStaff;
 
     @OneToMany(fetch = FetchType.LAZY , mappedBy = "projectList")
     @JsonIgnore
-    private List<UserInfo> users = new ArrayList<>();
+    private List<User> users = new ArrayList<>();
 
 }

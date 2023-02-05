@@ -1,7 +1,6 @@
 package com.srlab.basic.serverside.configs;
 
 import com.navercorp.lucy.security.xss.servletfilter.XssEscapeServletFilter;
-import com.srlab.basic.serverside.interceptors.LogInterceptor;
 import com.srlab.basic.serverside.logs.repositories.ApiHistoryRepository;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
@@ -30,14 +29,15 @@ public class WebConfig implements WebMvcConfigurer {
 
     @Autowired
     private final ApiHistoryRepository apiRepository;
+
     //interceptor configuration
-    @Override
-    public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(new LogInterceptor(apiRepository))
-                .order(1)
-                .addPathPatterns("/**")
-                .excludePathPatterns("/css/**", "/*.ico", "/error");
-    }
+//    @Override
+//    public void addInterceptors(InterceptorRegistry registry) {
+//        registry.addInterceptor(new LogInterceptor(apiRepository))
+//                .order(1)
+//                .addPathPatterns("/**")
+//                .excludePathPatterns("/css/**", "/*.ico", "/error");
+//    }
 
     //web cache configuration
     @Override

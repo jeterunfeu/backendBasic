@@ -1,7 +1,11 @@
 package com.srlab.basic.serverside.auditables;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.experimental.SuperBuilder;
+import net.bytebuddy.implementation.bind.annotation.Super;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
@@ -15,6 +19,9 @@ import java.util.Date;
 @EntityListeners(AuditingEntityListener.class)
 @Getter
 @Setter
+@SuperBuilder
+@NoArgsConstructor
+@AllArgsConstructor
 public class CustomAuditable {
 
     @CreatedDate
@@ -67,6 +74,6 @@ public class CustomAuditable {
     @Column(name="note", columnDefinition="NCHAR")
     private String note;
 
-    @Column(name="available", columnDefinition="CHAR(1) default 1", nullable = false)
+    @Column(name="available", columnDefinition="CHAR(1) default 1")
     private Boolean available;
 }
