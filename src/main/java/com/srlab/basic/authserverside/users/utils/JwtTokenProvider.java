@@ -2,6 +2,7 @@ package com.srlab.basic.authserverside.users.utils;
 
 import com.srlab.basic.authserverside.users.Dto.TokenDto;
 import com.srlab.basic.serverside.boards.controllers.CommentController;
+import edu.emory.mathcs.backport.java.util.Collections;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
@@ -78,14 +79,14 @@ public class JwtTokenProvider {
         }
 
         // bring auth info from claim
-        Collection<? extends GrantedAuthority> authorities =
-                Arrays.stream(claims.get(AUTHORITIES_KEY).toString().split(","))
-                        .map(SimpleGrantedAuthority::new)
-                        .collect(Collectors.toList());
+//        Collection<? extends GrantedAuthority> authorities =
+//                Arrays.stream(claims.get(AUTHORITIES_KEY).toString().split(","))
+//                        .map(SimpleGrantedAuthority::new)
+//                        .collect(Collectors.toList());
 
         // make UserDetails instance then return Authentication
-        UserDetails principal = new User(claims.getSubject(), "", authorities);
-        return new UsernamePasswordAuthenticationToken(principal, "", authorities);
+        UserDetails principal = new User(claims.getSubject(), "", Collections.emptyList()/*authorities*/);
+        return new UsernamePasswordAuthenticationToken(principal, "", Collections.emptyList()/*authorities*/);
     }
 
     // method that validate token info

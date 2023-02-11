@@ -36,9 +36,9 @@ public class QueryBuilder<P> {
     private final Logger LOG = LoggerFactory.getLogger(QueryBuilder.class);
 
     //class
-    private Class<P> m;
+    private P m;
 
-    public void set(Class<P> m) throws NoSuchMethodException, InvocationTargetException,
+    public void set(P m) throws NoSuchMethodException, InvocationTargetException,
             InstantiationException, IllegalAccessException {
         this.m = m;
     }
@@ -131,6 +131,27 @@ public class QueryBuilder<P> {
         }
     }
 
+    public <T> Long findMaxDepth(Class<T> clazz, String tName, P root) {
+        try {
+            BooleanBuilder builder = new BooleanBuilder();
+            PathBuilder<T> entityPath = new PathBuilder<T>(clazz, tName);
+
+            Long seq = (Long) method(root, "getSeq").invoke(root);
+
+            builder.and(Expressions.numberPath(Long.class, "root.seq").eq(seq));
+
+            Long jpaQuery = jpaQueryFactory.select(Expressions.numberPath(Long.class, "depth").max())
+                    .from(entityPath)
+                    .where(builder)
+                    .fetchOne();
+
+            return jpaQuery == null ? 0L : jpaQuery;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
     public <T> Long findLeftMinByDepth(Class<T> clazz, String tName, P root, Long depth) {
         try {
             BooleanBuilder builder = new BooleanBuilder();
@@ -153,29 +174,7 @@ public class QueryBuilder<P> {
         }
     }
 
-    public <T> Long findRightMaxFromDepth(Class<T> clazz, String tName, P root, Long depth) {
-        try {
-            BooleanBuilder builder = new BooleanBuilder();
-            PathBuilder<T> entityPath = new PathBuilder<T>(clazz, tName);
-
-            Long seq = (Long) method(root,"getSeq").invoke(root);
-
-            builder.and(Expressions.numberPath(Long.class, "root.seq").eq(seq));
-            builder.and(Expressions.numberPath(Long.class, "depth").eq(depth));
-
-            Long jpaQuery = jpaQueryFactory.select(Expressions.numberPath(Long.class, "rightNode").max())
-                    .from(entityPath)
-                    .where(builder)
-                    .fetchOne();
-
-            return jpaQuery;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
-
-    public <T> ResponseEntity<?> findByRightNode(Class<T> clazz, String tName, P root, Long leftNode) {
+    public <T> Object findByRightNode(Class<T> clazz, String tName, P root, Long leftNode) {
         try {
             BooleanBuilder builder = new BooleanBuilder();
             PathBuilder<T> entityPath = new PathBuilder<T>(clazz, tName);
@@ -185,28 +184,7 @@ public class QueryBuilder<P> {
             builder.and(Expressions.numberPath(Long.class, "root.seq").eq(seq));
             builder.and(Expressions.numberPath(Long.class, "rightNode").eq(leftNode));
 
-            List<?> jpaQuery = jpaQueryFactory.select(entityPath)
-                    .where(builder
-                    )
-                    .fetch();
-
-            return new ResponseEntity<>(jpaQuery, HttpStatus.OK);
-        } catch (Exception e) {
-            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
-
-    public <T> Object findByLeftNode(Class<T> clazz, String tName, P root, Long rightNode) {
-        try {
-            BooleanBuilder builder = new BooleanBuilder();
-            PathBuilder<T> entityPath = new PathBuilder<T>(clazz, tName);
-
-            Long seq = (Long) method(root, "getSeq").invoke(root);
-
-            builder.and(Expressions.numberPath(Long.class, "root.seq").eq(seq));
-            builder.and(Expressions.numberPath(Long.class, "leftNode").eq(rightNode));
-
-            Object jpaQuery = jpaQueryFactory.selectFrom(entityPath)
+             Object jpaQuery = jpaQueryFactory.selectFrom(entityPath)
                     .where(builder)
                     .fetchOne();
 
@@ -416,151 +394,6 @@ public class QueryBuilder<P> {
         }
     }
 
-    public <T> Object findMaxParentByDepth(Class<T> clazz, String tName, P root, Long depth) {
-        try {
-            BooleanBuilder builder = new BooleanBuilder();
-            PathBuilder<T> entityPath = new PathBuilder<T>(clazz, tName);
-
-            Long seq = (Long) method(root, "getSeq").invoke(root);
-
-            builder.and(Expressions.numberPath(Long.class, "root.seq").eq(seq));
-            builder.and(Expressions.numberPath(Long.class, "depth").eq(depth));
-
-            JPQLQuery sub = JPAExpressions.select(Expressions.numberPath(Long.class, "leftNode").max())
-                    .where(builder);
-
-            Object jpaQuery = jpaQueryFactory.select(entityPath.get(Expressions.stringPath("parent")))
-                    .where(Expressions.numberPath(Long.class, "leftNode").eq(sub))
-                    .fetchOne();
-
-            return jpaQuery;
-        } catch (Exception e) {
-            return null;
-        }
-    }
-
-    public <T> Object findMinParentByDepth(Class<T> clazz, String tName, P root, Long depth) {
-        try {
-            BooleanBuilder builder = new BooleanBuilder();
-            PathBuilder<T> entityPath = new PathBuilder<T>(clazz, tName);
-
-            Long seq = (Long) method(root, "getSeq").invoke(root);
-
-            builder.and(Expressions.numberPath(Long.class, "root.seq").eq(seq));
-            builder.and(Expressions.numberPath(Long.class, "depth").eq(depth));
-
-            JPQLQuery sub = JPAExpressions.select(Expressions.numberPath(Long.class, "leftNode").min()).where(builder);
-
-            Object jpaQuery = jpaQueryFactory.select(entityPath.get(Expressions.stringPath("parent")))
-                    .where(Expressions.stringPath("leftNode").eq(sub))
-                    .fetchOne();
-
-            return jpaQuery;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
-
-    public <T> Long countByDepth(Class<T> clazz, String tName, Long depth) {
-        try {
-            BooleanBuilder builder = new BooleanBuilder();
-            PathBuilder<T> entityPath = new PathBuilder<>(clazz, tName);
-
-            builder.and(Expressions.stringPath("depth").eq(depth.toString()));
-
-            List<?> jpaQuery = jpaQueryFactory.select(Expressions.stringPath("depth").count())
-                    .from(entityPath)
-                    .fetch();
-            Long result = Long.parseLong(jpaQuery.get(0).toString());
-
-            return result == null ? 0L : result;
-        } catch (Exception e) {
-            return null;
-        }
-    }
-
-    public <T> ResponseEntity<?> originSetting(Class<T> clazz, String tName, P root, Long leftNode,
-                                               Long rightNode, Long groupDiff) {
-        try {
-            BooleanBuilder builder = new BooleanBuilder();
-            PathBuilder<T> entityPath = new PathBuilder<T>(clazz, tName);
-
-            Long seq = (Long) method(root, "getSeq").invoke(root);
-
-            builder.and(Expressions.numberPath(Long.class, "root.seq").eq(seq));
-            builder.and(Expressions.numberPath(Long.class, "leftNode").between(leftNode, rightNode));
-
-            StringPath path1 = Expressions.stringPath("leftNode");
-            StringPath path2 = Expressions.stringPath( "rightNode");
-
-            NumberPath value1 = Expressions.numberPath(Long.class, "leftNode");
-            NumberPath value2 = Expressions.numberPath(Long.class, "rightNode");
-
-            Long jpaQuery = jpaQueryFactory.update(entityPath)
-                    .set(path1, value1.subtract(groupDiff))
-                    .set(path2, value2.subtract(groupDiff + 1L))
-                    .where(builder
-                    )
-                    .execute();
-
-            return new ResponseEntity<>(jpaQuery, HttpStatus.OK);
-        } catch (Exception e) {
-            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
-
-    public <T> ResponseEntity<?> targetSetting(Class<T> clazz, String tName, P root, Long nextLeftNode,
-                                               Long nextRightNode, Long groupDiff) {
-        try {
-            BooleanBuilder builder = new BooleanBuilder();
-            PathBuilder<T> entityPath = new PathBuilder<T>(clazz, tName);
-
-            Long seq = (Long) method(root, "getSeq").invoke(root);
-
-            builder.and(Expressions.numberPath(Long.class,"root.seq").eq(seq));
-            builder.and(Expressions.numberPath(Long.class, "leftNode").between(nextLeftNode, nextRightNode));
-
-            StringPath path1 = Expressions.stringPath("leftNode");
-            StringPath path2 = Expressions.stringPath("rightNode");
-
-            NumberPath value1 = Expressions.numberPath(Long.class, "leftNode");
-            NumberPath value2 = Expressions.numberPath(Long.class, "rightNode");
-
-            Long jpaQuery = jpaQueryFactory.update(entityPath)
-                    .set(path1, value1.add(groupDiff))
-                    .set(path2, value2.add(groupDiff + 1L))
-                    .where(builder
-                    )
-                    .execute();
-
-            return new ResponseEntity<>(jpaQuery, HttpStatus.OK);
-        } catch (Exception e) {
-            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
-
-    public <T> ResponseEntity<?> addOrder(Class<T> clazz, String tName, Long order) {
-        try {
-            BooleanBuilder builder = new BooleanBuilder();
-            PathBuilder<T> entityPath = new PathBuilder<T>(clazz, tName);
-
-            builder.and(Expressions.numberPath(Long.class, "depth").eq(0L));
-            builder.and(Expressions.numberPath(Long.class, "nodeOrder").gt(order));
-
-            StringPath path = Expressions.stringPath("nodeOrder");
-            NumberPath value = Expressions.numberPath(Long.class, "nodeOrder");
-            Long jpaQuery = jpaQueryFactory.update(entityPath)
-                    .set(path, value.add(1L))
-                    .where(builder)
-                    .execute();
-
-            return new ResponseEntity<>(jpaQuery, HttpStatus.OK);
-        } catch (Exception e) {
-            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
-
     public <T> Long findMaxNodeOrder(Class<T> clazz, String tName) {
         try {
             PathBuilder<T> entityPath = new PathBuilder<T>(clazz, tName);
@@ -569,32 +402,319 @@ public class QueryBuilder<P> {
                     .from(entityPath)
                     .fetchOne();
 
-            return jpaQuery == null ? 0 : jpaQuery;
+            return jpaQuery == null ? 0L : jpaQuery;
         } catch (Exception e) {
             e.printStackTrace();
             return null;
         }
     }
 
-    public <T> ResponseEntity<?> subOrder(Class<T> clazz, String tName, Long order) {
+    public <T> Object findLastNodeDepth(Class<T> clazz, String tName, P root, Long depth) {
+        try {
+            BooleanBuilder builder = new BooleanBuilder();
+            BooleanBuilder subBuilder = new BooleanBuilder();
+            PathBuilder<T> entityPath = new PathBuilder<T>(clazz, tName);
+
+            Long seq = (Long) method(root, "getSeq").invoke(root);
+
+            subBuilder.and(Expressions.numberPath(Long.class, "depth").eq(depth));
+            subBuilder.and(Expressions.numberPath(Long.class, "root.seq").eq(seq));
+
+            Long max = jpaQueryFactory.select(Expressions.numberPath(Long.class, "rightNode").max())
+                    .from(entityPath)
+                    .where(subBuilder)
+                    .fetchOne();
+
+            builder.and(Expressions.numberPath(Long.class, "root.seq").eq(seq));
+            builder.and(Expressions.numberPath(Long.class, "rightNode").eq(max));
+
+            Object jpaQuery = jpaQueryFactory.selectFrom(entityPath)
+                    .where(builder)
+                    .fetchOne();
+
+            return jpaQuery;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    @Modifying
+    @Transactional
+    public <T> void nodeChange(Class<T> clazz, String tName, P root, Long originRightNode, Long originLeftNode,
+                           Long targetRightNode, Long targetLeftNode) {
+        try {
+            BooleanBuilder originBuilder = new BooleanBuilder();
+            BooleanBuilder targetBuilder = new BooleanBuilder();
+            BooleanBuilder recoveryBuilder = new BooleanBuilder();
+            PathBuilder<T> entityPath = new PathBuilder<T>(clazz, tName);
+
+            Long seq = (Long) method(root, "getSeq").invoke(root);
+
+            originBuilder.or(Expressions.numberPath(Long.class, "leftNode").between(originLeftNode, originRightNode));
+            originBuilder.or(Expressions.numberPath(Long.class, "rightNode").between(originLeftNode, originRightNode));
+            originBuilder.and(Expressions.numberPath(Long.class, "root.seq").eq(seq));
+
+            targetBuilder.or(Expressions.numberPath(Long.class, "leftNode").between(targetLeftNode, targetRightNode));
+            targetBuilder.or(Expressions.numberPath(Long.class, "rightNode").between(targetLeftNode, targetRightNode));
+            targetBuilder.and(Expressions.numberPath(Long.class, "root.seq").eq(seq));
+
+            recoveryBuilder.or(Expressions.numberPath(Long.class, "leftNode").lt(0L));
+            recoveryBuilder.and(Expressions.numberPath(Long.class, "root.seq").eq(seq));
+
+            Long originDiff = originRightNode - originLeftNode + 1L;
+            Long targetDiff = targetRightNode - targetLeftNode + 1L;
+
+            StringPath path1 = Expressions.stringPath("leftNode");
+            NumberPath value1 = Expressions.numberPath(Long.class, "leftNode");
+            StringPath path2 = Expressions.stringPath("rightNode");
+            NumberPath value2 = Expressions.numberPath(Long.class, "rightNode");
+
+            //origin multiply
+            jpaQueryFactory.update(entityPath)
+                    .set(path1, value1.subtract(targetDiff).multiply(-1L))
+                    .set(path2, value2.subtract(targetDiff).multiply(-1L))
+                    .where(originBuilder)
+                    .execute();
+            //target add
+            jpaQueryFactory.update(entityPath)
+                    .set(path1, value1.add(originDiff))
+                    .set(path2, value2.add(originDiff))
+                    .where(targetBuilder)
+                    .execute();
+            //origin multiply
+            jpaQueryFactory.update(entityPath)
+                    .set(path1, value1.multiply(-1L))
+                    .set(path2, value2.multiply(-1L))
+                    .where(recoveryBuilder)
+                    .execute();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Modifying
+    @Transactional
+    public <T> void nodeChangeMore(Class<T> clazz, String tName, P root, Long depth, P parent,
+                               Long targetDepth, P targetParent, Long originRightNode,
+                               Long originLeftNode, Long targetRightNode, Long targetLeftNode, Boolean flag) {
+
+        try {
+            BooleanBuilder originBuilder = new BooleanBuilder();
+            BooleanBuilder targetBuilder = new BooleanBuilder();
+            BooleanBuilder recoveryBuilder = new BooleanBuilder();
+            PathBuilder<T> entityPath = new PathBuilder<T>(clazz, tName);
+
+            Long seq = (Long) method(root, "getSeq").invoke(root);
+            Long parentSeq = (Long) method(parent, "getSeq").invoke(parent);
+            Long targetParentSeq = (Long) method(targetParent, "getSeq").invoke(targetParent);
+
+            originBuilder.and(Expressions.numberPath(Long.class, "leftNode").eq(originLeftNode));
+            originBuilder.and(Expressions.numberPath(Long.class, "rightNode").eq(originRightNode));
+            originBuilder.and(Expressions.numberPath(Long.class, "root.seq").eq(seq));
+
+            targetBuilder.and(Expressions.numberPath(Long.class, "leftNode").eq(targetLeftNode));
+            targetBuilder.and(Expressions.numberPath(Long.class, "rightNode").eq(targetRightNode));
+            targetBuilder.and(Expressions.numberPath(Long.class, "root.seq").eq(seq));
+
+            recoveryBuilder.and(Expressions.numberPath(Long.class, "leftNode").lt(0L));
+            recoveryBuilder.and(Expressions.numberPath(Long.class, "root.seq").eq(seq));
+
+            StringPath path1 = Expressions.stringPath("leftNode");
+            StringPath path2 = Expressions.stringPath("rightNode");
+            NumberPath path3 = Expressions.numberPath(Long.class, "depth");
+            NumberPath path4 = Expressions.numberPath(Long.class, "parent.seq");
+
+            NumberPath value1 = Expressions.numberPath(Long.class, "leftNode");
+            NumberPath value2 = Expressions.numberPath(Long.class, "rightNode");
+
+            NumberExpression exp1;
+            NumberExpression exp2;
+            NumberExpression exp3;
+            NumberExpression exp4;
+
+            if(flag) {
+                exp1 = value1.subtract(1L);
+                exp2 = value2.add(1L);
+                exp3 = value1.add(1L);
+                exp4 = value2.subtract(1L);
+            } else {
+                exp1 = value1.add(1L);
+                exp2 = value2.subtract(1L);
+                exp3 = value1.subtract(1L);
+                exp4 = value2.add(1L);
+            }
+
+            //origin multiply
+            jpaQueryFactory.update(entityPath)
+                    .set(path1, exp1.multiply(-1L))
+                    .set(path2, exp2.multiply(-1L))
+                    .set(path3, targetDepth)
+                    .set(path4, targetParentSeq)
+                    .where(originBuilder)
+                    .execute();
+            //target add
+            jpaQueryFactory.update(entityPath)
+                    .set(path1, exp3)
+                    .set(path2, exp4)
+                    .set(path3, depth)
+                    .set(path4, parentSeq)
+                    .where(targetBuilder)
+                    .execute();
+            //origin multiply
+            jpaQueryFactory.update(entityPath)
+                    .set(path1, value1.multiply(-1L))
+                    .set(path2, value2.multiply(-1L))
+                    .where(recoveryBuilder)
+                    .execute();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public <T> Long findNodeOrderMin(Class<T> clazz, String tName) {
+        try {
+            PathBuilder<T> entityPath = new PathBuilder<T>(clazz, tName);
+
+            Long jpaQuery = jpaQueryFactory.select(Expressions.numberPath(Long.class, "nodeOrder").min())
+                    .from(entityPath)
+                    .fetchOne();
+
+            return jpaQuery == null ? 0L : jpaQuery;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    @Modifying
+    @Transactional
+    public <T> void nodeOrderChange(Class<T> clazz, String tName, P root, Long nodeOrder, Boolean flag) {
+        try {
+            BooleanBuilder builder = new BooleanBuilder();
+            BooleanBuilder subBuilder = new BooleanBuilder();
+            PathBuilder<T> entityPath = new PathBuilder<T>(clazz, tName);
+
+            Long seq = (Long) method(root, "getSeq").invoke(root);
+
+            subBuilder.and(Expressions.numberPath(Long.class, "nodeOrder").lt(nodeOrder));
+
+            NumberPath path = Expressions.numberPath(Long.class, "nodeOrder");
+
+            Long orderValue;
+
+            if(flag) {
+                orderValue = jpaQueryFactory.select(Expressions.numberPath(Long.class, "nodeOrder").max())
+                        .from(entityPath)
+                        .where(builder)
+                        .fetchOne();
+            } else {
+                orderValue = jpaQueryFactory.select(Expressions.numberPath(Long.class, "nodeOrder").min())
+                        .from(entityPath)
+                        .where(builder)
+                        .fetchOne();
+            }
+
+            builder.and(Expressions.numberPath(Long.class, "root.seq").eq(seq));
+            builder.and(Expressions.numberPath(Long.class, "nodeOrder").eq(orderValue));
+
+            //target change
+            jpaQueryFactory.update(entityPath)
+                    .set(path, nodeOrder)
+                    .where(builder)
+                    .execute();
+            //origin change
+            jpaQueryFactory.update(entityPath)
+                    .set(path, orderValue)
+                    .where(Expressions.numberPath(Long.class, "seq").eq(seq))
+                    .execute();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public <T>Long findLeftMaxByDepth(Class<T> clazz, String tName, P root, Long depth) {
         try {
             BooleanBuilder builder = new BooleanBuilder();
             PathBuilder<T> entityPath = new PathBuilder<T>(clazz, tName);
 
-            builder.and(Expressions.numberPath(Long.class, "depth").eq(0L));
-            builder.and(Expressions.numberPath(Long.class, "nodeOrder").gt(order));
+            Long seq = (Long) method(root, "getSeq").invoke(root);
 
-            StringPath path = Expressions.stringPath("nodeOrder");
-            NumberPath value = Expressions.numberPath(Long.class, "nodeOrder");
-            Long jpaQuery = jpaQueryFactory.update(entityPath)
-                    .set(path, value.subtract(1L))
+            builder.and(Expressions.numberPath(Long.class, "root.seq").eq(seq));
+            builder.and(Expressions.numberPath(Long.class, "depth").eq(depth));
+
+            Long jpaQuery = jpaQueryFactory.select(Expressions.numberPath(Long.class, "leftNode").max())
+                    .from(entityPath)
+                    .where(builder)
+                    .fetchOne();
+
+            return jpaQuery == null ? 0L : jpaQuery;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public <T> Long findNodeOrderMax(Class<T> clazz, String tName) {
+        try {
+            PathBuilder<T> entityPath = new PathBuilder<T>(clazz, tName);
+
+            Long jpaQuery = jpaQueryFactory.select(Expressions.numberPath(Long.class, "nodeOrder").max())
+                    .from(entityPath)
+                    .fetchOne();
+
+            return jpaQuery == null ? 0L : jpaQuery;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public <T> Long checkDepthLastNode(Class<T> clazz, String tName, P root, Long depth) {
+        try {
+            BooleanBuilder builder = new BooleanBuilder();
+            PathBuilder<T> entityPath = new PathBuilder<T>(clazz, tName);
+
+            Long seq = (Long) method(root, "getSeq").invoke(root);
+
+            builder.and(Expressions.numberPath(Long.class, "root.seq").eq(seq));
+            builder.and(Expressions.numberPath(Long.class, "depth").eq(depth));
+
+            Long jpaQuery = jpaQueryFactory.select(Expressions.numberPath(Long.class, "depth").count())
+                    .from(entityPath)
+                    .where(builder)
+                    .fetchOne();
+
+            return jpaQuery == null ? 0L : jpaQuery;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public <T> void arrangeDepth(Class<T> clazz, String tName, P root, Long depth) {
+        try {
+            BooleanBuilder builder = new BooleanBuilder();
+            PathBuilder<T> entityPath = new PathBuilder<T>(clazz, tName);
+
+            Long seq = (Long) method(root, "getSeq").invoke(root);
+
+            builder.and(Expressions.numberPath(Long.class, "root.seq").eq(seq));
+            builder.and(Expressions.numberPath(Long.class, "depth").gt(depth));
+
+            StringPath path = Expressions.stringPath("depth");
+            NumberPath value = Expressions.numberPath(Long.class, "depth");
+
+            jpaQueryFactory.update(entityPath)
+                    .set(path, value.subtract(1))
                     .where(builder)
                     .execute();
 
-            return new ResponseEntity<>(jpaQuery, HttpStatus.OK);
         } catch (Exception e) {
             e.printStackTrace();
-            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 }

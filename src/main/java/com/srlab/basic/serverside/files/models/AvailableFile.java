@@ -18,6 +18,7 @@ import javax.persistence.*;
 @Getter
 @Setter
 @SuperBuilder
+@NoArgsConstructor
 @AllArgsConstructor
 public class AvailableFile extends FileAuditable {
 

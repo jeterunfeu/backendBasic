@@ -47,9 +47,11 @@ public class FileController {
     @Autowired
     private CommonDataService<TempFile, FileService, FileTempRepository> tempCommonDataService;
 
+    AvailableFile availableFile = new AvailableFile();
+    TempFile tempFile = new TempFile();
     public void FileSet() {
         try {
-            commonDataService.set(AvailableFile.class, fileService, fileRepository);
+            commonDataService.set(availableFile, fileService, fileRepository);
         } catch(Exception e) {
             e.printStackTrace();
             LOG.info(e.getMessage());
@@ -58,7 +60,7 @@ public class FileController {
 
     public void FileTempSet() {
         try {
-            tempCommonDataService.set(TempFile.class, fileService, fileTempRepository);
+            tempCommonDataService.set(tempFile, fileService, fileTempRepository);
         } catch(Exception e) {
             e.printStackTrace();
             LOG.info(e.getMessage());

@@ -16,6 +16,7 @@ import java.util.List;
 @Getter
 @Setter
 @SuperBuilder
+@NoArgsConstructor
 @AllArgsConstructor
 public class Device extends CustomAuditable {
 

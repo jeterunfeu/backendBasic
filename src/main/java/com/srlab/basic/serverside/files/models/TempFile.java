@@ -13,6 +13,7 @@ import javax.persistence.*;
 @Getter
 @Setter
 @SuperBuilder
+@NoArgsConstructor
 @AllArgsConstructor
 public class TempFile extends FileAuditable {
 

@@ -32,9 +32,10 @@ public class BoardController {
     @Autowired
     private CommonDataService<Board, BoardService, BoardRepository> commonDataService;
 
+    Board board = new Board();
     public void BoardSet() {
         try {
-            commonDataService.set(Board.class, bService, bRepository);
+            commonDataService.set(board, bService, bRepository);
         } catch (Exception e) {
             LOG.info(e.getMessage());
         }

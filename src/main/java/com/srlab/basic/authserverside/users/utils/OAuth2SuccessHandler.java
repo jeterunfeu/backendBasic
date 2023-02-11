@@ -2,7 +2,7 @@ package com.srlab.basic.authserverside.users.utils;
 
 import com.srlab.basic.authserverside.users.Dto.OAuthDto;
 import com.srlab.basic.authserverside.users.Dto.TokenDto;
-import com.srlab.basic.authserverside.users.models.User;
+import com.srlab.basic.authserverside.users.models.UserInfo;
 import com.srlab.basic.authserverside.users.repositories.UserRepository;
 import com.srlab.basic.authserverside.users.services.TokenService;
 import com.srlab.basic.serverside.boards.controllers.BoardController;
@@ -53,7 +53,7 @@ public class OAuth2SuccessHandler implements AuthenticationSuccessHandler {
 
         // sign up process. later write more info
         if (email != null && userRepository.findOneById(email) == null) {
-            User user = User.builder()
+            UserInfo user = UserInfo.builder()
                     .id(email)
                     .password(bcryptUtil.encodeBcrypt(pw, Integer.parseInt(yamlConfig.getCount())))
                     .name(oAuthDto.getName())

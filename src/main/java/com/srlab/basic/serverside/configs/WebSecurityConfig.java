@@ -4,6 +4,7 @@ import com.srlab.basic.authserverside.users.repositories.UserRepository;
 import com.srlab.basic.authserverside.users.services.CustomOAuth2UserService;
 import com.srlab.basic.authserverside.users.utils.JwtTokenProvider;
 import com.srlab.basic.authserverside.users.utils.OAuth2SuccessHandler;
+import com.srlab.basic.serverside.filters.ExceptionHandlerFilter;
 import com.srlab.basic.serverside.filters.JwtAuthenticationFilter;
 import com.srlab.basic.serverside.logs.repositories.ApiHistoryRepository;
 import lombok.RequiredArgsConstructor;
@@ -16,6 +17,8 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
@@ -55,17 +58,26 @@ public class WebSecurityConfig {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeRequests()
-                .antMatchers(/*"/api/tokens/**"*/"/api/**", "/css/**",
+                .antMatchers(/*"/api/tokens/**"*/"/api/tokens/**", "/css/**",
                         "/js/**", "/*.ico", "/*.html**", "/error").permitAll()
                 .antMatchers("/v2/api-docs", "/swagger-resources/**",
                         "/swagger-ui/**", "/webjars/**","/swagger/**").permitAll()
                 .anyRequest().authenticated()
+                .and()
+                .formLogin()
+                .defaultSuccessUrl("/")
+                .failureUrl("/error")
+                .permitAll()
                 .and()
                 .oauth2Login()
                 .successHandler(successHandler)
                 .userInfoEndpoint().userService(oAuth2UserService);
 
         httpSecurity.addFilterBefore(new JwtAuthenticationFilter(userRepository, apiRepository, jwtTokenProvider, redisTemplate), UsernamePasswordAuthenticationFilter.class);
+//        httpSecurity.addFilterBefore(
+//                new ExceptionHandlerFilter(),
+//                UsernamePasswordAuthenticationFilter.class
+//        );
         return httpSecurity.build();
     }
 
@@ -82,13 +94,18 @@ public class WebSecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(Collections.singletonList("*"));
+        configuration.setAllowedOriginPatterns(Collections.singletonList("*"));
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "OPTIONS", "DELETE", "PUT", "PATCH"));
         configuration.setAllowedHeaders(Arrays.asList("X-Requested-With", "Origin", "Content-Type", "Accept", "Authorization"));
         configuration.setAllowCredentials(true);
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
         return source;
+    }
+
+    @Bean
+    public PasswordEncoder getPasswordEncoder() {
+        return new BCryptPasswordEncoder();
     }
 
 }

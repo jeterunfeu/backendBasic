@@ -1,7 +1,7 @@
 package com.srlab.basic.serverside.hierarchies.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.srlab.basic.authserverside.users.models.User;
+import com.srlab.basic.authserverside.users.models.UserInfo;
 import com.srlab.basic.authserverside.users.models.UserRole;
 import com.srlab.basic.serverside.auditables.CustomAuditable;
 import com.srlab.basic.serverside.boards.models.Board;
@@ -21,6 +21,7 @@ import java.util.List;
 @Setter
 @SuperBuilder
 @AllArgsConstructor
+@NoArgsConstructor
 @ToString
 public class HierarchyData extends CustomAuditable {
 
@@ -65,6 +66,6 @@ public class HierarchyData extends CustomAuditable {
 
     @OneToMany(fetch = FetchType.LAZY , mappedBy = "hierarchyData")
     @JsonIgnore
-    private List<User> users = new ArrayList<>();
+    private List<UserInfo> users = new ArrayList<>();
 
 }

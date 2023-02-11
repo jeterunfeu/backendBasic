@@ -49,10 +49,10 @@ public class ProjectList extends CustomAuditable {
 
     @OneToOne
     @JoinColumn(name = "certificate_id")
-    private User certificationStaff;
+    private UserInfo certificationStaff;
 
     @OneToMany(fetch = FetchType.LAZY , mappedBy = "projectList")
     @JsonIgnore
-    private List<User> users = new ArrayList<>();
+    private List<UserInfo> users = new ArrayList<>();
 
 }

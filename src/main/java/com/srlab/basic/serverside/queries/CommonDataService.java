@@ -28,9 +28,9 @@ public class CommonDataService<M, S, R> {
             IllegalAccessException, InvocationTargetException {
     }
 
-    public void set(Class<M> m, S s, R r) throws NoSuchMethodException, InvocationTargetException,
+    public void set(M m, S s, R r) throws NoSuchMethodException, InvocationTargetException,
             InstantiationException, IllegalAccessException {
-        this.m = m.getConstructor().newInstance();
+        this.m = m;
         this.s = s;
         this.r = r;
         queryBuilder.set(m);
@@ -133,7 +133,7 @@ public class CommonDataService<M, S, R> {
 
         try {
             //check empty
-            if(queryBuilder.checkEmpty(m.getClass(), tName)) {
+            if (queryBuilder.checkEmpty(m.getClass(), tName)) {
                 return new ResponseEntity<>("DB is empty", HttpStatus.INTERNAL_SERVER_ERROR);
             }
 
@@ -171,8 +171,8 @@ public class CommonDataService<M, S, R> {
                     //middle clearing
                     queryBuilder.addMiddleClear(m.getClass(), tName, origin);
                 } else {
-                    leftNode+=2;
-                    rightNode+=2;
+                    leftNode += 2;
+                    rightNode += 2;
                     //root decided
                     //nodeOrder decided
                     parent = root;
@@ -211,17 +211,25 @@ public class CommonDataService<M, S, R> {
             Long leftNode = (Long) method(origin, "getLeftNode").invoke(origin);
             Long rightNode = (Long) method(origin, "getRightNode").invoke(origin);
             Long rootSeq = (Long) method(origin, "getSeq").invoke(origin);
+            Long depth = (Long) method(origin, "getDepth").invoke(origin);
             Long diff = rightNode - leftNode;
 
             //need cascade!! root delete
-            if(method(origin, "getRoot").invoke(origin) == null) {
+            if (method(origin, "getRoot").invoke(origin) == null) {
                 queryBuilder.deleteRoot(m.getClass(), tName, rootSeq);
                 return new ResponseEntity<>("root delete completed", HttpStatus.OK);
             } else {
+                //check last depth
+                Long count = queryBuilder.checkDepthLastNode(m.getClass(), tName, root, depth);
+
                 //delete
                 queryBuilder.deleteByLeftNodeBetween(m.getClass(), tName, root, leftNode, rightNode - 1L);
                 //leftNode update
                 queryBuilder.deleteNodeClear(m.getClass(), tName, root, diff);
+
+                if (count == 1L) {
+                    queryBuilder.arrangeDepth(m.getClass(), tName, root, depth);
+                }
 
                 //end clearing
                 queryBuilder.addEndClear(m.getClass(), tName, root);
@@ -235,18 +243,44 @@ public class CommonDataService<M, S, R> {
 
     }
 
-    public void swap(M origin, M originCopy, M target, M targetCopy) {
-        try{
-//            Long originSeq = (Long) method(origin, "getSeq").invoke(origin);
-//            Long targetSeq = (Long) method(origin, "getSeq").invoke(origin);
-//
-//            M getOrigin = (M) method(origin, "findOneBySeq").invoke(origin, originSeq);
-//            M getTarget = (M) method(target, "findOneBySeq").invoke(target, targetSeq);
+    public void nodeChange(M originRoot, String tName, Long originLeftNode, Long originRightNode, Boolean flag) {
+        try {
+            M target;
+            if (flag) {
+                target = (M) queryBuilder.findByRightNode(m.getClass(), tName, originRoot, originLeftNode - 1L);
+            } else {
+                target = (M) queryBuilder.findByRightNode(m.getClass(), tName, originRoot, originRightNode + 2L);
+            }
 
-            method(origin, "update").invoke(s, origin, originCopy);
-            method(target, "update").invoke(s, target, targetCopy);
+            Long targetLeftNode = (Long) method(target, "getLeftNode").invoke(target);
+            Long targetRightNode = (Long) method(target, "getRightNode").invoke(target);
 
-        } catch(Exception e) {
+            queryBuilder.nodeChange(m.getClass(), tName, originRoot, originRightNode,
+                    originLeftNode, targetRightNode, targetLeftNode);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void upperNodeChange(M originRoot, M parent, String tName, Long depth, Long originLeftNode, Long originRightNode, Boolean flag) {
+        Long lastDepth;
+        try {
+            if (flag) {
+                lastDepth = depth - 1L;
+            } else {
+                lastDepth = depth + 1L;
+            }
+            M target = (M) queryBuilder.findLastNodeDepth(m.getClass(), tName, originRoot, lastDepth);
+            Long targetLeftNode = (Long) method(target, "getLeftNode").invoke(target);
+            Long targetRightNode = (Long) method(target, "getRightNode").invoke(target);
+            Long targetDepth = (Long) method(target, "getDepth").invoke(target);
+            M targetParent = (M) method(target, "getParent").invoke(target);
+
+            queryBuilder.nodeChangeMore(m.getClass(), tName, originRoot, depth, parent, targetDepth,
+                    targetParent, originRightNode, originLeftNode, targetRightNode, targetLeftNode, flag);
+
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -254,78 +288,55 @@ public class CommonDataService<M, S, R> {
     public ResponseEntity<?> moveUp(String tName, Long seq) {
 
         try {
-            //depth 0 disable
+            //bring origin
             M origin = (M) method(null, "findOneBySeq").invoke(s, seq);
-            M root = (M) method(origin, "getRoot").invoke(origin);
-            M originCopy = origin;
+            M parent = (M) method(origin, "getParent").invoke(origin);
+            M originRoot = (M) method(origin, "getRoot").invoke(origin);
 
-            Long leftNode = (Long) method(origin, "getLeftNode").invoke(origin);
-            Long rightNode = (Long) method(origin, "getRightNode").invoke(origin);
-
-            Long diff = rightNode - leftNode;
+            //depth check
             Long depth = (Long) method(origin, "getDepth").invoke(origin);
+            Long originLeftNode = (Long) method(origin, "getLeftNode").invoke(origin);
+            Long originRightNode = (Long) method(origin, "getRightNode").invoke(origin);
 
-            M target = (M) queryBuilder.findByRightNode(m.getClass(), tName, root, leftNode - 1L);
-            M targetCopy = target;
+            //first leftNode check
+            Long minLeftNode = queryBuilder.findLeftMinByDepth(m.getClass(), tName, originRoot, depth);
+            // last depth check
+            Long maxDepth = queryBuilder.findMaxDepth(m.getClass(), tName, originRoot);
 
-            //find next node by leftNode
-            Long nextLeftNode = (Long) method(target, "getLeftNode").invoke(target);
-            Long nextRightNode = (Long) method(target, "getRightNode").invoke(target);
-            Long nextDiff = nextRightNode - nextLeftNode;
-
-            Long groupDiff = nextLeftNode - leftNode;
-
-            Long changeLeft = rightNode - diff;
-            Long changeRight = nextRightNode;
-            Long changeNextLeft = leftNode;
-            Long changeNextRight = nextLeftNode + nextDiff;
+            Long nodeOrder;
+            Long nodeOrderMin;
 
             if (depth > 0L) {
-                //check depth`s min left node
-                depth -= 1;
 
-                Long leftMin = queryBuilder.findLeftMinByDepth(m.getClass(), tName, root, depth);
-                M leftMaxParent = (M) queryBuilder.findMaxParentByDepth(m.getClass(), tName, root, depth);
-
-                if(leftMin == leftNode) {
-                    method(origin, "setParent").invoke(origin, leftMaxParent);
-                    method(origin, "setDepth").invoke(depth);
-                }
-
-                //both don`t have child
-                if (diff == 1 && nextDiff == 1) {
-                    //switch both
-                    method(originCopy, "setLeftNode").invoke(originCopy, nextLeftNode);
-                    method(originCopy, "setRightNode").invoke(originCopy, nextRightNode);
-                    method(targetCopy, "setLeftNode").invoke(targetCopy, leftNode);
-                    method(targetCopy, "setRightNode").invoke(targetCopy, rightNode);
-
-                    swap(origin, originCopy, target, targetCopy);
+                //last node change
+                if (depth == maxDepth) {
+                    if (originLeftNode != minLeftNode) {
+                        nodeChange(originRoot, tName, originLeftNode, originRightNode, true);
+                    } else {
+                        //find upper depth last node
+                        upperNodeChange(originRoot, parent, tName, depth, originLeftNode, originRightNode, true);
+                    }
+                } else if (depth == 1L) {
+                    if (originLeftNode != minLeftNode) {
+                        nodeChange(originRoot, tName, originLeftNode, originRightNode, true);
+                    }
                 } else {
-                    //switch both and sub
-                    method(originCopy, "setLeftNode").invoke(originCopy, changeLeft);
-                    method(originCopy, "setRightNode").invoke(originCopy, changeRight);
-                    method(targetCopy, "setLeftNode").invoke(targetCopy, changeNextLeft);
-                    method(targetCopy, "setRightNode").invoke(targetCopy, changeNextRight);
-
-                    swap(origin, originCopy, target, targetCopy);
-
-                    //sub
-                    queryBuilder.originSetting(m.getClass(), tName, root, leftNode, rightNode, groupDiff);
-                    queryBuilder.targetSetting(m.getClass(), tName, root, nextLeftNode, nextRightNode, groupDiff);
-
+                    if (originLeftNode != minLeftNode) {
+                        nodeChange(originRoot, tName, originLeftNode, originRightNode, true);
+                    } else {
+                        //find upper depth last node
+                        upperNodeChange(originRoot, parent, tName, depth, originLeftNode, originRightNode, true);
+                    }
                 }
             } else {
-                //depth is 0
-                Long order = (Long) method(origin, "getNodeOrder").invoke(origin);
-                if (order > 1) {
-                    order = order - 1L;
-                    method(originCopy, "setNodeOrder").invoke(originCopy, order);
-                    queryBuilder.addOrder(m.getClass(), tName, order);
-                    method(origin, "update").invoke(s, origin, originCopy);
+                //nodeOrder changes
+                nodeOrder = (Long) method(origin, "getNodeOrder").invoke(origin);
+                nodeOrderMin = (Long) queryBuilder.findNodeOrderMin(m.getClass(), tName);
+                if (nodeOrder != nodeOrderMin) {
+                    queryBuilder.nodeOrderChange(m.getClass(), tName, originRoot, nodeOrder, true);
                 }
             }
-            return new ResponseEntity<>("up completed", HttpStatus.OK);
+            return new ResponseEntity<>("move up success", HttpStatus.OK);
         } catch (Exception e) {
             e.printStackTrace();
             return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
@@ -334,76 +345,44 @@ public class CommonDataService<M, S, R> {
 
     public ResponseEntity<?> moveDown(String tName, Long seq) {
         try {
-            //opposite moveup
-            //depth 0 and last disable
+            //bring origin
             M origin = (M) method(null, "findOneBySeq").invoke(s, seq);
-            M originCopy = origin;
-            M root = (M) method(origin, "getRoot").invoke(origin);
+            M parent = (M) method(origin, "getParent").invoke(origin);
+            M originRoot = (M) method(origin, "getRoot").invoke(origin);
 
-            Long leftNode = (Long) method(origin, "getLeftNode").invoke(origin);
-            Long rightNode = (Long) method(origin, "getRightNode").invoke(origin);
-            Long diff = rightNode - leftNode;
+            //depth check
             Long depth = (Long) method(origin, "getDepth").invoke(origin);
+            Long originLeftNode = (Long) method(origin, "getLeftNode").invoke(origin);
+            Long originRightNode = (Long) method(origin, "getRightNode").invoke(origin);
 
-            Long rightMax = queryBuilder.findRightMaxFromDepth(m.getClass(), tName, root, depth);
+            Long nodeOrder;
+            Long nodeOrderMax;
 
-            M rightMinParent = (M) queryBuilder.findMinParentByDepth(m.getClass(), tName, root, depth);
+            //first leftNode check
+            Long maxLeftNode = queryBuilder.findLeftMaxByDepth(m.getClass(), tName, originRoot, depth);
+            // last depth check
+            Long maxDepth = queryBuilder.findMaxDepth(m.getClass(), tName, originRoot);
 
-            //find next node by rightNode
-            M target = (M) queryBuilder.findByLeftNode(m.getClass(), tName, root, rightNode + 1L);
-            M targetCopy = target;
-
-            Long nextLeftNode = (Long) method(target, "getLeftNode").invoke(target);
-            Long nextRightNode = (Long) method(target, "getRightNode").invoke(target);
-            Long nextDiff = nextRightNode - nextLeftNode;
-
-            //switch both and sub
-            Long groupDiff = leftNode - nextLeftNode;
-
-            Long changeLeft = nextRightNode - nextDiff;
-            Long changeRight = rightNode;
-            Long changeNextLeft = nextLeftNode;
-            Long changeNextRight = leftNode + diff;
-
-            Long order = (Long) method(origin, "getNodeOrder").invoke(origin);
-            Long limit = queryBuilder.countByDepth(m.getClass(), tName, 0L);
-
-            if (depth > 0L) {
-                //check depth`s max right node
-                if (rightMax == rightNode) {
-                    method(origin, "setParent").invoke(origin, rightMinParent);
-                    method(null, "setDepth").invoke(depth + 1L);
-                }
-                //both don`t have child
-                if (diff == 1 && nextDiff == 1) {
-                    //switch both
-                    method(originCopy, "setLeftNode").invoke(originCopy, nextLeftNode);
-                    method(originCopy, "setRightNode").invoke(originCopy, nextRightNode);
-                    method(targetCopy, "setLeftNode").invoke(targetCopy, leftNode);
-                    method(targetCopy, "setRightNode").invoke(targetCopy, rightNode);
-
-                    swap(origin, originCopy, target, targetCopy);
-                } else {
-                    method(originCopy, "setLeftNode").invoke(originCopy, changeLeft);
-                    method(originCopy, "setRightNode").invoke(originCopy, changeRight);
-                    method(targetCopy, "setLeftNode").invoke(targetCopy, changeNextLeft);
-                    method(targetCopy, "setRightNode").invoke(targetCopy, changeNextRight);
-
-                    swap(origin, originCopy, target, targetCopy);
-
-                    //sub
-                    queryBuilder.originSetting(m.getClass(), tName, root, nextLeftNode, nextRightNode, groupDiff);
-                    queryBuilder.targetSetting(m.getClass(), tName, root, leftNode, rightNode, groupDiff);
+            if (depth > 0L && depth < maxDepth) {
+                    if (originLeftNode != maxLeftNode) {
+                        nodeChange(originRoot, tName, originLeftNode, originRightNode, false);
+                    } else {
+                        //find upper depth last node
+                        upperNodeChange(originRoot, parent, tName, depth, originLeftNode, originRightNode, false);
+                    }
+            } else if (depth == maxDepth) {
+                if (originLeftNode != maxLeftNode) {
+                    nodeChange(originRoot, tName, originLeftNode, originRightNode, false);
                 }
             } else {
-                if (order < limit) {
-                    order += 1L;
-                    method(originCopy, "setNodeOrder").invoke(originCopy);
-                    queryBuilder.subOrder(m.getClass(), tName, order);
-                    method(origin, "update").invoke(origin, originCopy);
+                //nodeOrder changes
+                nodeOrder = (Long) method(origin, "getNodeOrder").invoke(origin);
+                nodeOrderMax = queryBuilder.findNodeOrderMax(m.getClass(), tName);
+                if (nodeOrder != nodeOrderMax) {
+                    queryBuilder.nodeOrderChange(m.getClass(), tName, originRoot, nodeOrder, false);
                 }
             }
-            return new ResponseEntity<>("down completed", HttpStatus.OK);
+            return new ResponseEntity<>("move up success", HttpStatus.OK);
         } catch (Exception e) {
             e.printStackTrace();
             return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);

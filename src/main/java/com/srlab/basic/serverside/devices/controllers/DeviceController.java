@@ -32,9 +32,10 @@ public class DeviceController {
     @Autowired
     private CommonDataService<Device, DeviceService, DeviceRepository> commonDataService;
 
+    Device device = new Device();
     public void DeviceSet() {
         try {
-            commonDataService.set(Device.class, dService, dRepository);
+            commonDataService.set(device, dService, dRepository);
         } catch(Exception e) {
             LOG.info(e.getMessage());
         }

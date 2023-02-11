@@ -7,6 +7,7 @@ import com.srlab.basic.serverside.queries.CommonDataService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,10 +31,13 @@ public class HierarchyDataController {
     @Autowired
     private CommonDataService<HierarchyData, HierarchyDataService, HierarchyDataRepository> commonDataService;
 
-    public void HierarchySet() {
+    HierarchyData hierarchyData = new HierarchyData();
+
+    public void hierarchySet() {
         try {
-            commonDataService.set(HierarchyData.class, hDataService, hRepository);
+            commonDataService.set(hierarchyData, hDataService, hRepository);
         } catch(Exception e) {
+            e.printStackTrace();
             LOG.info(e.getMessage());
         }
     }
@@ -44,7 +48,7 @@ public class HierarchyDataController {
     @GetMapping()
     public ResponseEntity<?> hierarchyFindAll(HttpServletRequest req, @RequestParam Map<String, String> param,
                                               Pageable pageable) {
-        HierarchySet();
+        hierarchySet();
         return commonDataService.findAll("hierarchyData", param, pageable);
     }
 
@@ -53,7 +57,7 @@ public class HierarchyDataController {
             @ApiResponse(responseCode = "500", description = "internal server error")})
     @GetMapping("/{seq}")
     public ResponseEntity<?> hierarchyFindOne(HttpServletRequest req, @PathVariable Long seq) {
-        HierarchySet();
+        hierarchySet();
         return commonDataService.findOne(seq);
     }
 
@@ -63,7 +67,7 @@ public class HierarchyDataController {
             @ApiResponse(responseCode = "500", description = "internal server error")})
     @PostMapping()
     public ResponseEntity<?> hierarchyRootInsert(HttpServletRequest req, @RequestBody HierarchyData data) {
-        HierarchySet();
+        hierarchySet();
         return commonDataService.insert("hierarchyData", data);
     }
 
@@ -73,7 +77,7 @@ public class HierarchyDataController {
     @PostMapping("/{seq}")
     public ResponseEntity<?> hierarchyInsert(HttpServletRequest req, @PathVariable Long seq,
                                              @RequestBody HierarchyData data) {
-        HierarchySet();
+        hierarchySet();
         return commonDataService.addSet("hierarchyData", seq, data, false);
     }
 
@@ -84,7 +88,7 @@ public class HierarchyDataController {
     @PostMapping("/{seq}/depth")
     public ResponseEntity<?> hierarchyInsertDepth(HttpServletRequest req, @PathVariable Long seq,
                                                   @RequestBody HierarchyData data) {
-        HierarchySet();
+        hierarchySet();
         return commonDataService.addSet("hierarchyData", seq, data, true);
     }
 
@@ -102,7 +106,7 @@ public class HierarchyDataController {
             @ApiResponse(responseCode = "500", description = "internal server error")})
     @GetMapping("/{seq}/up")
     public ResponseEntity<?> hierarchyMoveUp(HttpServletRequest req, @PathVariable Long seq) {
-        HierarchySet();
+        hierarchySet();
         return commonDataService.moveUp("hierarchyData", seq);
     }
 
@@ -111,7 +115,7 @@ public class HierarchyDataController {
             @ApiResponse(responseCode = "500", description = "internal server error")})
     @GetMapping("/{seq}/down")
     public ResponseEntity<?> hierarchyMoveDown(HttpServletRequest req, @PathVariable Long seq) {
-        HierarchySet();
+        hierarchySet();
         return commonDataService.moveDown("hierarchyData", seq);
     }
 
@@ -120,7 +124,7 @@ public class HierarchyDataController {
             @ApiResponse(responseCode = "500", description = "internal server error")})
     @DeleteMapping("/{seq}")
     public ResponseEntity<?> hierarchyDelete(HttpServletRequest req, @PathVariable Long seq) {
-        HierarchySet();
+        hierarchySet();
         return commonDataService.subtractSet("hierarchyData", seq);
     }
 

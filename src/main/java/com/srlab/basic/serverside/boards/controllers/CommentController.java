@@ -33,9 +33,10 @@ public class CommentController {
     @Autowired
     private CommonDataService<Reply, CommentService, CommentRepository> commonDataService;
 
+    Reply reply = new Reply();
     public void commentSet() {
         try {
-            commonDataService.set(Reply.class, cService, cRepository);
+            commonDataService.set(reply, cService, cRepository);
         } catch(Exception e) {
             LOG.info(e.getMessage());
         }

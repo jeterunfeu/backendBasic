@@ -1,15 +1,15 @@
 package com.srlab.basic.authserverside.users.services;
 
 import com.srlab.basic.authserverside.users.Dto.*;
-import com.srlab.basic.authserverside.users.models.User;
+import com.srlab.basic.authserverside.users.models.UserInfo;
 import com.srlab.basic.authserverside.users.repositories.UserRepository;
 import com.srlab.basic.authserverside.users.utils.JwtTokenProvider;
 import com.srlab.basic.serverside.configs.YamlConfig;
-import com.srlab.basic.serverside.filters.RequestServletFilter;
 import com.srlab.basic.serverside.logs.models.ConnectHistory;
 import com.srlab.basic.serverside.logs.repositories.ConnectHistoryRepository;
 import com.srlab.basic.serverside.utils.BcryptUtil;
 import com.srlab.basic.serverside.utils.IpUtil;
+import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +19,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
 import ua_parser.Client;
@@ -29,7 +33,8 @@ import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
 @Service
-public class UserService {
+@RequiredArgsConstructor
+public class UserService implements UserDetailsService {
 
     private final Logger LOG = LoggerFactory.getLogger(UserService.class);
 
@@ -42,8 +47,10 @@ public class UserService {
     @Autowired
     private ConnectHistoryRepository chRepository;
 
+    private final AuthenticationManagerBuilder authenticationManagerBuilder;
+
     @Autowired
-    private AuthenticationManagerBuilder authenticationManagerBuilder;
+    private PasswordEncoder passwordEncoder;
     @Autowired
     private RedisTemplate redisTemplate;
     @Autowired
@@ -56,9 +63,10 @@ public class UserService {
                 return new ResponseEntity<>("id already exists", HttpStatus.BAD_REQUEST);
             }
 
-            User user = User.builder()
+            UserInfo user = UserInfo.builder()
                     .id(signUp.getId())
-                    .password(bcryptUtil.encodeBcrypt(signUp.getPassword(), Integer.parseInt(yamlConfig.getCount())))
+//                    .password(bcryptUtil.encodeBcrypt(signUp.getPassword(), Integer.parseInt(yamlConfig.getCount())))
+                    .password(passwordEncoder.encode(signUp.getPassword()))
                     .name(signUp.getName())
                     .cellPhone(signUp.getCellPhone())
                     .email(signUp.getEmail())
@@ -77,18 +85,28 @@ public class UserService {
 
     public ResponseEntity<?> login(HttpServletRequest req, LoginDto login) {
         try {
-            UsernamePasswordAuthenticationToken authenticationToken = login.toAuthentication();
+            UserDetails userDetails = loadUserByUsername(login.getId());
+
+//            UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
+//                userDetails, login.getPassword(), userDetails.getAuthorities());
+
+//            UsernamePasswordAuthenticationToken authenticationToken = login.toAuthentication(login.getId());
+
+            UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(login.getId(), login.getPassword());
+
 
             Authentication authentication = authenticationManagerBuilder.getObject().authenticate(authenticationToken);
 
             TokenDto tokenInfo = jwtTokenProvider.generateToken(authentication);
+
+
 
             redisTemplate.opsForValue()
                     .set("RT:" + authentication.getName(), tokenInfo.getRefreshToken(),
                             tokenInfo.getRefreshTokenExpirationTime(), TimeUnit.MILLISECONDS);
 
             checkInOut(req, null, "login");
-            return new ResponseEntity<>("sign up success", HttpStatus.OK);
+            return new ResponseEntity<>(tokenInfo, HttpStatus.OK);
         } catch (Exception e) {
             e.printStackTrace();
             return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
@@ -200,5 +218,16 @@ public class UserService {
                 .build();
 
         chRepository.save(cHistory);
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String id) throws UsernameNotFoundException {
+        UserInfo result = userRepository.findOneById(id).orElse(null);
+
+        if (result != null) {
+            return new UserDetailsDto(result.getId(), result.getEmail(), result.getPassword());
+        } else {
+            throw new UsernameNotFoundException("User not found with username: " + id);
+        }
     }
 }
