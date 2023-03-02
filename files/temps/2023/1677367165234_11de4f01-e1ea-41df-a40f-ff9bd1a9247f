@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link>
+    <title>Document</title>
+    <style>
+        /* 주석 */
+        /* 요소이름 : 선택자(selector) */
+        /* * 선택자 : 전체 선택자, 모든 요소 선택 */
+        /* 태그선택자 : 태그이름사용 */
+        h1, h2, h3, h4, h5, h6, p {
+            /* 속성: 속성값 */
+            text-align:center;
+            color:green;
+            border: 1px dotted black;
+        }
+        img {
+            width:200px;
+            height:200px;
+            border: 1px dotted red;
+        }
+        .img1 {
+            border-radius:50px;
+        }
+        .img2 {
+            border-radius:25px;
+        }
+        td {
+            background-color: blue;
+        }
+        span{
+            background-color:yellow;
+        }
+        .korea {
+            color:blue;
+        }
+        .my {
+            color:red;
+        }
+        /* 아이디이름 : 문서내 특정요소 하나에만 스타일 적용하고 싶을 경우 */
+        #name {
+            border: 3px dashed brown;
+            background-color: skyblue;
+        }
+    </style>
+</head>
+<body>
+    <!-- style : html 요소에 서식을 지정하는 것 -->
+    <!-- 내부 스타일 지정 : 문서내에서 <style>내부의 내용을 정의 하는 것 -->
+        <h1>여러가지 스타일</h1>
+        <h1>태그선택자 연습</h1>
+        <h2>오늘은 스타일을 연습하고 있습니다.</h2>
+        <h3>복잡하네요...</h3>
+        <p>안녕하세요</p>
+        안녕하세요
+        <table>
+            <tr>
+                <td>첫번째칸</td><td>두번째칸</td>
+            </tr>
+            <tr>
+                <td>세번째칸</td><td>네번째칸</td>
+            </tr>
+        </table>
+<!-- 클래스 속성 : 요소 그룹을 만들어주는 속성(여러개가능) -->
+        <p>
+            동해물과 백두산이 마르고 닳도록<br>
+            하느님이 보우하사 <span class="my">우리나라</span>만세<br>
+            무궁화 삼천리 화려강산<br>
+            대한사람 <span class="korea">대한</span>으로 길이 보전하세
+        </p>
+        <!-- 똑같은 클래스를 다양한 태그에 적용 가능 -->
+        <p class="my">
+            클래스 선택자 - 특정 부분에 스타일 적용하기
+        </p>
+        <br>
+        <img src="../tokyo_tower.jpg" class = "img1">
+        <img src="../tokyo_tower_icon.png" class = "img2">
+        <img src="../tokyo_tower.jpg" class = "img1">
+        <img src="../tokyo_tower_icon.png" class = "img2">
+        <br>
+        <p>
+            <!-- id속성 : 웹문서 내에서 딱 하나의 요소를 식별 -->
+            안녕하세요 저는 <span id="name">홍길동</span>입니다.
+        </p>
+</body>
+</html>

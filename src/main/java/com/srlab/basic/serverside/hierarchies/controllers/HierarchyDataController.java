@@ -12,6 +12,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -65,7 +67,7 @@ public class HierarchyDataController {
     @Operation(description = "hierarchy insert", responses = { @ApiResponse(responseCode = "200", description = "inserted"),
             @ApiResponse(responseCode = "400", description = "bad request"),
             @ApiResponse(responseCode = "500", description = "internal server error")})
-    @PostMapping()
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> hierarchyRootInsert(HttpServletRequest req, @RequestBody HierarchyData data) {
         hierarchySet();
         return commonDataService.insert("hierarchyData", data);
@@ -74,28 +76,39 @@ public class HierarchyDataController {
     @Operation(description = "hierarchy same depth insert", responses = { @ApiResponse(responseCode = "200", description = "same depth inserted"),
             @ApiResponse(responseCode = "400", description = "bad request"),
             @ApiResponse(responseCode = "500", description = "internal server error")})
-    @PostMapping("/{seq}")
+    @PostMapping(path="/{seq}", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> hierarchyInsert(HttpServletRequest req, @PathVariable Long seq,
                                              @RequestBody HierarchyData data) {
-        hierarchySet();
-        return commonDataService.addSet("hierarchyData", seq, data, false);
+        try {
+            hierarchySet();
+            return new ResponseEntity<>((HierarchyData) commonDataService.addSet("hierarchyData", seq, data, false), HttpStatus.OK);
+        } catch(Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
     }
 
     //new level
     @Operation(description = "hierarchy sub depth insert", responses = { @ApiResponse(responseCode = "200", description = "sub depth inserted"),
             @ApiResponse(responseCode = "400", description = "bad request"),
             @ApiResponse(responseCode = "500", description = "internal server error")})
-    @PostMapping("/{seq}/depth")
+    @PostMapping(path="/{seq}/depth", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> hierarchyInsertDepth(HttpServletRequest req, @PathVariable Long seq,
                                                   @RequestBody HierarchyData data) {
-        hierarchySet();
-        return commonDataService.addSet("hierarchyData", seq, data, true);
+        try {
+            hierarchySet();
+            return new ResponseEntity<>((HierarchyData) commonDataService.addSet("hierarchyData", seq, data, true), HttpStatus.OK);
+        } catch(Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @Operation(description = "hierarchy update", responses = { @ApiResponse(responseCode = "200", description = "updated"),
             @ApiResponse(responseCode = "400", description = "bad request"),
             @ApiResponse(responseCode = "500", description = "internal server error")})
-    @PutMapping("/{seq}")
+    @PutMapping(path="/{seq}", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> hierarchyUpdate(HttpServletRequest req, @PathVariable Long seq,
                                              @RequestBody HierarchyData data) {
         return hDataService.update(seq, data);

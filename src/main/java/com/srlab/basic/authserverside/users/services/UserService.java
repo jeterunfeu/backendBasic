@@ -1,6 +1,6 @@
 package com.srlab.basic.authserverside.users.services;
 
-import com.srlab.basic.authserverside.users.Dto.*;
+import com.srlab.basic.authserverside.users.dtos.*;
 import com.srlab.basic.authserverside.users.models.UserInfo;
 import com.srlab.basic.authserverside.users.repositories.UserRepository;
 import com.srlab.basic.authserverside.users.utils.JwtTokenProvider;

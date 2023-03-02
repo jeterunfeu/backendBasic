@@ -1,12 +1,19 @@
 package com.srlab.basic.serverside.files.services;
 
+import com.srlab.basic.serverside.boards.models.Board;
+import com.srlab.basic.serverside.boards.models.Reply;
+import com.srlab.basic.serverside.boards.repositories.BoardRepository;
 import com.srlab.basic.serverside.configs.YamlConfig;
+import com.srlab.basic.serverside.devices.models.Device;
 import com.srlab.basic.serverside.files.models.AvailableFile;
 import com.srlab.basic.serverside.files.models.TempFile;
 import com.srlab.basic.serverside.files.repositories.FileRepository;
 import com.srlab.basic.serverside.files.repositories.FileTempRepository;
+import com.srlab.basic.serverside.hierarchies.models.HierarchyData;
 import com.srlab.basic.serverside.queries.QueryBuilder;
 import com.srlab.basic.serverside.utils.FileUtil;
+import com.srlab.basic.serverside.utils.MapStructMapper;
+import net.bytebuddy.build.Plugin;
 import org.apache.commons.io.FilenameUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -39,6 +46,8 @@ public class FileService {
     @Autowired
     private FileRepository fileRepository;
     @Autowired
+    private BoardRepository boardRepository;
+    @Autowired
     private FileTempRepository fileTempRepository;
     @Autowired
     private QueryBuilder<TempFile> queryBuilderTemp;
@@ -47,42 +56,52 @@ public class FileService {
     @Autowired
     private YamlConfig config;
 
-    public ResponseEntity<?> download(String key) throws MalformedURLException {
+    public Resource download(String key) throws MalformedURLException {
         try {
-            AvailableFile file = (AvailableFile) findByKey(key).getBody();
-            Resource resource = (Resource) getDownResource(file, key).getBody();
-            return new ResponseEntity<>(resource.exists() ? resource : null, HttpStatus.OK);
+            AvailableFile file = findByKey(key);
+            Resource resource = getDownResource(file, key);
+            return resource;
         } catch (Exception e) {
-            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+            e.printStackTrace();
+            return null;
         }
     }
 
-    public ResponseEntity<?> getDownResource(AvailableFile file, String key) throws MalformedURLException {
+    public Resource getDownResource(AvailableFile file, String key) throws MalformedURLException {
         try {
+
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy_MM_dd_HH_mm_ss");
+            String newTime = simpleDateFormat.format(file.getInsertedDate());
+
+            String originName = file.getFilePath().split("/")[4];
+
             Path fileSourceLocation = Paths.get(file.getFilePath() + "/").toAbsolutePath().normalize();
-            String fileName = file.getInsertedDate() + "_" + file.getFileName();
-            Path filePath = fileSourceLocation.resolve(fileName).normalize();
+//            String fileName = newTime + "_" + originName+ "." + file.getFileExt();
+//            Path filePath = fileSourceLocation.resolve(fileName).normalize();
+            Path filePath = fileSourceLocation.normalize();
             Resource resource = new UrlResource(filePath.toUri());
-            return new ResponseEntity<>(resource, HttpStatus.OK);
+            return resource;
         } catch (Exception e) {
-            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-
-    }
-
-    public ResponseEntity<?> findByKey(String key) {
-        try {
-            return new ResponseEntity<>(fileNullCheck(fileRepository.findByKey(key)), HttpStatus.OK);
-        } catch (Exception e) {
-            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+            e.printStackTrace();
+            return null;
         }
     }
 
-    public ResponseEntity<?> fileNullCheck(AvailableFile file) {
+    public AvailableFile findByKey(String key) {
         try {
-            return new ResponseEntity<>(file == null ? null : file, HttpStatus.OK);
+            return fileNullCheck(fileRepository.findByKey(key));
         } catch (Exception e) {
-            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public AvailableFile fileNullCheck(AvailableFile file) {
+        try {
+            return file == null ? null : file;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
         }
     }
 
@@ -145,6 +164,8 @@ public class FileService {
 
                 Path moveLocation = fileStorageTarget.resolve(uploadFileName); // real file
                 Files.copy(is, moveLocation, StandardCopyOption.REPLACE_EXISTING);
+
+                is.close();
             }
             return new ResponseEntity<>(list, HttpStatus.OK);
         } catch (Exception e) {
@@ -152,19 +173,21 @@ public class FileService {
         }
     }
 
-    public ResponseEntity<?> transfer(String category, Long seq, Map<String, String> map) {
+    public ResponseEntity<?> transfer(String category, Map<String, String> map) {
         try {
             List<AvailableFile> files = new ArrayList<>();
             List<AvailableFile> result = null;
-            String key;
-            Optional<TempFile> tempFile = fileTempRepository.findById(seq);
-            if (tempFile.isPresent()) {
-                for (int i = 0; i < map.size(); i++) {
-                    key = String.valueOf(map.get("file" + (i + 1)));
-                    files.add((AvailableFile) transOneFile(category, seq, key).getBody());
+            Optional<TempFile> tempFile;
+
+            for (Map.Entry<String, String> pair : map.entrySet()) {
+                LOG.info("file input");
+                tempFile = fileTempRepository.findOneByKey(pair.getValue());
+                if(tempFile.isPresent()) {
+                    files.add(transOneFile(category, pair.getValue()/*, mKey*/));
                 }
-                result = files;
             }
+
+                result = files;
             return new ResponseEntity<>(result, HttpStatus.OK);
         } catch (Exception e) {
             e.printStackTrace();
@@ -172,15 +195,20 @@ public class FileService {
         }
     }
 
-    private ResponseEntity<?> transOneFile(String category, Long seq, String key) {
+    private AvailableFile transOneFile(String category, String key/*, String mKey*/) {
         try {
             SimpleDateFormat format = new SimpleDateFormat("yyyy");
             String year = format.format(new Date());
 
             TempFile fileTemp = (TempFile) getFileTemporaryOne(key).getBody();
 
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy_MM_dd_HH_mm_ss");
+            String newTime = simpleDateFormat.format(fileTemp.getInsertedDate());
+
+            String originName = fileTemp.getFilePath().split("/")[4];
+
             String fullPath = config.getPath() + "/" + year + "/" +
-                    fileTemp.getInsertedDate() + "_" + fileTemp.getFileName();
+                    newTime + "_" + originName + "." + fileTemp.getFileExt();
 
             AvailableFile file = AvailableFile.builder()
                     .insertedDate(fileTemp.getInsertedDate())
@@ -198,9 +226,10 @@ public class FileService {
             // file copy process
             fileCopy(fileTemp, year);
 
-            return new ResponseEntity<>(file, HttpStatus.OK);
+            return file;
         } catch (Exception e) {
-            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+            e.printStackTrace();
+            return null;
         }
     }
 
@@ -212,13 +241,18 @@ public class FileService {
 
             Path fileSource = Paths.get(path + "/").toAbsolutePath().normalize();
             Path fileTarget = Paths.get(sourcePath + "/").toAbsolutePath().normalize();
-            String saveName = file.getInsertedDate() + "_" + file.getFileName();
+
+            String originName = file.getFilePath().split("/")[4];
+
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy_MM_dd_HH_mm_ss");
+            String newTime = simpleDateFormat.format(file.getInsertedDate());
+
+            String saveName = newTime + "_" + originName + '.' + file.getFileExt();
 
             File f = new File(path);
 
             if (!f.exists()) f.mkdirs();
-
-            Path sourceLocation = fileTarget.resolve(file.getFileName());
+            Path sourceLocation = fileTarget.resolve(originName);
             Path targetLocation = fileSource.resolve(saveName);
             Files.copy(sourceLocation, targetLocation, StandardCopyOption.REPLACE_EXISTING);
             return new ResponseEntity<>(true, HttpStatus.OK);
@@ -234,6 +268,7 @@ public class FileService {
             Boolean result = false;
             if (chkfile != null && chkfile.exists()) {
                 chkfile.delete();
+                fileRepository.deleteOneByKey(key);
                 result = true;
             } else {
                 System.out.println("Not Found The File");
@@ -258,6 +293,28 @@ public class FileService {
             }
             return new ResponseEntity<>(result, HttpStatus.OK);
         } catch (Exception e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    public ResponseEntity<?> updateBySeq(Long seq, AvailableFile file) {
+        try {
+            AvailableFile ori = fileRepository.findOneBySeq(seq);
+            file.setSeq(seq);
+            MapStructMapper.INSTANCE.update(file, ori);
+            AvailableFile result = fileRepository.save(ori);
+            return new ResponseEntity<>(result, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    public ResponseEntity<?> insertFile(AvailableFile file) {
+        try {
+            AvailableFile result = fileRepository.save(file);
+            return new ResponseEntity<>(result, HttpStatus.OK);
+        } catch(Exception e) {
+            e.printStackTrace();
             return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }

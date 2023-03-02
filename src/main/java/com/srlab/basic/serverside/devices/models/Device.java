@@ -18,10 +18,19 @@ import java.util.List;
 @SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
+@SequenceGenerator(
+        name = "DEVICE_SEQ_GEN", //시퀀스 제너레이터 이름
+        sequenceName = "DEVICE_SEQ", //시퀀스 이름
+        initialValue = 1, //시작값
+        allocationSize = 1 //메모리를 통해 할당할 범위 사이즈
+)
 public class Device extends CustomAuditable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(
+            strategy = GenerationType.SEQUENCE, //사용할 전략을 시퀀스로  선택
+            generator = "DEVICE_SEQ_GEN" //식별자 생성기를 설정해놓은  USER_SEQ_GEN으로 설정
+    )
     private Long seq;
     @Column(name = "device_id", unique = true)
     private String deviceId;
@@ -68,7 +77,6 @@ public class Device extends CustomAuditable {
     @Column(nullable = false, columnDefinition = "NUMBER(19,0) default 1")
     private Long nodeOrder;
 
-    @OneToMany(fetch = FetchType.LAZY , mappedBy = "board")
-    private List<AvailableFile> files = new ArrayList<>();
-
+//    @OneToMany(mappedBy = "device")
+//    private List<AvailableFile> files = new ArrayList<>();
 }

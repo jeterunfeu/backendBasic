@@ -88,11 +88,14 @@ public class FileController {
     @Operation(description = "download", responses = { @ApiResponse(responseCode = "200", description = "download"),
             @ApiResponse(responseCode = "400", description = "bad request"),
             @ApiResponse(responseCode = "500", description = "internal server error")})
-    @GetMapping("/keys/{key}")
-    public ResponseEntity<?> downloadFileByPath(HttpServletRequest req, @PathVariable("key") String key,
-                                                @RequestParam("route") String route) {
+    @GetMapping("/download/{key}")
+    public ResponseEntity<?> downloadFileByPath(HttpServletRequest req, @RequestParam("route") String route,
+                                                @PathVariable("key") String key) {
+
+        LOG.info("download here");
         try {
-            Resource resource = (Resource) fileService.download(key).getBody();
+            Resource resource = fileService.download(key);
+            LOG.info("request : " + req == null ? "null": req.toString());
             String contentType = req.getServletContext().getMimeType(resource.getFile().getAbsolutePath());
 
             if(contentType == null) {
@@ -119,24 +122,45 @@ public class FileController {
             @ApiResponse(responseCode = "400", description = "bad request"),
             @ApiResponse(responseCode = "500", description = "internal server error")})
 
-    @PostMapping("/{category}/attach")
+    @PostMapping(path = "/{category}/attach", consumes=MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<?> attach(HttpServletRequest req, @PathVariable String category,
                                     @RequestParam("file") MultipartFile[] files) {
-        Map<String, String> result = new HashMap<>();
-        List<TempFile> fileTemp = (List<TempFile>) fileService.insert(category, files).getBody();
-        for(TempFile file: fileTemp) {
-            result.put(file.getFileName(), file.getKey());
+        try{
+            Map<String, String> result = new HashMap<>();
+            List<TempFile> fileTemp = (List<TempFile>) fileService.insert(category, files).getBody();
+            for(TempFile file: fileTemp) {
+                result.put(file.getFileName(), file.getKey());
+            }
+            return new ResponseEntity<>(result, HttpStatus.OK);
+        }catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<>(e.getMessage(),HttpStatus.INTERNAL_SERVER_ERROR);
         }
-        return new ResponseEntity<>(result, HttpStatus.OK);
+
     }
 
+//    @Operation(description = "insert file", responses = { @ApiResponse(responseCode = "200", description = "inserted success"),
+//            @ApiResponse(responseCode = "400", description = "bad request"),
+//            @ApiResponse(responseCode = "500", description = "internal server error")})
+//    @PostMapping()
+//    public ResponseEntity<?> fileSave(HttpServletRequest req, @RequestBody AvailableFile file) {
+//        try{
+//            LOG.info("file save");
+//            return fileService.insertFile(file);
+//        } catch(Exception e) {
+//            e.printStackTrace();
+//            return null;
+//        }
+//    }
+
+    //seq 삭제
     @Operation(description = "transport file", responses = { @ApiResponse(responseCode = "200", description = "transported"),
             @ApiResponse(responseCode = "400", description = "bad request"),
             @ApiResponse(responseCode = "500", description = "internal server error")})
-    @PostMapping("/{category}/{seq}")
+    @PostMapping(path="/{category}", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> fileSave(HttpServletRequest req, @PathVariable("category") String category,
-                                      @PathVariable("seq") Long seq, @RequestBody Map<String, String> map) {
-        return fileService.transfer(category, seq, map);
+                                      /*@PathVariable("key") String id,*/ @RequestBody Map<String, String> map) {
+        return fileService.transfer(category, map);
     }
 
     @Operation(description = "file delete", responses = { @ApiResponse(responseCode = "200", description = "deleted"),

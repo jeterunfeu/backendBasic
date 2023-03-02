@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <style>
+        span {
+            background-color: yellow;
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <a href = "#bottom">맨아래로가기</a>
+    <!-- 복습 -->
+    <!-- 제목 태그 -->
+    <h1 id="top">heading tag(제목을 나타냄)</h1>
+    <!-- 문단 단락 -->
+    <p>
+        어떤 <span>블록</span>을 표시하는 태그<br>
+        html에서는 줄바꿈 여러개 공백이 불가하여 html문서 내에서 줄바꿈시 &lt;br&gt;태그 사용 <br>
+        여러개의 공백을 넣는 방법은 특수문자 사용<br>
+        공백   1 <!--한개의 공백만 허용--><br>
+        공백&nbsp;&nbsp;&nbsp;1
+    </p>
+    <!-- 강조태그 -->
+    <p>
+        굵게 만드는 b or strong <br>
+        b와 strong의 차이는 <b>b</b>는 화면에서만 굵게 표시될뿐
+        strong은 화면낭독기가 <strong>강조해서</strong>읽어준다
+    </p>
+    <p>
+        글자를 기울게 만드는 i or em <br>
+        둘다 글자를 <i>이탤릭체</i>로 만든다 <br>
+        하지만 em을 사용한 곳은 <em>강조해서</em>읽는다
+    </p>
+    <!-- 텍스트의 일부를 묶는 태그 -->
+    <p>
+        텍스트 내부에서 특정 부분만 구분짓고 싶을 때
+        <span>span태그</span>를 사용합니다.
+    </p>
+    <!-- 목록을 만드는 태그 -->
+    <!-- 순서가 있는 리스트 -->
+    <h3 id = "top">유명한 축구선수</h3>
+    <ol>
+        <li>손흥민</li>
+        <li>이강인</li>
+        <li>조규성</li>
+    </ol>
+    <!-- 순서가 없는 리스트 -->
+    <h3>우리나라의 유명한 야구선수</h3>
+    <ul>
+        <li>이종범</li>
+        <li>선동열</li>
+        <li>양현종</li>
+    </ul>
+    <!-- 표 만들기 -->
+    <table border="1"> <!-- 테이블 태그 기본서식 : 테두리 너비 0-->
+        <tr><!--행선언-->
+            <td>내용</td><td>내용1</td>
+        </tr>
+    </table>
+    <br>
+    <table border="1">
+        <tr> <!--열에 제목넣기-->
+            <th>이름</th><th>나이</th><th>주소</th>
+        </tr>
+        <tr> <!--열에 제목넣기-->
+            <td>홍길동</td><td>15</td><td>장성</td>
+        </tr>
+    </table>
+   <br>
+    <table border="1">
+        <tr>
+            <td>1995</td><td>OO 초등학교 입학</td>
+        </tr>
+        <tr>
+            <td>2001</td><td>XX 중학교 입학</td>
+        </tr>
+        <tr>
+            <td>2004</td><td>$$ 고등학교 입학</td>
+        </tr>
+        <tr>
+            <td>2007</td><td>** 대학교 입학</td>
+        </tr>
+    </table>
+    <br>
+<!-- 칸합치기 -->
+<table border="1">
+    <tr>
+        <th>이름</th><td>홍길동</td>
+        <th>나이</th><td>16</td>
+    </tr>
+    <tr>
+        <th>자기소개</th><td colspan="3">oooo</td>
+    </tr>
+</table>
+<br>
+<!-- 칸합치기 (세로) -->
+<table border="1">
+    <tr>
+        <th rowspan="2">과목</th><td>자바</td>
+    </tr>
+    <tr>
+        <td>파이썬</td>
+    </tr>
+</table>
+<br>
+<table border="1">
+    <tr>
+        <td colspan="2">a</td><td rowspan="2">b</td>
+    </tr>
+    <tr>
+        <td rowspan="2">d</td><td>e</td>
+    </tr>
+    <tr>
+        <td colspan="2">h</td>
+    </tr>
+</table>
+<br>
+<!-- 칸합치기 -->
+<!-- 그림넣기 img태그 -->
+<!-- 닫는태그 없음 -->
+<!-- alt 이미지 없을때 설명할 텍스트 -->
+<img src="../tokyo_tower.jpg" width="500px" height="500px" alt="도쿄타워">
+<br> <!--자동줄바꿈이 안되므로 br등으로 개행해야함-->
+<img src="C:\Users\user\Desktop\new_tokyo_tower.jpg" width="500px" height="500px" alt="도꾜따워">
+<br>
+<!-- 큰사진 작게 가능 작은걸 늘리는 것 이미지 깨짐 -->
+<img src = "abc.jpg" alt="이미지가 없습니다">
+<br>
+<img src = "../tokyo_tower_icon.png"><p>원래이미지</p>
+<img src = "../tokyo_tower_icon.png" width="500" height="500">
+<br>
+<a href = "http://www.naver.com"><p>네이버</p></a>
+<a href = "https://www.google.com"><p>구글</p></a>
+<a href = "https://www.yahoo.co.jp" target="_blank">
+    <img src = "../tokyo_tower.jpg" width="200">
+</a>
+<!-- target _self 기본 _blank 새창 -->
+<!-- 페이지 내부이동 앵커태그 -->
+<!-- 동일문서 내부 해당 id 요소의 위치로 이동 -->
+<br>
+<a href = "#top" id="bottom">위로가기</a>
+</body>
+</html>

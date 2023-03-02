@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Song+Myung&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Dongle:wght@300&display=swap" rel="stylesheet">
+    <title>Document</title>
+    <style>
+
+        /* *{
+            font-weight:lighter;
+        } */
+
+        p {
+            /* 글꼴을 바꿔주는 font-family 속성 */
+            /* font-family: 'Song Myung', serif; */
+            /* font-family: 'Dongle', sans-serif; */
+            /* 두께는 100-900 숫자 or 키워드 */
+            font-size: 32px;
+            font-weight: bolder;
+            font-style: italic;
+        }
+        /* #first{
+            font-size: 32px;
+         } */
+        #second{
+            color: #FF4319;
+            text-decoration: line-through;
+        } 
+        a {
+            /* 텍스트 줄 표시 혹은 없애기 */
+            text-decoration: none;
+            color: black;
+            font-style: normal;
+        }
+        a:hover {
+            color: red;
+            font-size: 40px;
+            background-color: gray;
+        }
+        h1 {
+            /* 텍스트-그림 가로거리, 세로거리, 번짐정도, 색 */
+            /* text-shadow: -5px 5px 5px #00ff00, 5px -5px 5px #0000ff ; */
+            text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #e60073, 0 0 40px #e60073, 0 0 50px #e60073, 0 0 60px #e60073, 0 0 70px #e60073;
+            background-color: black;
+        }
+        /* 테이블 한줄로 만들기 */
+        table {
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+    </style>
+
+</head>
+<body>
+    <!-- 텍스트 관련 스타일 -->
+    <h1>제목입니다</h1>
+        <p id="first">
+            하늘을 나르는 우리꿈을 보아라
+            죽어도 또 죽어도 겨레와 나라
+            젊은피를 하늘 위에 뿌린다
+        </p>
+        <p id="second">
+            하늘을 우러러 한점 부끄럼 없이
+            스치는 바람에도 나는 괴로워했다
+        </p>
+        <p>
+            <a href="https://www.naver.com">네이버</a>
+        </p>
+</body>
+</html>

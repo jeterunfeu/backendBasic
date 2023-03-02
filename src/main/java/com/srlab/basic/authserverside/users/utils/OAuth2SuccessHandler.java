@@ -1,7 +1,7 @@
 package com.srlab.basic.authserverside.users.utils;
 
-import com.srlab.basic.authserverside.users.Dto.OAuthDto;
-import com.srlab.basic.authserverside.users.Dto.TokenDto;
+import com.srlab.basic.authserverside.users.dtos.OAuthDto;
+import com.srlab.basic.authserverside.users.dtos.TokenDto;
 import com.srlab.basic.authserverside.users.models.UserInfo;
 import com.srlab.basic.authserverside.users.repositories.UserRepository;
 import com.srlab.basic.authserverside.users.services.TokenService;

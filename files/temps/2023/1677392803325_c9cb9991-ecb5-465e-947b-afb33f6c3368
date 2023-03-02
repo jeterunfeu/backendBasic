@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 개발정보를 쓰는 곳입니다 -->
+    <!-- 주석을 적습니다 -->
+    <!-- 여러가지 태그 --> 
+    <!-- 텍스트 관련 태그 -->
+    <!-- hn tag : 제목을 나타냄 -->
+    <h1>heading 1</h1><h2>heading 2</h2><h3>heading 3</h3>
+    <h4>heading 4</h4>
+    <h5>heading 5</h5>
+    <h6>heading 6</h6>
+    <!-- p tag : 본문 문단을 내타냄 -->
+    <!-- 편집기에서 줄바꿈 적용안됨 -->
+    <p>안녕하세요. 오늘은 2월 6일 입니다. 월요일입니다. <br>지금시간은 두시 칠분입니다.</p>
+    <p>내일은 2월 7일 입니다.</p>
+    <!-- 내소개하기 -->
+    <h1>自己紹介</h1>
+    <p>私はキムチャンワンです。<br>私は日本就業のために勉強しています。</p>
+    <!-- 수평선 넣기 -->
+    <hr>
+    <!-- 인용문 넣는 blockquote -->
+    <blockquote>この小説は<br>素晴らしいですよ。</blockquote>
+    <!-- 태그를 나와 글을 쓰면 들여쓰기가 안됩니다. -->
+    <!-- 입력하는 그대로 표시하는 pre 태그 //프로그램 접근안됨 -->
+    <pre>
+        import random
+        a = random.randint(1,10)
+        print(a)
+
+            public static void main(String [] args) {
+                System.out.println("안뇽");
+            }
+    
+    </pre>
+    <!-- 텍스트 내부에 사용하는 태그 -->
+    <!-- 굵게 b, strong -->
+    <!-- 텍스트 기울게 i, em -->
+    <p>
+        <!-- b = bold strong = 강조(화면낭독시에도) -->
+        <b>하늘을</b> 우러러
+        한점 <strong>부끄럼</strong> 없기를
+        <!-- i = italic -->
+        <!-- em = emphasis -->
+        <i>잎새</i>에 이는 <em>바람</em>에도
+        나는 괴로워했다
+        오늘도 별이 바람에 스치운다
+    </p>
+    <p>
+        おはようございます。私は<em>キムチャンワン</em>です。私の趣味は<strong>山登り</strong>です。
+    </p>
+    <!-- 인용 표시 q 태그 -->
+    <p>
+        <h2>웹 접근성</h2>
+        <p>
+            웹의 창시자인 팀 버너스리의 
+            <q cite = "https://www.naver.com">웹의 힘은 보편성에 있다. 장애에 구애없이 모든사람이 접근할 수 있는 것이 
+            필수적인 요소이다.</q>
+            라는 말로 웹 접근성을 설명한다.
+        </p>
+    </p>
+    <!-- 색으로 강조할 수 있는 mark -->
+    <p>
+        감염병을 예방하기 위해서는 <mark>손씻기</mark>가 중요합니다.
+    </p>
+    <!-- 텍스트를 묶기 위한 span -->
+    <p style = "color:red;">
+        span 태그를 사용하면 <span style = "color:blue;">줄바꿈</span> 없이 텍스트를 묶을 수 있습니다.
+    </p>
+    <!-- 목록태그 -->
+    <!-- 순서태그 ordered list -->
+    <ol type = "I" reversed>
+        <!-- 항목지정 -->
+        <li>라면봉지를 뜯는다</li>
+        <li>면을 꺼낸다</li>
+        <li>잘 끓인다</li>
+    </ol>
+    <!-- 순서가 없는 태그 unordered list -->
+    <ul>
+        <li>핸드폰 : 010-1234-1234</li>
+        <li>이메일 : jeterunfeu@naver.com</li>        
+    </ul>
+</body>
+</html>

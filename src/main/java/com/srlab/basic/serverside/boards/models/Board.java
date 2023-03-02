@@ -1,13 +1,16 @@
 package com.srlab.basic.serverside.boards.models;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.srlab.basic.serverside.auditables.CustomAuditable;
 import com.srlab.basic.serverside.files.models.AvailableFile;
 import com.srlab.basic.serverside.hierarchies.models.HierarchyData;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
+import net.minidev.json.annotate.JsonIgnore;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,10 +22,20 @@ import java.util.List;
 @SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString
+@SequenceGenerator(
+        name = "BOARD_SEQ_GEN", //시퀀스 제너레이터 이름
+        sequenceName = "BOARD_SEQ", //시퀀스 이름
+        initialValue = 1, //시작값
+        allocationSize = 1 //메모리를 통해 할당할 범위 사이즈
+)
 public class Board extends CustomAuditable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(
+            strategy = GenerationType.SEQUENCE, //사용할 전략을 시퀀스로  선택
+            generator = "BOARD_SEQ_GEN" //식별자 생성기를 설정해놓은  USER_SEQ_GEN으로 설정
+    )
     private Long seq;
 
     @Column(name = "title")
@@ -31,7 +44,7 @@ public class Board extends CustomAuditable {
     @Column(name = "body_type", columnDefinition = "CHAR(1) default 1")
     private Boolean bodyType;
 
-    @Column(name = "body", columnDefinition = "LONG")
+    @Column(name = "content", columnDefinition = "CLOB")
     private String body;
 
     @Column(name = "writer")
@@ -60,16 +73,60 @@ public class Board extends CustomAuditable {
     @Column(nullable = false, columnDefinition = "NUMBER(19,0) default 1")
     private Long nodeOrder;
 
-    @OneToMany(fetch = FetchType.LAZY , mappedBy = "board")
+    @OneToMany(mappedBy = "board"/*,
+            cascade = CascadeType.ALL, orphanRemoval = true*/)
+    @JsonManagedReference
     private List<AvailableFile> files = new ArrayList<>();
 
-    @OneToMany(fetch = FetchType.LAZY , mappedBy = "board")
+//    @OneToMany
+//    @JoinColumn(name = "reply_id")
+    @OneToMany(mappedBy = "board"/*,
+            cascade = CascadeType.ALL, orphanRemoval = true*/)
+    @JsonManagedReference
     private List<Reply> replies = new ArrayList<>();
+//
+//    @ManyToOne
+//    @JoinColumn(name = "hierarchyData_seq")
+//    private HierarchyData hierarchyData;
+//
+//    public Board(Long seq) {
+//        this.seq = seq;
+//    }
+//
+//    public void addFiles(AvailableFile file)
+//    {
+//        files.add(file);
+//        file.setBoard(this);
+//    }
 
-    @ManyToOne
-    @JoinColumns({
-            @JoinColumn(name = "hierarchyData_seq")
-    })
-    private HierarchyData hierarchyData;
+//    public void putReply(Reply reply) {
+//        this.replies.add(reply);
+//        if(reply.getBoard() != this) {
+//            reply.setBoard(this);
+//        }
+//    }
+//    public void putFile(AvailableFile file) {
+//        this.files.add(file);
+//        if(file.getBoard() != this) {
+//            file.setBoard(this);
+//        }
+//    }
+
+//    public Integer getLikeCount() {
+//        return super.getLikeMember().length();
+//    }
+//
+//    public void setLikeCount(Integer likeCount) {
+//        super.setLikeCount(likeCount);
+//    }
+//
+//    public Integer getDislikeCount() {
+//        return super.getDislikeMember().length();
+//    }
+//
+//    public void setDislikeCount(Integer dislikeCount) {
+//        super.setDislikeCount(dislikeCount);
+//    }
+
 
 }

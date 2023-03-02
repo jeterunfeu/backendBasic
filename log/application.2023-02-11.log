@@ -3441,3 +3441,6 @@ io.jsonwebtoken.ExpiredJwtException: JWT expired at 2023-02-11T07:42:55Z. Curren
 2023:02:11 16:53:52.944 WARN  --- [http-nio-30403-exec-8] o.h.e.jdbc.spi.SqlExceptionHelper : SQL Error: 1722, SQLState: 42000 
 2023:02:11 16:53:52.945 ERROR --- [http-nio-30403-exec-8] o.h.e.jdbc.spi.SqlExceptionHelper : ORA-01722: 수치가 부적합합니다
  
+2023:02:11 18:32:54.634 INFO  --- [SpringApplicationShutdownHook] o.s.o.j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default' 
+2023:02:11 18:32:54.708 INFO  --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource : HikariPool-1 - Shutdown initiated... 
+2023:02:11 18:32:54.729 INFO  --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource : HikariPool-1 - Shutdown completed. 

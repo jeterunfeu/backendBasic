@@ -99,7 +99,12 @@ public class CommonDataService<M, S, R> {
     }
 
     public ResponseEntity<?> findAll(String tName, Map<String, String> param, Pageable pageable) {
-        return queryBuilder.findAllByConditions(m.getClass(), tName, param, pageable);
+        try {
+            return queryBuilder.findAllByConditions(m.getClass(), tName, param, pageable);
+        } catch(Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     public ResponseEntity<?> findOne(Long seq) {
@@ -107,6 +112,7 @@ public class CommonDataService<M, S, R> {
             Object result = method(null, "findOneBySeq").invoke(s, seq);
             return new ResponseEntity<>(result, HttpStatus.OK);
         } catch (Exception e) {
+            e.printStackTrace();
             return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
@@ -129,30 +135,33 @@ public class CommonDataService<M, S, R> {
         }
     }
 
-    public ResponseEntity<?> addSet(String tName, Long seq, M data, Boolean flag) {
-
+    public Object addSet(String tName, Long seq, M data, Boolean flag) {
+        LOG.info("d1");
         try {
             //check empty
             if (queryBuilder.checkEmpty(m.getClass(), tName)) {
+                LOG.info("d2");
                 return new ResponseEntity<>("DB is empty", HttpStatus.INTERNAL_SERVER_ERROR);
             }
-
+            LOG.info("d3");
             //check right
             M origin = (M) method(null, "findOneBySeq").invoke(s, seq);
             //root
             M root = (M) method(origin, "getRoot").invoke(origin);
             M parent = null;
             //elements
+            LOG.info("d4");
             Long depth = (Long) method(origin, "getDepth").invoke(origin);
             Long leftNode = (Long) method(origin, "getLeftNode").invoke(origin);
             Long rightNode = leftNode + 1;
             Long nodeOrder = (Long) method(origin, "getNodeOrder").invoke(origin);
-
+            LOG.info("d5");
             root = root == null ? origin : root;
 
             //plus 2 bigger than right value
             //new level?
             if ((Long) method(origin, "getDepth").invoke(origin) == 0L) {
+                LOG.info("d6");
                 depth++;
                 leftNode++;
                 rightNode++;
@@ -161,6 +170,7 @@ public class CommonDataService<M, S, R> {
                 parent = root;
             } else {
                 if (flag) {
+                    LOG.info("d7");
                     depth++;
                     leftNode++;
                     rightNode++;
@@ -171,6 +181,7 @@ public class CommonDataService<M, S, R> {
                     //middle clearing
                     queryBuilder.addMiddleClear(m.getClass(), tName, origin);
                 } else {
+                    LOG.info("d8");
                     leftNode += 2;
                     rightNode += 2;
                     //root decided
@@ -178,6 +189,7 @@ public class CommonDataService<M, S, R> {
                     parent = root;
                 }
             }
+            LOG.info("d9");
             //exist left, right node process
             method(data, "setLeftNode").invoke(data, leftNode);
             method(data, "setRightNode").invoke(data, rightNode);
@@ -185,21 +197,22 @@ public class CommonDataService<M, S, R> {
             method(data, "setRoot").invoke(data, root);
             method(data, "setParent").invoke(data, parent);
             method(data, "setNodeOrder").invoke(data, nodeOrder);
-
+            LOG.info("d10");
             //clearing
             queryBuilder.addClear(m.getClass(), tName, root
                     , (Long) method(origin, "getLeftNode").invoke(origin));
-
+            LOG.info("d11");
             //save
-            method(null, "save").invoke(s, data);
-
+            Object result = method(null, "save").invoke(s, data);
+            LOG.info("d12");
             //end clearing
             queryBuilder.addEndClear(m.getClass(), tName, root);
-
-            return new ResponseEntity<>("process completed", HttpStatus.OK);
+            LOG.info("d13");
+            return result;
         } catch (Exception e) {
+            LOG.info("d14");
             e.printStackTrace();
-            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+            return null;
         }
     }
 

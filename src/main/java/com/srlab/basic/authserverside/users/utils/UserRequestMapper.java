@@ -1,6 +1,6 @@
 package com.srlab.basic.authserverside.users.utils;
 
-import com.srlab.basic.authserverside.users.Dto.OAuthDto;
+import com.srlab.basic.authserverside.users.dtos.OAuthDto;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Component;
 

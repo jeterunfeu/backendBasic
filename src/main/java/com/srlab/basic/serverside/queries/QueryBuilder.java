@@ -67,20 +67,21 @@ public class QueryBuilder<P> {
             for (String key : orMap.keySet()) {
                 if (!key.equals("page") && !key.equals("size") && !key.equals("sort")) {
                     StringPath sPath = Expressions.stringPath(key);
-                    builder.or(containsKeyword(sPath, orMap.get(key)));
+                    builder.and(containsKeyword(sPath, orMap.get(key)));
                 }
             }
             List<T> jpaQuery = jpaQueryFactory.selectFrom(entityPath)
                     .where(builder)
                     .offset(pageable.getOffset())
-                    .limit(pageable.getPageSize() + 1)
+                    .limit(pageable.getPageSize())
                     .orderBy(makeOrderSpecifiers(entityPath, pageable))
                     .fetch();
             JPAQuery<Long> countQuery = jpaQueryFactory.select(entityPath.count())
-                    .where(builder)
-                    .offset(pageable.getOffset())
-                    .limit(pageable.getPageSize() + 1)
-                    .orderBy(makeOrderSpecifiers(entityPath, pageable));
+                    .from(entityPath)
+                    .where(builder);
+//                    .offset(pageable.getOffset())
+//                    .limit(pageable.getPageSize() + 1)
+//                    .orderBy(makeOrderSpecifiers(entityPath, pageable));
             return new ResponseEntity<>(PageableExecutionUtils.getPage(jpaQuery, pageable, countQuery::fetchOne), HttpStatus.OK);
 
         } catch (Exception e) {
@@ -695,6 +696,8 @@ public class QueryBuilder<P> {
         }
     }
 
+    @Modifying
+    @Transactional
     public <T> void arrangeDepth(Class<T> clazz, String tName, P root, Long depth) {
         try {
             BooleanBuilder builder = new BooleanBuilder();

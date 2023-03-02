@@ -12,6 +12,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -67,7 +69,7 @@ public class DeviceController {
     @Operation(description = "device insert", responses = { @ApiResponse(responseCode = "200", description = "inserted"),
             @ApiResponse(responseCode = "400", description = "bad request"),
             @ApiResponse(responseCode = "500", description = "internal server error")})
-    @PostMapping()
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> deviceRootInsert(HttpServletRequest req, @RequestBody Device data) {
 
         DeviceSet();
@@ -76,27 +78,38 @@ public class DeviceController {
     @Operation(description = "device same depth insert", responses = { @ApiResponse(responseCode = "200", description = "same depth inserted"),
             @ApiResponse(responseCode = "400", description = "bad request"),
             @ApiResponse(responseCode = "500", description = "internal server error")})
-    @PostMapping("/{seq}")
+    @PostMapping(path="/{seq}", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> deviceInsert(HttpServletRequest req, @PathVariable Long seq, @RequestBody Device data) {
-        DeviceSet();
-        return commonDataService.addSet("device", seq, data, false);
+        try {
+            DeviceSet();
+            return new ResponseEntity<>((Device) commonDataService.addSet("device", seq, data, false), HttpStatus.OK);
+        } catch(Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     //new level
     @Operation(description = "device sub depth insert", responses = { @ApiResponse(responseCode = "200", description = "sub depth inserted"),
             @ApiResponse(responseCode = "400", description = "bad request"),
             @ApiResponse(responseCode = "500", description = "internal server error")})
-    @PostMapping("/{seq}/depth")
+    @PostMapping(path="/{seq}/depth", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> deviceInsertDepth(HttpServletRequest req, @PathVariable Long seq,
                                                @RequestBody Device data) {
-        DeviceSet();
-        return commonDataService.addSet("device", seq, data, true);
+        try {
+            DeviceSet();
+            return new ResponseEntity<>((Device) commonDataService.addSet("device", seq, data, true), HttpStatus.OK);
+        } catch(Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
     }
 
     @Operation(description = "device update", responses = { @ApiResponse(responseCode = "200", description = "updated"),
             @ApiResponse(responseCode = "400", description = "bad request"),
             @ApiResponse(responseCode = "500", description = "internal server error")})
-    @PutMapping("/{seq}")
+    @PutMapping(path="/{seq}", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> deviceUpdate(HttpServletRequest req, @PathVariable Long seq, @RequestBody Device data) {
 
         return dService.update(seq, data);
@@ -105,7 +118,7 @@ public class DeviceController {
     @Operation(description = "device node move up", responses = { @ApiResponse(responseCode = "200", description = "moved up"),
             @ApiResponse(responseCode = "400", description = "bad request"),
             @ApiResponse(responseCode = "500", description = "internal server error")})
-    @PutMapping("/{seq}/up")
+    @PutMapping(path="/{seq}/up", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> moveUp(HttpServletRequest req, @PathVariable Long seq) {
 
         DeviceSet();
@@ -115,7 +128,7 @@ public class DeviceController {
     @Operation(description = "device node move down", responses = { @ApiResponse(responseCode = "200", description = "moved down"),
             @ApiResponse(responseCode = "400", description = "bad request"),
             @ApiResponse(responseCode = "500", description = "internal server error")})
-    @PutMapping("/{seq}/down")
+    @PutMapping(path="/{seq}/down", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> moveDown(HttpServletRequest req, @PathVariable Long seq) {
 
         DeviceSet();

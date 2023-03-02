@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -62,11 +63,12 @@ public class WebSecurityConfig {
                         "/js/**", "/*.ico", "/*.html**", "/error").permitAll()
                 .antMatchers("/v2/api-docs", "/swagger-resources/**",
                         "/swagger-ui/**", "/webjars/**","/swagger/**").permitAll()
+                .antMatchers(HttpMethod.GET, "/api/files/download/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
-                .defaultSuccessUrl("/")
-                .failureUrl("/error")
+                .defaultSuccessUrl("/index.html")
+                .failureUrl("/index.html")
                 .permitAll()
                 .and()
                 .oauth2Login()

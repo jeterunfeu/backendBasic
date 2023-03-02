@@ -38,6 +38,16 @@ import java.util.List;
 @RequiredArgsConstructor
 public class JwtAuthenticationFilter extends GenericFilterBean {
 
+    /**
+     * HTTP 요청 문자 인코딩
+     */
+//    private String encoding = null;
+
+    /**
+     * Ajax 요청임을 나타내는 플래그 파라미터 이름
+     */
+//    private String ajaxFlag = null;
+
     private final Logger LOG = LoggerFactory.getLogger(JwtAuthenticationFilter.class);
 
     private final UserRepository uRepository;
@@ -54,6 +64,25 @@ public class JwtAuthenticationFilter extends GenericFilterBean {
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         try {
+
+//            if (ajaxFlag != null
+//                    && "true".equals(((HttpServletRequest) request)
+//                    .getHeader(ajaxFlag))) {
+//                // Ajax 처리 요청일 경우 무조건 UTF-8 지정.
+//                request.setCharacterEncoding("UTF-8");
+//                if (LOG.isDebugEnabled()) {
+//                    LOG.debug("요청 헤더에 " + ajaxFlag + "가 "
+//                            + ((HttpServletRequest) request).getHeader(ajaxFlag)
+//                            + "로 설정되어 있어 문자 인코딩에  UTF-8을 사용합니다.");
+//                }
+//            } else if (encoding != null) {
+//                // Ajax 플래그가 true가 아니면, 기본적인 인코딩을 적용한다.
+//                request.setCharacterEncoding(encoding);
+//                if (LOG.isDebugEnabled()) {
+//                    LOG.debug("문자 인코딩에 " + encoding + "을 사용합니다.");
+//                }
+//            }
+
             HttpServletRequest req = (HttpServletRequest) request;
             HttpServletResponse res = (HttpServletResponse) response;
 
@@ -82,10 +111,10 @@ public class JwtAuthenticationFilter extends GenericFilterBean {
 
             chain.doFilter(request, response);
 
-            if(req.getRequestURI().contains("/api/")) apiLog(req, res, id);
+            if (req.getRequestURI().contains("/api/")) apiLog(req, res, id);
 
         } catch (Exception e) {
-//            e.printStackTrace();
+            e.printStackTrace();
             throw new RuntimeException(e.getMessage());
         }
     }
@@ -96,7 +125,7 @@ public class JwtAuthenticationFilter extends GenericFilterBean {
 //        if (StringUtils.hasText(bearerToken) && bearerToken.startsWith(BEARER_TYPE)) {
 //            return bearerToken.substring(7);
 //        }
-        if(StringUtils.hasText(bearerToken)) {
+        if (StringUtils.hasText(bearerToken)) {
             return bearerToken;
         }
         return null;
@@ -112,18 +141,18 @@ public class JwtAuthenticationFilter extends GenericFilterBean {
 //        return null;
 //    }
 
-    private void checkRole(HttpServletRequest req, HttpServletResponse res, Authentication auth){
+    private void checkRole(HttpServletRequest req, HttpServletResponse res, Authentication auth) {
         try {
             LOG.info("principal : " + auth.getPrincipal().toString());
-           User loginInfo = (User) auth.getPrincipal();
-           id = loginInfo.getUsername();
-           UserInfo user = uRepository.findOneById(id).orElse(null);
-           HierarchyData data = user.getHierarchyData();
-           List<UserRole> roles = data.getRoles();
-           String uri = req.getRequestURI();
-           Boolean check = false;
+            User loginInfo = (User) auth.getPrincipal();
+            id = loginInfo.getUsername();
+            UserInfo user = uRepository.findOneById(id).orElse(null);
+            HierarchyData data = user.getHierarchyData();
+            List<UserRole> roles = data.getRoles();
+            String uri = req.getRequestURI();
+            Boolean check = false;
 
-            if(data.getName().equals("developer")) {
+            if (data.getName().equals("developer")) {
                 LOG.info("DEVELOPER! freepass");
                 check = true;
             } else {
@@ -137,13 +166,13 @@ public class JwtAuthenticationFilter extends GenericFilterBean {
                 }
             }
 
-           if(!check) {
+            if (!check) {
 //               flush(req, res, HttpStatus.UNAUTHORIZED, "unauthorized");
-               throw new RuntimeException("unauthorized");
-           }
+                throw new RuntimeException("unauthorized");
+            }
 
         } catch (Exception e) {
-//            e.printStackTrace();
+            e.printStackTrace();
             throw new RuntimeException(e.getMessage());
 //            flush(req, res, HttpStatus.UNAUTHORIZED, "unauthorized");
         }
@@ -170,7 +199,7 @@ public class JwtAuthenticationFilter extends GenericFilterBean {
                     .build();
 
             apiRepository.save(api);
-        } catch(Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return null;
@@ -180,7 +209,7 @@ public class JwtAuthenticationFilter extends GenericFilterBean {
         BufferedReader buff = null;
         StringBuilder builder;
         String result = null;
-        try{
+        try {
             buff = new BufferedReader(new InputStreamReader(request.getInputStream()));
             builder = new StringBuilder();
             String buffer;
@@ -194,7 +223,7 @@ public class JwtAuthenticationFilter extends GenericFilterBean {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            if(buff != null) buff.close();
+            if (buff != null) buff.close();
         }
         return result;
     }
